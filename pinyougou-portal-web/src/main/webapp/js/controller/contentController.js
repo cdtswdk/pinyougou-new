@@ -6,11 +6,11 @@ app.controller("contentController",function($scope,$http,contentService){
 
     $scope.contentList={};
 
-    //根据categoryid查询广告
-    $scope.getByCategoryId=function (categoryid) {
-        contentService.findByCategoryid(categoryid).success(function (response) {
+    //根据categoryId查询广告
+    $scope.getByCategoryId=function (categoryId) {
+        contentService.findByCategoryId(categoryId).success(function (response) {
             //存储所有广告
-            $scope.contentList[categoryid]=response;
+            $scope.contentList[categoryId]=response;
         })
     }
 

@@ -5,8 +5,8 @@
 app.service("contentService",function($http){
 
     //调用后台
-    this.findByCategoryid=function (categoryid) {
-        return $http.get('/content/findByCategoryId.shtml?categoryId='+categoryid);
+    this.findByCategoryId=function (categoryId) {
+        return $http.get('/content/findByCategoryId.shtml?categoryId='+categoryId);
     }
 
 });
