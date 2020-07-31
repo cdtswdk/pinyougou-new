@@ -1,5 +1,7 @@
 package com.pinyougou.model;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,12 +16,14 @@ public class Item implements Serializable {
      */
     @Id
     @Column(name = "id")
+    @Field(value = "id")
     private Long id;
 
     /**
      * 商品标题
      */
     @Column(name = "title")
+    @Field(value = "item_title")
     private String title;
 
     /**
@@ -32,6 +36,7 @@ public class Item implements Serializable {
      * 商品价格，单位为：元
      */
     @Column(name = "price")
+    @Field(value = "item_price")
     private BigDecimal price;
 
     @Column(name = "stock_count")
@@ -53,6 +58,7 @@ public class Item implements Serializable {
      * 商品图片
      */
     @Column(name = "image")
+    @Field(value = "item_image")
     private String image;
 
     /**
@@ -92,6 +98,7 @@ public class Item implements Serializable {
     private String isDefault;
 
     @Column(name = "goods_id")
+    @Field(value = "item_goodsid")
     private Long goodsId;
 
     @Column(name = "seller_id")
@@ -101,15 +108,18 @@ public class Item implements Serializable {
     private String cartThumbnail;
 
     @Column(name = "category")
+    @Field("item_category")
     private String category;
 
     @Column(name = "brand")
+    @Field("item_brand")
     private String brand;
 
     @Column(name = "spec")
     private String spec;
 
     @Column(name = "seller")
+    @Field("item_seller")
     private String seller;
 
     private static final long serialVersionUID = 1L;
