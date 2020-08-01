@@ -1,6 +1,7 @@
 package com.pinyougou.model;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Dynamic;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 @Table(name = "tb_item")
 public class Item implements Serializable {
@@ -121,6 +123,18 @@ public class Item implements Serializable {
     @Column(name = "seller")
     @Field("item_seller")
     private String seller;
+
+    @Dynamic
+    @Field(value = "item_spec_*")
+    private Map<String,String> specMap;
+
+    public Map<String, String> getSpecMap() {
+        return specMap;
+    }
+
+    public void setSpecMap(Map<String, String> specMap) {
+        this.specMap = specMap;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -488,5 +502,35 @@ public class Item implements Serializable {
      */
     public void setSeller(String seller) {
         this.seller = seller == null ? null : seller.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", sellPoint='" + sellPoint + '\'' +
+                ", price=" + price +
+                ", stockCount=" + stockCount +
+                ", num=" + num +
+                ", barcode='" + barcode + '\'' +
+                ", image='" + image + '\'' +
+                ", categoryid=" + categoryid +
+                ", status='" + status + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", itemSn='" + itemSn + '\'' +
+                ", costPirce=" + costPirce +
+                ", marketPrice=" + marketPrice +
+                ", isDefault='" + isDefault + '\'' +
+                ", goodsId=" + goodsId +
+                ", sellerId='" + sellerId + '\'' +
+                ", cartThumbnail='" + cartThumbnail + '\'' +
+                ", category='" + category + '\'' +
+                ", brand='" + brand + '\'' +
+                ", spec='" + spec + '\'' +
+                ", seller='" + seller + '\'' +
+                ", specMap=" + specMap +
+                '}';
     }
 }
