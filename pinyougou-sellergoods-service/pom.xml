@@ -16,6 +16,13 @@
     <packaging>war</packaging>
 
     <dependencies>
+
+        <!--依赖common-->
+        <dependency>
+            <groupId>com.pinyougou</groupId>
+            <artifactId>pinyougou-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--依赖Mapper-->
         <dependency>
             <artifactId>pinyougou-mapper</artifactId>

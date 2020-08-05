@@ -10,6 +10,7 @@ import com.pinyougou.model.SpecificationOption;
 import com.pinyougou.model.TypeTemplate;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
@@ -20,6 +21,9 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
     @Autowired
     private TypeTemplateMapper typeTemplateMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 	/**
 	 * 返回TypeTemplate全部列表
@@ -44,11 +48,27 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
        
         //执行查询
         List<TypeTemplate> all = typeTemplateMapper.select(typeTemplate);
+
+        //刷新缓存
+        refreshRedis();
         PageInfo<TypeTemplate> pageInfo = new PageInfo<TypeTemplate>(all);
         return pageInfo;
     }
 
-
+    /**
+     * 缓存
+     */
+    public void refreshRedis(){
+        List<TypeTemplate> typeTemplates = this.typeTemplateMapper.selectAll();
+        for (TypeTemplate typeTemplate : typeTemplates) {
+            //将品牌信息转成List<Map>
+            List<Map> brandList = JSON.parseArray(typeTemplate.getBrandIds(), Map.class);
+            //将typeTemplate的ID作为key,品牌信息作为value
+            this.redisTemplate.boundHashOps("brandList").put(typeTemplate.getId(),brandList);
+            //将typeTemplate的ID作为key,规格信息作为value
+            this.redisTemplate.boundHashOps("specList").put(typeTemplate.getId(),getOptionsByTypeId(typeTemplate.getId()));
+        }
+    }
 
     /***
      * 增加TypeTemplate信息

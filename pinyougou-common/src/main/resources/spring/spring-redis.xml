@@ -14,7 +14,7 @@
     <context:property-override location="classpath:config/redis-config.properties" />
 
     <!--Jedis连接池配置-->
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"/>
 
     <!--Jedis连接工厂对象-->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
