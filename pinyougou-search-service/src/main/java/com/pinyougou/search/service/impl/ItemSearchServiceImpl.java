@@ -6,6 +6,7 @@ import com.pinyougou.model.Item;
 import com.pinyougou.search.service.ItemSearchService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
@@ -41,21 +42,21 @@ public class ItemSearchServiceImpl implements ItemSearchService {
             //关键词的key是keyword
             String keyword = (String) searchMap.get("keyword");
             if(StringUtils.isNotBlank(keyword)){
-                Criteria criteria = new Criteria("item_keywords").is(keyword);
+                Criteria criteria = new Criteria("item_keywords").is(keyword.replace(" ",""));
                 highlightQuery.addCriteria(criteria);
             }
             //分类过滤
             String category = (String) searchMap.get("category");
             if(StringUtils.isNotBlank(category)){
                 Criteria criteria = new Criteria("item_category").is(category);
-                FilterQuery filterQuery = new SimpleQuery(criteria);
+                FilterQuery filterQuery = new SimpleFilterQuery(criteria);
                 highlightQuery.addFilterQuery(filterQuery);
             }
             //品牌过滤
             String brand = (String) searchMap.get("brand");
             if(StringUtils.isNotBlank(brand)){
                 Criteria criteria = new Criteria("item_brand").is(brand);
-                FilterQuery filterQuery = new SimpleFacetQuery(criteria);
+                FilterQuery filterQuery = new SimpleFilterQuery(criteria);
                 highlightQuery.addFilterQuery(filterQuery);
             }
 
@@ -69,15 +70,62 @@ public class ItemSearchServiceImpl implements ItemSearchService {
                     //获取值
                     String value = entry.getValue();
                     Criteria criteria = new Criteria("item_spec_" + key).is(value);
-                    FilterQuery filterQuery = new SimpleFacetQuery(criteria);
+                    FilterQuery filterQuery = new SimpleFilterQuery(criteria);
                     highlightQuery.addFilterQuery(filterQuery);
                 }
             }
-        }
 
-        //分页
-        highlightQuery.setOffset(0);
-        highlightQuery.setRows(10);
+            //价格区间过滤
+            String price = (String) searchMap.get("price");
+            if(StringUtils.isNotBlank(price)){
+                //分割价格区间
+                String[] split = price.split("-");
+                //创建criteria对象用于封装匹配条件
+                Criteria criteria = null;
+                //如果不包含*号，则直接按区间查询
+                if(!price.contains("*")){
+                    criteria = new Criteria("item_price").
+                            between(Long.parseLong(split[0]),Long.parseLong(split[1]),true,false);
+                }else {
+                    //包含*号则按照>x执行
+                    criteria = new Criteria("item_price").greaterThan(Long.parseLong(split[0]));
+                }
+                //创建过滤搜索对象
+                FilterQuery filterQuery = new SimpleFilterQuery(criteria);
+                //加入到query中
+                highlightQuery.addFilterQuery(filterQuery);
+            }
+
+            //分页
+            Integer pageNum = (Integer) searchMap.get("pageNum");
+            Integer size = (Integer) searchMap.get("size");
+
+            //防止空数据
+            if(pageNum == null){
+                pageNum = 1;
+            }
+            if(size == null){
+                size = 10;
+            }
+            highlightQuery.setOffset((pageNum-1)*size);
+            highlightQuery.setRows(size);
+
+            //排序搜索
+            String sortType = (String) searchMap.get("sortType");
+            String sortField = (String) searchMap.get("sortField");
+
+            if(StringUtils.isNotBlank(sortType) && StringUtils.isNotBlank(sortField)){
+                Sort orders = null;
+                if("asc".equalsIgnoreCase(sortType)){
+                    //升序
+                    orders = new Sort(Sort.Direction.ASC,sortField);
+                }else {
+                    //降序
+                    orders = new Sort(Sort.Direction.DESC,sortField);
+                }
+                highlightQuery.addSort(orders);
+            }
+        }
 
         //分页查询
         HighlightPage<Item> highlightPage = this.solrTemplate.queryForHighlightPage(highlightQuery, Item.class);
@@ -112,7 +160,24 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         //分类数据集合
         dataMap.put("categoryList",categoryList);
 
+        //分页数据
+        //dataMap.put("pageNum",pageNum);
+
         return dataMap;
+    }
+
+    @Override
+    public void importItems(List<Item> items) {
+        this.solrTemplate.saveBeans(items);
+        this.solrTemplate.commit();
+    }
+
+    @Override
+    public void deleteByGoodsIds(List<Long> ids) {
+        Criteria criteria = new Criteria("item_goodsid").in(ids);
+        Query query = new SimpleQuery(criteria);
+        this.solrTemplate.delete(query);
+        this.solrTemplate.commit();
     }
 
     /**
@@ -121,6 +186,11 @@ public class ItemSearchServiceImpl implements ItemSearchService {
      * @return
      */
     public List<String> searchCategory(HighlightQuery highlightQuery) {
+
+        //重置分页
+        highlightQuery.setOffset(0);
+        highlightQuery.setRows(100);
+
         //分类分组查询
         GroupOptions groupOptions = new GroupOptions();
         //分组域

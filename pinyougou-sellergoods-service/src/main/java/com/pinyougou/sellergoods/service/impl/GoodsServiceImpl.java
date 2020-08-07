@@ -308,6 +308,17 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.updateByExampleSelective(goods, example);
     }
 
+    @Override
+    public List<Item> findItemListByGoodsIdAndStatus(List<Long> ids, String status) {
+        //查询条件
+        Example example = new Example(Item.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("goodsId",ids);
+        criteria.andEqualTo("status",status);
+
+        return this.itemMapper.selectByExample(example);
+    }
+
     /***
      * 构建Itme集合
      * @param goods

@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/data/solr/spring-solr.xsd">
 
     <!--指定solr地址-->
-    <solr:solr-server id="solrServer" url="http://localhost:38080/solr/collection1" />
+    <solr:solr-server id="solrServer" url="http://192.168.254.128:48080/solr/collection1" />
 
     <!-- solr模板，使用solr模板可对索引库进行CRUD的操作 -->
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">

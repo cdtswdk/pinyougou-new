@@ -3,6 +3,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
 import com.pinyougou.model.Goods;
+import com.pinyougou.model.Item;
+import com.pinyougou.search.service.ItemSearchService;
 import com.pinyougou.sellergoods.service.GoodsService;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
@@ -15,6 +17,8 @@ public class GoodsController {
     @Reference
     private GoodsService goodsService;
 
+    @Reference
+    private ItemSearchService itemSearchService;
 
     /***
      * 审核操作
@@ -27,6 +31,13 @@ public class GoodsController {
         try {
             int mcount = goodsService.updateStatus(ids,status);
             if(mcount>0){
+                //判断商品是否审核通过
+                if("1".equals(status)){
+                    //查找商品
+                    List<Item> items = this.goodsService.findItemListByGoodsIdAndStatus(ids,status);
+                    //更新索引库
+                    this.itemSearchService.importItems(items);
+                }
                 return new Result(true);
             }
         } catch (Exception e) {
@@ -46,6 +57,8 @@ public class GoodsController {
             int dcount = goodsService.deleteByIds(ids);
 
             if(dcount>0){
+                //删除索引
+                this.itemSearchService.deleteByGoodsIds(ids);
                 return new Result(true,"删除成功");
             }
         } catch (Exception e) {

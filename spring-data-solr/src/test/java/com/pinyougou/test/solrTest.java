@@ -4,7 +4,6 @@ import com.itcast.model.Item;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.Query;
@@ -79,7 +78,7 @@ public class solrTest {
      */
     @Test
     public void testDeleteById(){
-        this.solrTemplate.deleteById("0");
+        this.solrTemplate.deleteById("1369364");
         this.solrTemplate.commit();
     }
 
