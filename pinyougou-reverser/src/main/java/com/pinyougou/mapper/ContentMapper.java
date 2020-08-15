@@ -2,7 +2,9 @@ package com.pinyougou.mapper;
 
 import com.pinyougou.model.Content;
 import com.pinyougou.model.ContentExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 

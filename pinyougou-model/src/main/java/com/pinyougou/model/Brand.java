@@ -31,7 +31,7 @@ public class Brand implements Serializable {
      * 返回name，使用text
      * @return
      */
-    public String getText(){
+    public String getText() {
         return name;
     }
 

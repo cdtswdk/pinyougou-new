@@ -1,13 +1,16 @@
 package com.pinyougou.manager.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
 import com.pinyougou.model.Seller;
 import com.pinyougou.sellergoods.service.SellerService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/seller")
 public class SellerController {
@@ -22,8 +25,8 @@ public class SellerController {
      * @return
      */
     @RequestMapping(value = "/status/{sellerid}/{stu}")
-    public Result updateStatus(@PathVariable(value = "sellerid")String sellerid,
-                               @PathVariable(value = "stu")String status){
+    public Result updateStatus(@PathVariable(value = "sellerid") String sellerid,
+                               @PathVariable(value = "stu") String status) {
         try {
             //修改商户信息
             Seller seller = new Seller();
@@ -33,13 +36,13 @@ public class SellerController {
             //修改
             int mcount = sellerService.updateSellerById(seller);
 
-            if(mcount>0){
+            if (mcount > 0) {
                 //修改成功
-                return  new Result(true);
+                return new Result(true);
             }
         } catch (Exception e) {
         }
-        return new Result(false,"修改状态失败！");
+        return new Result(false, "修改状态失败！");
     }
 
 
@@ -49,18 +52,18 @@ public class SellerController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = sellerService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -68,18 +71,18 @@ public class SellerController {
      * @param seller
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody Seller seller){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody Seller seller) {
         try {
             //根据ID修改Seller信息
             int mcount = sellerService.updateSellerById(seller);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -87,8 +90,8 @@ public class SellerController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public Seller getById(@PathVariable(value = "id")String id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Seller getById(@PathVariable(value = "id") String id) {
         //根据ID查询Seller信息
         Seller seller = sellerService.getOneById(id);
         return seller;
@@ -104,22 +107,21 @@ public class SellerController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody Seller seller){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody Seller seller) {
         try {
             //执行增加
             int acount = sellerService.add(seller);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -127,13 +129,12 @@ public class SellerController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     public PageInfo<Seller> list(@RequestBody Seller seller,
                                  @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                  @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return sellerService.getAll(seller,page, size);
+        return sellerService.getAll(seller, page, size);
     }
-
 
 
     /***
@@ -141,7 +142,7 @@ public class SellerController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Seller> list() {
         return sellerService.getAll();
     }

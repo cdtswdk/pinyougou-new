@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -17,11 +19,12 @@ public class BrandServiceImpl implements BrandService {
     private BrandMapper brandMapper;
 
     /**
-	 * 返回Brand全部列表
-	 * @return
-	 */
-	@Override
-    public List<Brand> getAll(){
+     * 返回Brand全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<Brand> getAll() {
         return brandMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class BrandServiceImpl implements BrandService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<Brand> getAll(Brand brand,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<Brand> getAll(Brand brand, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<Brand> all = brandMapper.select(brand);
         PageInfo<Brand> pageInfo = new PageInfo<Brand>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class BrandServiceImpl implements BrandService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_brand where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return brandMapper.deleteByExample(example);
     }
 }

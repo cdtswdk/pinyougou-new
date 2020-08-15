@@ -27,7 +27,7 @@ app.directive('select2', function () {
                 };
 
             // 生成select
-            if(tagName === 'SELECT') {
+            if (tagName === 'SELECT') {
                 // 初始化
                 var $element = $(element);
                 delete config.multiple;
@@ -43,18 +43,18 @@ app.directive('select2', function () {
                     setTimeout(function () {
                         $element.find('[value^="?"]').remove();    // 清除错误的数据
                         $element.select2('val', newVal);
-                    },0);
+                    }, 0);
                 }, true);
                 return false;
             }
 
             // 处理input
-            if(tagName === 'INPUT') {
+            if (tagName === 'INPUT') {
                 // 初始化
                 var $element = $(element);
 
                 // 获取内置配置
-                if(attrs.query) {
+                if (attrs.query) {
                     scope.config = select2Query[attrs.query]();
                 }
 
@@ -79,7 +79,9 @@ app.directive('select2', function () {
                 // model - view
                 scope.$watch('ngModel', function (newVal) {
                     // 跳过ajax方式以及多选情况
-                    if(config.ajax || config.multiple) { return false }
+                    if (config.ajax || config.multiple) {
+                        return false
+                    }
 
                     $element.select2('val', newVal);
                 }, true);

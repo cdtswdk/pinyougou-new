@@ -44,6 +44,6 @@
     </mvc:annotation-driven>
 
     <!--引入dubbo-->
-    <import resource="spring-dubbo.xml" />
+    <import resource="spring-dubbo.xml"/>
 
 </beans>

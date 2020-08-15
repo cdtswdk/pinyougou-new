@@ -21,8 +21,8 @@ public class Specification implements Serializable {
     private String specName;
 
     /**
-    * 规格集合   关系一对多
-    * */
+     * 规格集合   关系一对多
+     */
     @Transient
     private List<SpecificationOption> specificationOptionList;
 

@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,12 +20,13 @@ public class SellerServiceImpl implements SellerService {
     @Autowired
     private SellerMapper sellerMapper;
 
-	/**
-	 * 返回Seller全部列表
-	 * @return
-	 */
-	@Override
-    public List<Seller> getAll(){
+    /**
+     * 返回Seller全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<Seller> getAll() {
         return sellerMapper.selectAll();
     }
 
@@ -35,11 +37,11 @@ public class SellerServiceImpl implements SellerService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<Seller> getAll(Seller seller,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<Seller> getAll(Seller seller, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         //List<Seller> all = sellerMapper.select(seller);
 
@@ -48,19 +50,19 @@ public class SellerServiceImpl implements SellerService {
         Example.Criteria criteria = example.createCriteria();
 
         //模糊查询
-        if(seller!=null){
+        if (seller != null) {
             //公司名称
-            if(StringUtils.isNotBlank(seller.getName())){
-                criteria.andLike("name","%"+seller.getName()+"%");
+            if (StringUtils.isNotBlank(seller.getName())) {
+                criteria.andLike("name", "%" + seller.getName() + "%");
             }
             //店铺名称
-            if(StringUtils.isNotBlank(seller.getNickName())){
-                criteria.andLike("nickName","%"+seller.getNickName()+"%");
+            if (StringUtils.isNotBlank(seller.getNickName())) {
+                criteria.andLike("nickName", "%" + seller.getNickName() + "%");
             }
 
             //状态
-            if(StringUtils.isNotBlank(seller.getStatus())){
-                criteria.andEqualTo("status",seller.getStatus());
+            if (StringUtils.isNotBlank(seller.getStatus())) {
+                criteria.andEqualTo("status", seller.getStatus());
             }
         }
 
@@ -69,7 +71,6 @@ public class SellerServiceImpl implements SellerService {
 
         return new PageInfo<Seller>(all);
     }
-
 
 
     /***
@@ -119,7 +120,7 @@ public class SellerServiceImpl implements SellerService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_seller where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return sellerMapper.deleteByExample(example);
     }
 }

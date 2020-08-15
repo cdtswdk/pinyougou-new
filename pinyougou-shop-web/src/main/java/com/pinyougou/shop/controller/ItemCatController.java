@@ -1,4 +1,5 @@
 package com.pinyougou.shop.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
@@ -21,8 +22,8 @@ public class ItemCatController {
      * http://localhost:18082/itemCat/parent/2.shtml    查询父ID=2的所有分类
      */
     @RequestMapping(value = "/parent/{id}")
-    public List<ItemCat> findByParentId(@PathVariable(value = "id")long id){
-         return itemCatService.findByParentId(id);
+    public List<ItemCat> findByParentId(@PathVariable(value = "id") long id) {
+        return itemCatService.findByParentId(id);
     }
 
 
@@ -32,18 +33,18 @@ public class ItemCatController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = itemCatService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -51,18 +52,18 @@ public class ItemCatController {
      * @param itemCat
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody ItemCat itemCat){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody ItemCat itemCat) {
         try {
             //根据ID修改ItemCat信息
             int mcount = itemCatService.updateItemCatById(itemCat);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -70,8 +71,8 @@ public class ItemCatController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ItemCat getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ItemCat getById(@PathVariable(value = "id") long id) {
         //根据ID查询ItemCat信息
         ItemCat itemCat = itemCatService.getOneById(id);
         return itemCat;
@@ -87,22 +88,21 @@ public class ItemCatController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody ItemCat itemCat){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody ItemCat itemCat) {
         try {
             //执行增加
             int acount = itemCatService.add(itemCat);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -110,12 +110,11 @@ public class ItemCatController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<ItemCat> list(@RequestBody ItemCat itemCat,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return itemCatService.getAll(itemCat,page, size);
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<ItemCat> list(@RequestBody ItemCat itemCat, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                  @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return itemCatService.getAll(itemCat, page, size);
     }
-
 
 
     /***
@@ -123,7 +122,7 @@ public class ItemCatController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<ItemCat> list() {
         return itemCatService.getAll();
     }

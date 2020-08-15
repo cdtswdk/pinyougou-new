@@ -13,15 +13,15 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--配置dubbo-->
-    <dubbo:application name="pinyougou-portal-web" />
+    <dubbo:application name="pinyougou-portal-web"/>
     <!--超时设置-->
-    <dubbo:consumer timeout="100000" />
+    <dubbo:consumer timeout="100000"/>
     <!--指定dubbo注册中心地址-->
-    <dubbo:registry address="zookeeper://192.168.254.128:2181" />
+    <dubbo:registry address="zookeeper://192.168.254.128:2181"/>
     <!--包扫描-->
-    <dubbo:annotation package="com" />
+    <dubbo:annotation package="com"/>
     <!--包扫描-->
-    <context:component-scan base-package="com" />
+    <context:component-scan base-package="com"/>
 
     <!--注解驱动-->
     <mvc:annotation-driven>

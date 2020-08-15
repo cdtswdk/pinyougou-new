@@ -58,7 +58,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //登录
         http.formLogin()
                 .loginPage("/login.html")   //登录页面
-                .defaultSuccessUrl("/admin/index.html",true)    //登录成功后总是跳转到这个页面
+                .defaultSuccessUrl("/admin/index.html", true)    //登录成功后总是跳转到这个页面
                 .loginProcessingUrl("/login")   //登录处理地址
                 .failureUrl("/login.html");     //登录失败跳转地址
 

@@ -18,10 +18,11 @@
         app.controller('select2Controller', function ($scope, $http) {//类的主体开始
             $scope.config3 = {
                 data: [{id: 1, text: '有BUG'},
-                       {id: 2, text: 'duplicate'},
-                       {id: 3, text: 'invalid'},
-                       {id: 4, text: 'wontfix'
-                }]
+                    {id: 2, text: 'duplicate'},
+                    {id: 3, text: 'invalid'},
+                    {
+                        id: 4, text: 'wontfix'
+                    }]
                 // 其他配置略，可以去看看内置配置中的ajax配置
             };
 
@@ -33,6 +34,6 @@
 </head>
 <body ng-app="pinyougou" ng-controller="select2Controller">
 multiple：允许多选<br/>
-<input select2  select2-model="cS2" config="config3" multiple placeholder="支持多选哦" class="form-control" type="text"/>
+<input select2 select2-model="cS2" config="config3" multiple placeholder="支持多选哦" class="form-control" type="text"/>
 </body>
 </html>

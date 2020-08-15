@@ -7,20 +7,17 @@
     <script src="js/angular.min.js"></script>
     <script>
         //用js创建模块
-        var app=angular.module('pinyougou',[]);
+        var app = angular.module('pinyougou', []);
 
         //创建一个控制层  第一个参数：给控制器取名字   
-        app.controller('demoController',function ($scope) {//类的主体开始
-            
-            //写方法
-            $scope.add=function () {
-                return parseInt( $scope.x )+ parseInt( $scope.y );
-            }
-            
-            
+        app.controller('demoController', function ($scope) {//类的主体开始
 
-            
-            
+            //写方法
+            $scope.add = function () {
+                return parseInt($scope.x) + parseInt($scope.y);
+            }
+
+
         });//类的主体结束
 
     </script>
@@ -39,12 +36,12 @@
 -->
 <div ng-app="pinyougou" ng-controller="demoController">
 
-        x:<input ng-model="x" /><br/>
-        y:<input ng-model="y" /><br/>
-        <!--
-            调用demoController的add方法
-        -->
-        结果{{add()}}
+    x:<input ng-model="x"/><br/>
+    y:<input ng-model="y"/><br/>
+    <!--
+        调用demoController的add方法
+    -->
+    结果{{add()}}
 </div>
 
 </body>

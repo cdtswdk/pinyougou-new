@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Provinces;
+
 import java.util.List;
 
 public interface ProvincesService {
 
-	/**
-	 * 返回Provinces全部列表
-	 * @return
-	 */
-	public List<Provinces> getAll();
+    /**
+     * 返回Provinces全部列表
+     *
+     * @return
+     */
+    public List<Provinces> getAll();
 
     /***
      * 分页返回Provinces列表

@@ -29,7 +29,7 @@ public class UploadController {
      * @return
      */
     @RequestMapping(value = "/upload")
-    public Result upload(MultipartFile file) throws Exception{   //file前台传的文件必须也为file
+    public Result upload(MultipartFile file) throws Exception {   //file前台传的文件必须也为file
         //获取文件名字
         String originalFilename = file.getOriginalFilename();
 
@@ -46,8 +46,8 @@ public class UploadController {
         String[] uploads = UploadUtil.upload(TRACKER_PATH, bytes, suffix);
 
         //拼接的图片访问地址
-        String url = IMAGE_DOMAIN+uploads[0]+"/"+uploads[1];
-        return new Result(true,url);
+        String url = IMAGE_DOMAIN + uploads[0] + "/" + uploads[1];
+        return new Result(true, url);
     }
 
 

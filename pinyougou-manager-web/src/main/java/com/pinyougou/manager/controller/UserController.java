@@ -1,13 +1,16 @@
 package com.pinyougou.manager.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
 import com.pinyougou.model.User;
 import com.pinyougou.sellergoods.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -22,18 +25,18 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = userService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -41,18 +44,18 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody User user){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody User user) {
         try {
             //根据ID修改User信息
             int mcount = userService.updateUserById(user);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -60,8 +63,8 @@ public class UserController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public User getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User getById(@PathVariable(value = "id") long id) {
         //根据ID查询User信息
         User user = userService.getOneById(id);
         return user;
@@ -77,22 +80,21 @@ public class UserController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody User user){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody User user) {
         try {
             //执行增加
             int acount = userService.add(user);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -100,12 +102,11 @@ public class UserController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<User> list(@RequestBody User user,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return userService.getAll(user,page, size);
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<User> list(@RequestBody User user, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                               @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return userService.getAll(user, page, size);
     }
-
 
 
     /***
@@ -113,7 +114,7 @@ public class UserController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<User> list() {
         return userService.getAll();
     }

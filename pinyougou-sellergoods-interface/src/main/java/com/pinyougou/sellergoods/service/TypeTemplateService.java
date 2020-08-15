@@ -1,16 +1,19 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.TypeTemplate;
+
 import java.util.List;
 import java.util.Map;
 
 public interface TypeTemplateService {
 
-	/**
-	 * 返回TypeTemplate全部列表
-	 * @return
-	 */
-	public List<TypeTemplate> getAll();
+    /**
+     * 返回TypeTemplate全部列表
+     *
+     * @return
+     */
+    public List<TypeTemplate> getAll();
 
     /***
      * 分页返回TypeTemplate列表

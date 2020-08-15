@@ -1,4 +1,5 @@
 package com.pinyougou.shop.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
@@ -23,7 +24,7 @@ public class TypeTemplateController {
      * @return
      */
     @RequestMapping(value = "/options/{id}")
-    public List<Map> getOptionsByTypeId(@PathVariable(value = "id")long id){
+    public List<Map> getOptionsByTypeId(@PathVariable(value = "id") long id) {
         return typeTemplateService.getOptionsByTypeId(id);
     }
 
@@ -33,18 +34,18 @@ public class TypeTemplateController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = typeTemplateService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -52,18 +53,18 @@ public class TypeTemplateController {
      * @param typeTemplate
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody TypeTemplate typeTemplate){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody TypeTemplate typeTemplate) {
         try {
             //根据ID修改TypeTemplate信息
             int mcount = typeTemplateService.updateTypeTemplateById(typeTemplate);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -71,8 +72,8 @@ public class TypeTemplateController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public TypeTemplate getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public TypeTemplate getById(@PathVariable(value = "id") long id) {
         //根据ID查询TypeTemplate信息
         TypeTemplate typeTemplate = typeTemplateService.getOneById(id);
         return typeTemplate;
@@ -88,22 +89,21 @@ public class TypeTemplateController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody TypeTemplate typeTemplate){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody TypeTemplate typeTemplate) {
         try {
             //执行增加
             int acount = typeTemplateService.add(typeTemplate);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -111,12 +111,11 @@ public class TypeTemplateController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<TypeTemplate> list(@RequestBody TypeTemplate typeTemplate,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return typeTemplateService.getAll(typeTemplate,page, size);
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<TypeTemplate> list(@RequestBody TypeTemplate typeTemplate, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                       @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return typeTemplateService.getAll(typeTemplate, page, size);
     }
-
 
 
     /***
@@ -124,7 +123,7 @@ public class TypeTemplateController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<TypeTemplate> list() {
         return typeTemplateService.getAll();
     }

@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.SpecificationOption;
+
 import java.util.List;
 
 public interface SpecificationOptionService {
 
-	/**
-	 * 返回SpecificationOption全部列表
-	 * @return
-	 */
-	public List<SpecificationOption> getAll();
+    /**
+     * 返回SpecificationOption全部列表
+     *
+     * @return
+     */
+    public List<SpecificationOption> getAll();
 
     /***
      * 分页返回SpecificationOption列表

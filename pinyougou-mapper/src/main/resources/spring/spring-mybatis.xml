@@ -19,29 +19,22 @@
         http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!--解析jdbc配置文件-->
-    <context:property-placeholder location="classpath:config/sys_jdbc.properties" />
-
+    <!--<context:property-placeholder location="classpath:config/sys_jdbc.properties" />-->
+    <context:property-override location="classpath:config/sys_jdbc.properties"/>
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-          destroy-method="close">
-        <property name="url" value="${db.url}" />
-        <property name="username" value="${db.username}" />
-        <property name="password" value="${db.password}" />
-        <property name="driverClassName" value="${db.driver}" />
-        <property name="maxActive" value="${db.maxActive}" />
-        <property name="minIdle" value="${db.minIdle}" />
-    </bean>
+          destroy-method="close"/>
 
     <!-- SqlSessionFactoryBean -->
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis/mybatis.xml" />
-        <property name="typeAliasesPackage" value="com.pinyougou.model" />
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
+        <property name="typeAliasesPackage" value="com.pinyougou.model"/>
         <property name="mapperLocations">
             <list>
                 <value>classpath:com/pinyougou/mapper/*Mapper.xml</value>
             </list>
         </property>
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
 
         <!--添加插件，拦截器插件-->
         <property name="plugins">

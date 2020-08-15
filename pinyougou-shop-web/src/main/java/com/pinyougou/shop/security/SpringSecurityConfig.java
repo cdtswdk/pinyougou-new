@@ -81,13 +81,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         responseLogin(response, result);
                     }
                 }).failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                        //失败响应消息
-                        Result result = new Result(false, "账号或密码不正确！");
-                        responseLogin(response, result);
-                    }
-                });
+            @Override
+            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                //失败响应消息
+                Result result = new Result(false, "账号或密码不正确！");
+                responseLogin(response, result);
+            }
+        });
 
         //.defaultSuccessUrl("/admin/index.html",true)
         //.failureUrl("/shoplogin.html");

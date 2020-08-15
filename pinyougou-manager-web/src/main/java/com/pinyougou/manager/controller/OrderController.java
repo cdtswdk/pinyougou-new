@@ -1,13 +1,16 @@
 package com.pinyougou.manager.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
 import com.pinyougou.model.Order;
 import com.pinyougou.sellergoods.service.OrderService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/order")
 public class OrderController {
@@ -22,18 +25,18 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = orderService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -41,18 +44,18 @@ public class OrderController {
      * @param order
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody Order order){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody Order order) {
         try {
             //根据ID修改Order信息
             int mcount = orderService.updateOrderById(order);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -60,8 +63,8 @@ public class OrderController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public Order getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Order getById(@PathVariable(value = "id") long id) {
         //根据ID查询Order信息
         Order order = orderService.getOneById(id);
         return order;
@@ -77,22 +80,21 @@ public class OrderController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody Order order){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody Order order) {
         try {
             //执行增加
             int acount = orderService.add(order);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -100,12 +102,11 @@ public class OrderController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<Order> list(@RequestBody Order order,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<Order> list(@RequestBody Order order, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return orderService.getAll(order,page, size);
+        return orderService.getAll(order, page, size);
     }
-
 
 
     /***
@@ -113,7 +114,7 @@ public class OrderController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Order> list() {
         return orderService.getAll();
     }

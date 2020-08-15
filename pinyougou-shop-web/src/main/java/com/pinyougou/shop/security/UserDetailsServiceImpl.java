@@ -39,14 +39,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //查询用户
         Seller seller = sellerService.getOneById(username);
 
-        if(seller!=null && seller.getStatus().equals("1")){
+        if (seller != null && seller.getStatus().equals("1")) {
             //授权信息-一般是查询出来
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             //构建一个User
-            return new User(username,seller.getPassword(),authorities);
+            return new User(username, seller.getPassword(), authorities);
         }
 
-      return  null;
+        return null;
     }
 }

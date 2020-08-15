@@ -21,7 +21,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/name")
-    public String getUerName(){
+    public String getUerName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

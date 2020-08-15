@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.SpecificationOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class SpecificationOptionServiceImpl implements SpecificationOptionServic
     @Autowired
     private SpecificationOptionMapper specificationOptionMapper;
 
-	/**
-	 * 返回SpecificationOption全部列表
-	 * @return
-	 */
-	@Override
-    public List<SpecificationOption> getAll(){
+    /**
+     * 返回SpecificationOption全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<SpecificationOption> getAll() {
         return specificationOptionMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class SpecificationOptionServiceImpl implements SpecificationOptionServic
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<SpecificationOption> getAll(SpecificationOption specificationOption,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<SpecificationOption> getAll(SpecificationOption specificationOption, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<SpecificationOption> all = specificationOptionMapper.select(specificationOption);
         PageInfo<SpecificationOption> pageInfo = new PageInfo<SpecificationOption>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class SpecificationOptionServiceImpl implements SpecificationOptionServic
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_specificationOption where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return specificationOptionMapper.deleteByExample(example);
     }
 }

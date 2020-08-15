@@ -38,6 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         //创建一个User
-        return new User(username,passsword,authorities);
+        return new User(username, passsword, authorities);
     }
 }

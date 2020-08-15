@@ -26,7 +26,7 @@ public class ValueTest {
      * 增加数据测试
      */
     @Test
-    public void testAdd(){
+    public void testAdd() {
         //boundValueOps用于操作简单的key:value类型
         redisTemplate.boundValueOps("username").set("小红红");
     }
@@ -36,7 +36,7 @@ public class ValueTest {
      * 查询操作
      */
     @Test
-    public void testGet(){
+    public void testGet() {
         Object username = redisTemplate.boundValueOps("username").get();
         System.out.println(username);
     }
@@ -45,7 +45,7 @@ public class ValueTest {
      * 删除测试
      */
     @Test
-    public void testDelete(){
+    public void testDelete() {
         //redisTemplate.boundValueOps("username")
         redisTemplate.delete("username");
     }

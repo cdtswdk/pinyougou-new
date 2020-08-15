@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Areas;
+
 import java.util.List;
 
 public interface AreasService {
 
-	/**
-	 * 返回Areas全部列表
-	 * @return
-	 */
-	public List<Areas> getAll();
+    /**
+     * 返回Areas全部列表
+     *
+     * @return
+     */
+    public List<Areas> getAll();
 
     /***
      * 分页返回Areas列表

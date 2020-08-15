@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.User;
+
 import java.util.List;
 
 public interface UserService {
 
-	/**
-	 * 返回User全部列表
-	 * @return
-	 */
-	public List<User> getAll();
+    /**
+     * 返回User全部列表
+     *
+     * @return
+     */
+    public List<User> getAll();
 
     /***
      * 分页返回User列表

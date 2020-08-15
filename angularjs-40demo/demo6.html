@@ -7,15 +7,15 @@
     <script src="js/angular.min.js"></script>
     <script>
         //用js创建模块
-        var app=angular.module('pinyougou',[]);
+        var app = angular.module('pinyougou', []);
 
         //创建一个控制层  第一个参数：给控制器取名字   
-        app.controller('demoController',function ($scope) {//类的主体开始
-            
-           //定义变量
-            $scope.list=[1,2,77,88,999];
-            
-            
+        app.controller('demoController', function ($scope) {//类的主体开始
+
+            //定义变量
+            $scope.list = [1, 2, 77, 88, 999];
+
+
         });//类的主体结束
 
     </script>
@@ -37,9 +37,9 @@
     <!--
         list是$scope中的变量  in:固定写法  i:定义临时变量接受当前循环到的数据
     -->
-       <div ng-repeat="i in list">
-           {{i}}
-       </div>
+    <div ng-repeat="i in list">
+        {{i}}
+    </div>
 </div>
 
 </body>

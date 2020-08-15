@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.CitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class CitiesServiceImpl implements CitiesService {
     @Autowired
     private CitiesMapper citiesMapper;
 
-	/**
-	 * 返回Cities全部列表
-	 * @return
-	 */
-	@Override
-    public List<Cities> getAll(){
+    /**
+     * 返回Cities全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<Cities> getAll() {
         return citiesMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class CitiesServiceImpl implements CitiesService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<Cities> getAll(Cities cities,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<Cities> getAll(Cities cities, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<Cities> all = citiesMapper.select(cities);
         PageInfo<Cities> pageInfo = new PageInfo<Cities>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class CitiesServiceImpl implements CitiesService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_cities where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return citiesMapper.deleteByExample(example);
     }
 }

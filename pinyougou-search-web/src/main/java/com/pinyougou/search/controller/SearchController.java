@@ -18,11 +18,12 @@ public class SearchController {
 
     /**
      * 商品搜索
+     *
      * @param searchMap
      * @return
      */
-    @RequestMapping(value = "search",method = RequestMethod.POST)
-    public Map<String,Object> search(@RequestBody(required = false) Map searchMap){
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public Map<String, Object> search(@RequestBody(required = false) Map searchMap) {
         return this.itemSearchService.search(searchMap);
     }
 }

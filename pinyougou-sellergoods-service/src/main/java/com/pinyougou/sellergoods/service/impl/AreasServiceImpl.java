@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.AreasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class AreasServiceImpl implements AreasService {
     @Autowired
     private AreasMapper areasMapper;
 
-	/**
-	 * 返回Areas全部列表
-	 * @return
-	 */
-	@Override
-    public List<Areas> getAll(){
+    /**
+     * 返回Areas全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<Areas> getAll() {
         return areasMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class AreasServiceImpl implements AreasService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<Areas> getAll(Areas areas,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<Areas> getAll(Areas areas, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<Areas> all = areasMapper.select(areas);
         PageInfo<Areas> pageInfo = new PageInfo<Areas>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class AreasServiceImpl implements AreasService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_areas where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return areasMapper.deleteByExample(example);
     }
 }

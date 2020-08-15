@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Address;
+
 import java.util.List;
 
 public interface AddressService {
 
-	/**
-	 * 返回Address全部列表
-	 * @return
-	 */
-	public List<Address> getAll();
+    /**
+     * 返回Address全部列表
+     *
+     * @return
+     */
+    public List<Address> getAll();
 
     /***
      * 分页返回Address列表

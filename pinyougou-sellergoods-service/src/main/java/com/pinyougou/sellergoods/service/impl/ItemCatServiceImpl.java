@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -21,12 +23,13 @@ public class ItemCatServiceImpl implements ItemCatService {
     private RedisTemplate redisTemplate;
 
 
-	/**
-	 * 返回ItemCat全部列表
-	 * @return
-	 */
-	@Override
-    public List<ItemCat> getAll(){
+    /**
+     * 返回ItemCat全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<ItemCat> getAll() {
         return itemCatMapper.selectAll();
     }
 
@@ -37,17 +40,16 @@ public class ItemCatServiceImpl implements ItemCatService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<ItemCat> getAll(ItemCat itemCat,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<ItemCat> getAll(ItemCat itemCat, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<ItemCat> all = itemCatMapper.select(itemCat);
         PageInfo<ItemCat> pageInfo = new PageInfo<ItemCat>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -95,7 +97,7 @@ public class ItemCatServiceImpl implements ItemCatService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_itemCat where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return itemCatMapper.deleteByExample(example);
     }
 
@@ -113,7 +115,7 @@ public class ItemCatServiceImpl implements ItemCatService {
         //存入缓存
         List<ItemCat> itemCats = this.itemCatMapper.selectAll();
         for (ItemCat cat : itemCats) {
-            this.redisTemplate.boundHashOps("ItemCat").put(cat.getName(),cat.getTypeId());
+            this.redisTemplate.boundHashOps("ItemCat").put(cat.getName(), cat.getTypeId());
         }
         return itemCatMapper.select(itemCat);
     }

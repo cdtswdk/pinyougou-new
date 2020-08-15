@@ -6,8 +6,8 @@ echo -n "Enter the version for this release: "
 read ver
 
 if [ ! $ver ]; then
-	echo "Invalid version."
-	exit
+  echo "Invalid version."
+  exit
 fi
 
 name="select2"
@@ -17,7 +17,7 @@ css="$name.css"
 release="$name-$ver"
 tag="$ver"
 branch="build-$ver"
-curbranch=`git branch | grep "*" | sed "s/* //"`
+curbranch=$(git branch | grep "*" | sed "s/* //")
 timestamp=$(date)
 tokens="s/@@ver@@/$ver/g;s/\@@timestamp@@/$timestamp/g"
 remote="github"
@@ -54,14 +54,14 @@ git add "$css"
 
 echo "Minifying..."
 
-echo "/*" > "$mini"
-cat LICENSE | sed "$tokens" >> "$mini"
-echo "*/" >> "$mini"
+echo "/*" >"$mini"
+cat LICENSE | sed "$tokens" >>"$mini"
+echo "*/" >>"$mini"
 
 curl -s \
-	--data-urlencode "js_code@$js" \
-	http://marijnhaverbeke.nl/uglifyjs \
-	>> "$mini"
+  --data-urlencode "js_code@$js" \
+  http://marijnhaverbeke.nl/uglifyjs \
+  >>"$mini"
 
 git add "$mini"
 

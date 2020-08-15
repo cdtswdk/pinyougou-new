@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.FreightTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
     @Autowired
     private FreightTemplateMapper freightTemplateMapper;
 
-	/**
-	 * 返回FreightTemplate全部列表
-	 * @return
-	 */
-	@Override
-    public List<FreightTemplate> getAll(){
+    /**
+     * 返回FreightTemplate全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<FreightTemplate> getAll() {
         return freightTemplateMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<FreightTemplate> getAll(FreightTemplate freightTemplate,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<FreightTemplate> getAll(FreightTemplate freightTemplate, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<FreightTemplate> all = freightTemplateMapper.select(freightTemplate);
         PageInfo<FreightTemplate> pageInfo = new PageInfo<FreightTemplate>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_freightTemplate where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return freightTemplateMapper.deleteByExample(example);
     }
 }

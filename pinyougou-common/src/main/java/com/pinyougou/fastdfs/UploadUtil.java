@@ -23,7 +23,7 @@ public class UploadUtil {
      * @return
      * @throws Exception
      */
-    public static String[] upload(String conffilename,byte[] buffer,String suffix) throws Exception{
+    public static String[] upload(String conffilename, byte[] buffer, String suffix) throws Exception {
         //解析类路径
         conffilename = getConfig(conffilename);
 
@@ -37,10 +37,10 @@ public class UploadUtil {
         TrackerServer trackerServer = trackerClient.getConnection();
 
         //通过TrackerServer来创建一个Storage客户端
-        StorageClient storageClient = new StorageClient(trackerServer,null);
+        StorageClient storageClient = new StorageClient(trackerServer, null);
 
         //通过Storage客户端实现文件上传
-        String[] strings = storageClient.upload_file(buffer,suffix,null);
+        String[] strings = storageClient.upload_file(buffer, suffix, null);
         return strings;
     }
 
@@ -48,7 +48,7 @@ public class UploadUtil {
      * 本地文件上传
      * @param conffilename:链接tracker的配置文件全路径
      */
-    public static String[] upload(String conffilename,String filename) throws Exception{
+    public static String[] upload(String conffilename, String filename) throws Exception {
         //解析类路径
         conffilename = getConfig(conffilename);
         filename = getConfig(filename);
@@ -63,7 +63,7 @@ public class UploadUtil {
         TrackerServer trackerServer = trackerClient.getConnection();
 
         //通过TrackerServer来创建一个Storage客户端
-        StorageClient storageClient = new StorageClient(trackerServer,null);
+        StorageClient storageClient = new StorageClient(trackerServer, null);
 
         //通过Storage客户端实现文件上传
         String[] strings = storageClient.upload_file(filename, null, null);
@@ -75,20 +75,20 @@ public class UploadUtil {
      * @param path
      * @return
      */
-    public static  String getConfig(String path){
+    public static String getConfig(String path) {
         //类路径下的文件
-        if(path.startsWith("classpath:")){
-            path = path.replace("classpath:",UploadUtil.class.getResource("/").getPath());
+        if (path.startsWith("classpath:")) {
+            path = path.replace("classpath:", UploadUtil.class.getResource("/").getPath());
         }
         return path;
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         //String tracker="D:\\project\\workspace40\\pinyougou\\pinyougou-common\\src\\main\\resources\\tracker.conf";
         //String filename="D:\\project\\workspace40\\pinyougou\\pinyougou-common\\src\\main\\resources\\3.jpg";
 
-        String tracker="classpath:tracker.conf";
-        String filename="classpath:5.jpg";
+        String tracker = "classpath:tracker.conf";
+        String filename = "classpath:5.jpg";
         String[] uploads = upload(tracker, filename);
 
         for (String upload : uploads) {

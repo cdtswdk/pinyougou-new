@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Brand;
+
 import java.util.List;
 
 public interface BrandService {
 
-	/**
-	 * 返回Brand全部列表
-	 * @return
-	 */
-	public List<Brand> getAll();
+    /**
+     * 返回Brand全部列表
+     *
+     * @return
+     */
+    public List<Brand> getAll();
 
     /***
      * 分页返回Brand列表

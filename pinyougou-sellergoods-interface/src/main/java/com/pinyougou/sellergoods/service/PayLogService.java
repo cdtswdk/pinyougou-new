@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.PayLog;
+
 import java.util.List;
 
 public interface PayLogService {
 
-	/**
-	 * 返回PayLog全部列表
-	 * @return
-	 */
-	public List<PayLog> getAll();
+    /**
+     * 返回PayLog全部列表
+     *
+     * @return
+     */
+    public List<PayLog> getAll();
 
     /***
      * 分页返回PayLog列表

@@ -1,15 +1,22 @@
 package com.pinyougou.manager.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
+import com.pinyougou.manager.mq.MessageSender;
 import com.pinyougou.model.Goods;
 import com.pinyougou.model.Item;
-import com.pinyougou.search.service.ItemSearchService;
+import com.pinyougou.mq.MessageInfo;
 import com.pinyougou.sellergoods.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import javax.jms.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/goods")
 public class GoodsController {
@@ -17,8 +24,14 @@ public class GoodsController {
     @Reference
     private GoodsService goodsService;
 
-    @Reference
-    private ItemSearchService itemSearchService;
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private Destination destination;
+
+    @Autowired
+    private MessageSender messageSender;
 
     /***
      * 审核操作
@@ -27,22 +40,32 @@ public class GoodsController {
      * @return
      */
     @RequestMapping(value = "/update/status")
-    public Result updateStatus(@RequestBody List<Long> ids,String status){
+    public Result updateStatus(@RequestBody List<Long> ids, String status) {
         try {
-            int mcount = goodsService.updateStatus(ids,status);
-            if(mcount>0){
+            int mcount = goodsService.updateStatus(ids, status);
+            if (mcount > 0) {
                 //判断商品是否审核通过
-                if("1".equals(status)){
+                if ("1".equals(status)) {
                     //查找商品
-                    List<Item> items = this.goodsService.findItemListByGoodsIdAndStatus(ids,status);
-                    //更新索引库
+                    List<Item> items = this.goodsService.findItemListByGoodsIdAndStatus(ids, status);
+                    /*//更新索引库
                     this.itemSearchService.importItems(items);
+
+                    //审核通过，生成静态页
+                    for (Long id : ids) {
+                        this.itemPageService.buildHtml(id);
+                    }
+                    */
+                    //向ActiveMQ发送消息-订阅消息
+                    MessageInfo messageInfo = new MessageInfo(MessageInfo.METHOD_UPDATE, items);
+                    this.messageSender.sendMessage(messageInfo);
                 }
                 return new Result(true);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return  new Result(false,"审核失败");
+        return new Result(false, "审核失败");
     }
 
     /***
@@ -51,20 +74,24 @@ public class GoodsController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = goodsService.deleteByIds(ids);
 
-            if(dcount>0){
+            if (dcount > 0) {
                 //删除索引
-                this.itemSearchService.deleteByGoodsIds(ids);
-                return new Result(true,"删除成功");
+                //this.itemSearchService.deleteByGoodsIds(ids);
+
+                MessageInfo messageInfo = new MessageInfo(MessageInfo.METHOD_DELETE, ids);
+                this.messageSender.sendMessage(messageInfo);
+
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -72,18 +99,18 @@ public class GoodsController {
      * @param goods
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody Goods goods){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody Goods goods) {
         try {
             //根据ID修改Goods信息
             int mcount = goodsService.updateGoodsById(goods);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -91,8 +118,8 @@ public class GoodsController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public Goods getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Goods getById(@PathVariable(value = "id") long id) {
         //根据ID查询Goods信息
         Goods goods = goodsService.getOneById(id);
         return goods;
@@ -108,22 +135,21 @@ public class GoodsController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody Goods goods){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody Goods goods) {
         try {
             //执行增加
             int acount = goodsService.add(goods);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -131,12 +157,11 @@ public class GoodsController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<Goods> list(@RequestBody Goods goods,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<Goods> list(@RequestBody Goods goods, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return goodsService.getAll(goods,page, size);
+        return goodsService.getAll(goods, page, size);
     }
-
 
 
     /***
@@ -144,7 +169,7 @@ public class GoodsController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Goods> list() {
         return goodsService.getAll();
     }

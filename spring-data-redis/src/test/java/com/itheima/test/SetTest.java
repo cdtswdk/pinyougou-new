@@ -28,7 +28,7 @@ public class SetTest {
      * 增加数据测试
      */
     @Test
-    public void testAdd(){
+    public void testAdd() {
         redisTemplate.boundSetOps("username").add("小红");
         redisTemplate.boundSetOps("username").add("小黑");
         redisTemplate.boundSetOps("username").add("小红");
@@ -36,12 +36,11 @@ public class SetTest {
     }
 
 
-
     /***
      * 查询操作
      */
     @Test
-    public void testGet(){
+    public void testGet() {
         Set members = redisTemplate.boundSetOps("username").members();
         System.out.println(members);
     }
@@ -50,7 +49,7 @@ public class SetTest {
      * 删除测试
      */
     @Test
-    public void testDelete(){
+    public void testDelete() {
         redisTemplate.boundSetOps("username").remove("小黑");
     }
 

@@ -24,7 +24,7 @@ public class SpringMapperTest {
     private BrandMapper brandMapper;
 
     @Before
-    public void init(){
+    public void init() {
         //初始化Spring容器
         ApplicationContext act = new ClassPathXmlApplicationContext("spring/spring.xml");
 
@@ -37,7 +37,7 @@ public class SpringMapperTest {
      * 增加测试
      */
     @Test
-    public void testInsert(){
+    public void testInsert() {
         //原始数据
         Brand brand = new Brand();
         brand.setName("小红666");
@@ -52,7 +52,7 @@ public class SpringMapperTest {
      * 增加测试
      */
     @Test
-    public void testInsertSelective(){
+    public void testInsertSelective() {
         //原始数据
         Brand brand = new Brand();
         brand.setName("小黑666");
@@ -65,8 +65,8 @@ public class SpringMapperTest {
      * 根据主键删除操作
      */
     @Test
-    public void testDeleteByPrimaryKey(){
-        Long id=92L;
+    public void testDeleteByPrimaryKey() {
+        Long id = 92L;
         brandMapper.deleteByPrimaryKey(id);
     }
 
@@ -76,7 +76,7 @@ public class SpringMapperTest {
      *  brand设置了name和firstChar  delete from tb_brand where name=? and firstChar=?
      */
     @Test
-    public void testDelete(){
+    public void testDelete() {
         Brand brand = new Brand();
         brand.setName("小红666");
         brandMapper.delete(brand);
@@ -86,7 +86,7 @@ public class SpringMapperTest {
      * 动态构建删除条件
      */
     @Test
-    public void testDeleteByExample(){
+    public void testDeleteByExample() {
         //delete from tb_brand where id in(92,68,67)
         Example example = new Example(Brand.class);
         Example.Criteria criteria = example.createCriteria();
@@ -96,7 +96,7 @@ public class SpringMapperTest {
         ids.add(92L);
         ids.add(68L);
         ids.add(67L);
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
 
         brandMapper.deleteByExample(example);
     }
@@ -106,7 +106,7 @@ public class SpringMapperTest {
      * 动态偶构建条件修改
      */
     @Test
-    public void testUpdateByExample(){
+    public void testUpdateByExample() {
         Brand brand = new Brand();
         brand.setName("小红果");
 
@@ -115,9 +115,9 @@ public class SpringMapperTest {
         Example.Criteria criteria = example.createCriteria();
 
         //修改firstchar名字为H   update tb_bran set name=xx where first_char=?
-        criteria.andEqualTo("firstChar","H");
+        criteria.andEqualTo("firstChar", "H");
 
-        brandMapper.updateByExample(brand,example);
+        brandMapper.updateByExample(brand, example);
         //brandMapper.updateByExampleSelective(brand,example);
         //brandMapper.updateByPrimaryKey();
         //brandMapper.updateByPrimaryKeySelective();
@@ -127,9 +127,9 @@ public class SpringMapperTest {
      * 查询
      */
     @Test
-    public void testSelectAll(){
+    public void testSelectAll() {
         //分页
-        PageHelper.startPage(2,5);
+        PageHelper.startPage(2, 5);
 
         List<Brand> brands = brandMapper.selectAll();
         for (Brand brand : brands) {
@@ -146,7 +146,7 @@ public class SpringMapperTest {
      * 查询多条数据
      */
     @Test
-    public void testSelect(){
+    public void testSelect() {
         Brand brand = new Brand();
         brand.setName("TCLAND长虹");
         brand.setFirstChar("T");
@@ -162,7 +162,7 @@ public class SpringMapperTest {
      * 查询多条数据
      */
     @Test
-    public void testSelectOne(){
+    public void testSelectOne() {
         Brand brand = new Brand();
         brand.setId(73L);
         Brand brandinfo = brandMapper.selectOne(brand);

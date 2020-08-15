@@ -7,22 +7,21 @@
     <script src="js/angular.min.js"></script>
     <script>
         //用js创建模块
-        var app=angular.module('pinyougou',[]);
+        var app = angular.module('pinyougou', []);
 
         //创建一个控制层  第一个参数：给控制器取名字   
-        app.controller('demoController',function ($scope,$http) {//类的主体开始
-            
+        app.controller('demoController', function ($scope, $http) {//类的主体开始
 
 
             //创建方法，实现查询
-            $scope.getData=function () {
+            $scope.getData = function () {
                 //使用$http向后台发送请求
                 $http.get('data.json').success(function (response) {
-                    $scope.list=response;
+                    $scope.list = response;
                 });
             }
 
-            
+
         });//类的主体结束
 
     </script>
@@ -44,9 +43,9 @@
     <!--
         list是$scope中的变量  in:固定写法  i:定义临时变量接受当前循环到的数据
     -->
-       <div ng-repeat="i in list">
-           {{i.name}}今年{{i.age}}岁了，家住{{i.address}}
-       </div>
+    <div ng-repeat="i in list">
+        {{i.name}}今年{{i.age}}岁了，家住{{i.address}}
+    </div>
 </div>
 
 </body>

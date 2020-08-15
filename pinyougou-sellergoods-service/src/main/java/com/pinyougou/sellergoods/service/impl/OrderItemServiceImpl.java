@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.sellergoods.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
-	/**
-	 * 返回OrderItem全部列表
-	 * @return
-	 */
-	@Override
-    public List<OrderItem> getAll(){
+    /**
+     * 返回OrderItem全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<OrderItem> getAll() {
         return orderItemMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class OrderItemServiceImpl implements OrderItemService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<OrderItem> getAll(OrderItem orderItem,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<OrderItem> getAll(OrderItem orderItem, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<OrderItem> all = orderItemMapper.select(orderItem);
         PageInfo<OrderItem> pageInfo = new PageInfo<OrderItem>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_orderItem where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return orderItemMapper.deleteByExample(example);
     }
 }

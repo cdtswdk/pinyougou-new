@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Goods;
 import com.pinyougou.model.Item;
@@ -7,11 +8,12 @@ import java.util.List;
 
 public interface GoodsService {
 
-	/**
-	 * 返回Goods全部列表
-	 * @return
-	 */
-	public List<Goods> getAll();
+    /**
+     * 返回Goods全部列表
+     *
+     * @return
+     */
+    public List<Goods> getAll();
 
     /***
      * 分页返回Goods列表
@@ -53,7 +55,8 @@ public interface GoodsService {
 
     /**
      * 根据id和status查找商品
-      * @param ids
+     *
+     * @param ids
      * @param status
      * @return
      */

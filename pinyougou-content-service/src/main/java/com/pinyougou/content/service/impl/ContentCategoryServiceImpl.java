@@ -1,4 +1,5 @@
 package com.pinyougou.content.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +9,7 @@ import com.pinyougou.content.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 @Service
@@ -16,12 +18,13 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
     @Autowired
     private ContentCategoryMapper contentCategoryMapper;
 
-	/**
-	 * 返回ContentCategory全部列表
-	 * @return
-	 */
-	@Override
-    public List<ContentCategory> getAll(){
+    /**
+     * 返回ContentCategory全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<ContentCategory> getAll() {
         return contentCategoryMapper.selectAll();
     }
 
@@ -32,17 +35,16 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<ContentCategory> getAll(ContentCategory contentCategory,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<ContentCategory> getAll(ContentCategory contentCategory, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<ContentCategory> all = contentCategoryMapper.select(contentCategory);
         PageInfo<ContentCategory> pageInfo = new PageInfo<ContentCategory>(all);
         return pageInfo;
     }
-
 
 
     /***
@@ -90,7 +92,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_contentCategory where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return contentCategoryMapper.deleteByExample(example);
     }
 }

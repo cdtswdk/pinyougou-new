@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.ContentCategory;
+
 import java.util.List;
 
 public interface ContentCategoryService {
 
-	/**
-	 * 返回ContentCategory全部列表
-	 * @return
-	 */
-	public List<ContentCategory> getAll();
+    /**
+     * 返回ContentCategory全部列表
+     *
+     * @return
+     */
+    public List<ContentCategory> getAll();
 
     /***
      * 分页返回ContentCategory列表

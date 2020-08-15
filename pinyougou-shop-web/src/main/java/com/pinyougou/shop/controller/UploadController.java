@@ -22,7 +22,7 @@ public class UploadController {
      * @return
      */
     @RequestMapping(value = "/upload")
-    public Result upload(MultipartFile file) throws Exception{   //file前台传的文件必须也为file
+    public Result upload(MultipartFile file) throws Exception {   //file前台传的文件必须也为file
         //获取文件名字
         String originalFilename = file.getOriginalFilename();
 
@@ -39,7 +39,7 @@ public class UploadController {
         String[] uploads = UploadUtil.upload("classpath:config/tracker.conf", bytes, suffix);
 
         //拼接的图片访问地址
-        String url = "http://192.168.254.128/"+uploads[0]+"/"+uploads[1];
-        return new Result(true,url);
+        String url = "http://192.168.254.128/" + uploads[0] + "/" + uploads[1];
+        return new Result(true, url);
     }
 }

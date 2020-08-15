@@ -2,53 +2,53 @@
  * 定义一个控制层 controller
  * 发送HTTP请求从后台获取数据
  ****/
-app.controller("sellerController",function($scope,$http,$controller,sellerService){
+app.controller("sellerController", function ($scope, $http, $controller, sellerService) {
 
     //继承父控制器
-    $controller("baseController",{$scope:$scope});
+    $controller("baseController", {$scope: $scope});
 
 
     //修改商户状态
-    $scope.updateStatus=function (sellerId,status) {
-        sellerService.updateStatus(sellerId,status).success(function (response) {
-            if(response.success){
+    $scope.updateStatus = function (sellerId, status) {
+        sellerService.updateStatus(sellerId, status).success(function (response) {
+            if (response.success) {
                 //修改成功
                 $scope.reloadList();
-            }else{
+            } else {
                 alert(response.message);
             }
         });
     }
 
     //获取所有的Seller信息
-    $scope.getPage=function(page,size){
+    $scope.getPage = function (page, size) {
         //发送请求获取数据
-        sellerService.findAll(page,size,$scope.searchEntity).success(function(response){
+        sellerService.findAll(page, size, $scope.searchEntity).success(function (response) {
             //集合数据
             $scope.list = response.list;
             //分页数据
-            $scope.paginationConf.totalItems=response.total;
+            $scope.paginationConf.totalItems = response.total;
         });
         alert($scope.list);
     }
 
     //添加或者修改方法
-    $scope.save = function(){
+    $scope.save = function () {
         var result = null;
-        if($scope.entity.id!=null){
+        if ($scope.entity.id != null) {
             //执行修改数据
             result = sellerService.update($scope.entity);
-        }else{
+        } else {
             //增加操作
             result = sellerService.add($scope.entity);
         }
         //判断操作流程
-        result.success(function(response){
+        result.success(function (response) {
             //判断执行状态
-            if(response.success){
+            if (response.success) {
                 //重新加载新的数据
                 $scope.reloadList();
-            }else{
+            } else {
                 //打印错误消息
                 alert(response.message);
             }
@@ -56,20 +56,20 @@ app.controller("sellerController",function($scope,$http,$controller,sellerServic
     }
 
     //根据ID查询信息
-    $scope.getById=function(id){
-        sellerService.findOne(id).success(function(response){
+    $scope.getById = function (id) {
+        sellerService.findOne(id).success(function (response) {
             //将后台的数据绑定到前台
-            $scope.entity=response;
+            $scope.entity = response;
         });
     }
 
     //批量删除
-    $scope.delete=function(){
-        sellerService.delete($scope.selectids).success(function(response){
+    $scope.delete = function () {
+        sellerService.delete($scope.selectids).success(function (response) {
             //判断删除状态
-            if(response.success){
+            if (response.success) {
                 $scope.reloadList();
-            }else{
+            } else {
                 alert(response.message);
             }
         });

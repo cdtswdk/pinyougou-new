@@ -13,9 +13,9 @@ app.controller("searchController", function ($scope, $http, $location, searchSer
         "sortField": ""
     };
 
-    $scope.loadKeyword = function(){
+    $scope.loadKeyword = function () {
         let keyword = $location.search()['keyword'];
-        if(keyword!=null){
+        if (keyword != null) {
             $scope.searchMap.keyword = keyword;
         }
     }

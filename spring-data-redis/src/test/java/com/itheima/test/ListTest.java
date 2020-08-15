@@ -28,11 +28,11 @@ public class ListTest {
      * 从队列的左边开始增加数据
      */
     @Test
-    public void testLeftAdd(){
+    public void testLeftAdd() {
         //只添加1条数据
         redisTemplate.boundListOps("Xiaohong").leftPush("花花");
         //批量添加
-        redisTemplate.boundListOps("Xiaohong").leftPushAll("小红红","小花花","哈哈哈");
+        redisTemplate.boundListOps("Xiaohong").leftPushAll("小红红", "小花花", "哈哈哈");
     }
 
 
@@ -40,33 +40,29 @@ public class ListTest {
      * 左压出栈
      */
     @Test
-    public void testLeftGet(){
+    public void testLeftGet() {
         Object result = redisTemplate.boundListOps("Xiaohong").leftPop();
         System.out.println(result);
     }
-
-
 
 
     /**
      * 右压栈
      */
     @Test
-    public void testRightAdd(){
+    public void testRightAdd() {
         //只添加1条数据
         redisTemplate.boundListOps("Xiaohong").rightPush("花花");
         //批量添加
-        redisTemplate.boundListOps("Xiaohong").rightPushAll("小红红","小花花","哈哈哈");
+        redisTemplate.boundListOps("Xiaohong").rightPushAll("小红红", "小花花", "哈哈哈");
     }
-
-
 
 
     /***
      * 左压出栈
      */
     @Test
-    public void testRightGet(){
+    public void testRightGet() {
         Object result = redisTemplate.boundListOps("Xiaohong").rightPop();
         System.out.println(result);
     }

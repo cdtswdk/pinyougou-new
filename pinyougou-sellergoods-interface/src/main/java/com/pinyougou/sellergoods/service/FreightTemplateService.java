@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.FreightTemplate;
+
 import java.util.List;
 
 public interface FreightTemplateService {
 
-	/**
-	 * 返回FreightTemplate全部列表
-	 * @return
-	 */
-	public List<FreightTemplate> getAll();
+    /**
+     * 返回FreightTemplate全部列表
+     *
+     * @return
+     */
+    public List<FreightTemplate> getAll();
 
     /***
      * 分页返回FreightTemplate列表

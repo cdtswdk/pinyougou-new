@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface SpecificationMapper extends Mapper<Specification> {
-    List<Map<String,Object>> selectOptionList();
+    List<Map<String, Object>> selectOptionList();
 }

@@ -1,7 +1,7 @@
-app.controller("baseController",function($scope){
+app.controller("baseController", function ($scope) {
 
     //条件查询对象定义
-    $scope.searchEntity={};
+    $scope.searchEntity = {};
 
     /***
      * 分页控件配置
@@ -16,20 +16,20 @@ app.controller("baseController",function($scope){
         totalItems: 10,
         itemsPerPage: 10,
         perPageOptions: [10, 20, 30, 40, 50],
-        onChange: function(){
+        onChange: function () {
             $scope.reloadList();//重新加载
         }
     };
 
     //定义一个变量，用于存储要删除的品牌ID
-    $scope.selectids=[];
+    $scope.selectids = [];
     //判断当前点击是否要删除对应品牌
-    $scope.updateSelection=function($event,id){
+    $scope.updateSelection = function ($event, id) {
         //判断当前操作是否是选中复选框
-        if($event.target.checked){
+        if ($event.target.checked) {
             //如果选中复选框，则将该id增加到数组中去
             $scope.selectids.push(id);
-        }else{
+        } else {
             //取消删除，则从数组中移除该id
             var idx = $scope.selectids.indexOf(id);   //获取id对应的下标
             $scope.selectids.splice(idx, 1);//删除对应下标的数据，1表示删除的数量
@@ -37,7 +37,7 @@ app.controller("baseController",function($scope){
     }
 
     //重新加载
-    $scope.reloadList=function(){
-        $scope.getPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+    $scope.reloadList = function () {
+        $scope.getPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
     }
 });

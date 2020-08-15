@@ -29,21 +29,21 @@ public class HashTest {
      *              key
      */
     @Test
-   public void testAdd(){
-        redisTemplate.boundHashOps("NameSpace").put("1","小花花");
-        redisTemplate.boundHashOps("NameSpace").put("2","大花花");
-        redisTemplate.boundHashOps("NameSpace").put("3","中花花");
+    public void testAdd() {
+        redisTemplate.boundHashOps("NameSpace").put("1", "小花花");
+        redisTemplate.boundHashOps("NameSpace").put("2", "大花花");
+        redisTemplate.boundHashOps("NameSpace").put("3", "中花花");
 
-        redisTemplate.boundHashOps("XiaohongHAHA").put("1","中花花");
-        redisTemplate.boundHashOps("XiaohongHAHA").put("2","中花花");
-   }
+        redisTemplate.boundHashOps("XiaohongHAHA").put("1", "中花花");
+        redisTemplate.boundHashOps("XiaohongHAHA").put("2", "中花花");
+    }
 
 
     /***
      * 查询操作
      */
     @Test
-   public void testGet(){
+    public void testGet() {
         Object result1 = redisTemplate.boundHashOps("NameSpace").get("1");
         System.out.println(result1);
 
@@ -56,7 +56,7 @@ public class HashTest {
      * 删除操作
      */
     @Test
-    public void testDelete(){
+    public void testDelete() {
         redisTemplate.boundHashOps("NameSpace").delete("2");
     }
 
@@ -64,7 +64,7 @@ public class HashTest {
      * 查询所有
      */
     @Test
-    public void testGetAll(){
+    public void testGetAll() {
         List nameSpace = redisTemplate.boundHashOps("NameSpace").values();
 
         for (Object o : nameSpace) {

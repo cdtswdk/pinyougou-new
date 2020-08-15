@@ -2,7 +2,9 @@ package com.pinyougou.mapper;
 
 import com.pinyougou.model.GoodsDesc;
 import com.pinyougou.model.GoodsDescExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 

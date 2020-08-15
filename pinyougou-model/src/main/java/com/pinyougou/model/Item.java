@@ -127,7 +127,7 @@ public class Item implements Serializable {
 
     @Dynamic
     @Field(value = "item_spec_*")
-    private Map<String,String> specMap;
+    private Map<String, String> specMap;
 
     public Map<String, String> getSpecMap() {
         return specMap;

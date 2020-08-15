@@ -50,14 +50,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //手动开启登录配置
         http.formLogin()
                 .loginPage("/login.html")   //配置登录页面  login.html
-                .defaultSuccessUrl("/images/1.png",true) //登录成功后跳转的欢迎页
+                .defaultSuccessUrl("/images/1.png", true) //登录成功后跳转的欢迎页
                 .loginProcessingUrl("/login");       //登录处理的地址
 
         //登出配置
         http.logout()
-            .invalidateHttpSession(true)    //让session销毁
-            .logoutUrl("/logout")           //退出地址
-            .logoutSuccessUrl("/login.html");
+                .invalidateHttpSession(true)    //让session销毁
+                .logoutUrl("/logout")           //退出地址
+                .logoutSuccessUrl("/login.html");
 
         //异常解决
         http.exceptionHandling().accessDeniedPage("/error.html");

@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,6 +11,7 @@ import com.pinyougou.sellergoods.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +21,13 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Autowired
     private SpecificationMapper specificationMapper;
 
-	/**
-	 * 返回Specification全部列表
-	 * @return
-	 */
-	@Override
-    public List<Specification> getAll(){
+    /**
+     * 返回Specification全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<Specification> getAll() {
         return specificationMapper.selectAll();
     }
 
@@ -35,11 +38,11 @@ public class SpecificationServiceImpl implements SpecificationService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<Specification> getAll(Specification specification,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<Specification> getAll(Specification specification, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<Specification> all = specificationMapper.select(specification);
         PageInfo<Specification> pageInfo = new PageInfo<Specification>(all);
@@ -140,7 +143,7 @@ public class SpecificationServiceImpl implements SpecificationService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_specification where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
 
         //删除规格信息
         int dcount = specificationMapper.deleteByExample(example);
@@ -150,10 +153,10 @@ public class SpecificationServiceImpl implements SpecificationService {
         Example.Criteria criteria1 = example1.createCriteria();
 
         //所需的SQL语句类似 delete from tb_specification where specId in(1,2,5,6)
-        criteria1.andIn("specId",ids);
+        criteria1.andIn("specId", ids);
 
         //删除规格选项
-        dcount+=specificationOptionMapper.deleteByExample(example1);
+        dcount += specificationOptionMapper.deleteByExample(example1);
 
         return dcount;
     }

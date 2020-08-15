@@ -13,16 +13,16 @@
 
     <!--dubbo配置-->
     <!--注册应用-->
-    <dubbo:application name="pinyougou-manager-web" />
+    <dubbo:application name="pinyougou-manager-web"/>
 
     <!--设置客户端请求超时时间-->
-    <dubbo:consumer timeout="10000"  />
+    <dubbo:consumer timeout="10000"/>
 
     <!--注册中心-->
-    <dubbo:registry address="zookeeper://192.168.254.128:2181" />
+    <dubbo:registry address="zookeeper://192.168.254.128:2181"/>
 
     <!--包扫描-->
-    <dubbo:annotation package="com.pinyougou.manager" />
+    <dubbo:annotation package="com.pinyougou.manager"/>
 
     <!--注解驱动-->
     <mvc:annotation-driven>
@@ -54,11 +54,10 @@
     </mvc:annotation-driven>
 
     <!-- 包扫描 -->
-    <context:component-scan base-package="com.pinyougou.manager" />
+    <context:component-scan base-package="com.pinyougou.manager"/>
 
     <!--加载配置文件-->
-    <context:property-placeholder location="classpath:config/sys_config.properties" />
-
+    <context:property-placeholder location="classpath:config/sys_config.properties"/>
 
     <!--文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -66,4 +65,6 @@
         <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
         <property name="maxUploadSize" value="5242880"></property>
     </bean>
+
+    <import resource="spring-mq.xml"/>
 </beans>

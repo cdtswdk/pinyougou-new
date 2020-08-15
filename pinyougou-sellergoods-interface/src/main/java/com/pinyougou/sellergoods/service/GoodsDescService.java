@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.GoodsDesc;
+
 import java.util.List;
 
 public interface GoodsDescService {
 
-	/**
-	 * 返回GoodsDesc全部列表
-	 * @return
-	 */
-	public List<GoodsDesc> getAll();
+    /**
+     * 返回GoodsDesc全部列表
+     *
+     * @return
+     */
+    public List<GoodsDesc> getAll();
 
     /***
      * 分页返回GoodsDesc列表

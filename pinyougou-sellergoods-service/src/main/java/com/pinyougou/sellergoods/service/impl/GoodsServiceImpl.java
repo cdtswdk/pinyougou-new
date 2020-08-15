@@ -313,8 +313,8 @@ public class GoodsServiceImpl implements GoodsService {
         //查询条件
         Example example = new Example(Item.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andIn("goodsId",ids);
-        criteria.andEqualTo("status",status);
+        criteria.andIn("goodsId", ids);
+        criteria.andEqualTo("status", status);
 
         return this.itemMapper.selectByExample(example);
     }

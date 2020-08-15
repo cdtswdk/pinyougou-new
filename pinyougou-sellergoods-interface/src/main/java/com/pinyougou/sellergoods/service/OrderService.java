@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Order;
+
 import java.util.List;
 
 public interface OrderService {
 
-	/**
-	 * 返回Order全部列表
-	 * @return
-	 */
-	public List<Order> getAll();
+    /**
+     * 返回Order全部列表
+     *
+     * @return
+     */
+    public List<Order> getAll();
 
     /***
      * 分页返回Order列表

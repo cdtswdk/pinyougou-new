@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.SeckillGoods;
+
 import java.util.List;
 
 public interface SeckillGoodsService {
 
-	/**
-	 * 返回SeckillGoods全部列表
-	 * @return
-	 */
-	public List<SeckillGoods> getAll();
+    /**
+     * 返回SeckillGoods全部列表
+     *
+     * @return
+     */
+    public List<SeckillGoods> getAll();
 
     /***
      * 分页返回SeckillGoods列表

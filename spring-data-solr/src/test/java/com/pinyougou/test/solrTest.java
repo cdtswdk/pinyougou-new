@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:spring/spring-solr.xml")
+@ContextConfiguration(locations = "classpath:spring/spring-solr.xml")
 public class solrTest {
 
     @Autowired
@@ -27,7 +27,7 @@ public class solrTest {
      * 测试增加
      */
     @Test
-    public void testAdd(){
+    public void testAdd() {
         Item item = new Item();
         item.setId(1L);
         item.setBrand("华为");
@@ -45,16 +45,16 @@ public class solrTest {
      * 测试增加
      */
     @Test
-    public void testBatchAdd(){
+    public void testBatchAdd() {
         List<Item> items = new ArrayList<Item>();
-        for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             Item item = new Item();
             item.setId((long) i);
-            item.setBrand("华为"+(int)(Math.random()*100));
-            item.setCategory("手机"+(int)(Math.random()*100));
+            item.setBrand("华为" + (int) (Math.random() * 100));
+            item.setCategory("手机" + (int) (Math.random() * 100));
             item.setGoodsId(1L);
-            item.setSeller("华为2号专卖店"+(int)(Math.random()*100));
-            item.setTitle("华为Mate9"+(int)(Math.random()*100));
+            item.setSeller("华为2号专卖店" + (int) (Math.random() * 100));
+            item.setTitle("华为Mate9" + (int) (Math.random() * 100));
             item.setPrice(new BigDecimal(2000));
             items.add(item);
         }
@@ -68,7 +68,7 @@ public class solrTest {
      * 根据ID查询
      */
     @Test
-    public void testGetById(){
+    public void testGetById() {
         Item item = this.solrTemplate.getById("1", Item.class);
         System.out.println(item);
     }
@@ -77,7 +77,7 @@ public class solrTest {
      * 根据主键删除
      */
     @Test
-    public void testDeleteById(){
+    public void testDeleteById() {
         this.solrTemplate.deleteById("1369364");
         this.solrTemplate.commit();
     }
@@ -86,13 +86,13 @@ public class solrTest {
      * 分页查询
      */
     @Test
-    public void testSearchByPage(){
+    public void testSearchByPage() {
         Query query = new SimpleQuery("*:*");
         //设置分页
         query.setOffset(5);
         query.setRows(7);
         ScoredPage<Item> scoredPage = this.solrTemplate.queryForPage(query, Item.class);
-        System.out.println("总记录数："+scoredPage.getTotalElements());
+        System.out.println("总记录数：" + scoredPage.getTotalElements());
         List<Item> content = scoredPage.getContent();
         for (Item item : content) {
             System.out.println(item);
@@ -103,7 +103,7 @@ public class solrTest {
      * 条件查询
      */
     @Test
-    public void testSearchByCondition(){
+    public void testSearchByCondition() {
         Query query = new SimpleQuery("*:*");
 
         //设置条件
@@ -113,7 +113,7 @@ public class solrTest {
         query.setOffset(0);
         query.setRows(10);
         ScoredPage<Item> scoredPage = this.solrTemplate.queryForPage(query, Item.class);
-        System.out.println("总记录数："+scoredPage.getTotalElements());
+        System.out.println("总记录数：" + scoredPage.getTotalElements());
         List<Item> content = scoredPage.getContent();
         for (Item item : content) {
             System.out.println(item);
@@ -124,7 +124,7 @@ public class solrTest {
      * 删除全部
      */
     @Test
-    public void deleteAll(){
+    public void deleteAll() {
         Query query = new SimpleQuery("*:*");
         this.solrTemplate.delete(query);
         this.solrTemplate.commit();

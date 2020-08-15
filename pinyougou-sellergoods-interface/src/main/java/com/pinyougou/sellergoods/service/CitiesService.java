@@ -1,15 +1,18 @@
 package com.pinyougou.sellergoods.service;
+
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Cities;
+
 import java.util.List;
 
 public interface CitiesService {
 
-	/**
-	 * 返回Cities全部列表
-	 * @return
-	 */
-	public List<Cities> getAll();
+    /**
+     * 返回Cities全部列表
+     *
+     * @return
+     */
+    public List<Cities> getAll();
 
     /***
      * 分页返回Cities列表

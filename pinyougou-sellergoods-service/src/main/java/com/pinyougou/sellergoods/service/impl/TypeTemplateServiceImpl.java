@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,12 +27,13 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-	/**
-	 * 返回TypeTemplate全部列表
-	 * @return
-	 */
-	@Override
-    public List<TypeTemplate> getAll(){
+    /**
+     * 返回TypeTemplate全部列表
+     *
+     * @return
+     */
+    @Override
+    public List<TypeTemplate> getAll() {
         return typeTemplateMapper.selectAll();
     }
 
@@ -41,11 +44,11 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
      * @param pageSize
      * @return
      */
-	@Override
-    public PageInfo<TypeTemplate> getAll(TypeTemplate typeTemplate,int pageNum, int pageSize) {
+    @Override
+    public PageInfo<TypeTemplate> getAll(TypeTemplate typeTemplate, int pageNum, int pageSize) {
         //执行分页
-        PageHelper.startPage(pageNum,pageSize);
-       
+        PageHelper.startPage(pageNum, pageSize);
+
         //执行查询
         List<TypeTemplate> all = typeTemplateMapper.select(typeTemplate);
 
@@ -58,15 +61,15 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
     /**
      * 缓存
      */
-    public void refreshRedis(){
+    public void refreshRedis() {
         List<TypeTemplate> typeTemplates = this.typeTemplateMapper.selectAll();
         for (TypeTemplate typeTemplate : typeTemplates) {
             //将品牌信息转成List<Map>
             List<Map> brandList = JSON.parseArray(typeTemplate.getBrandIds(), Map.class);
             //将typeTemplate的ID作为key,品牌信息作为value
-            this.redisTemplate.boundHashOps("brandList").put(typeTemplate.getId(),brandList);
+            this.redisTemplate.boundHashOps("brandList").put(typeTemplate.getId(), brandList);
             //将typeTemplate的ID作为key,规格信息作为value
-            this.redisTemplate.boundHashOps("specList").put(typeTemplate.getId(),getOptionsByTypeId(typeTemplate.getId()));
+            this.redisTemplate.boundHashOps("specList").put(typeTemplate.getId(), getOptionsByTypeId(typeTemplate.getId()));
         }
     }
 
@@ -115,7 +118,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         Example.Criteria criteria = example.createCriteria();
 
         //所需的SQL语句类似 delete from tb_typeTemplate where id in(1,2,5,6)
-        criteria.andIn("id",ids);
+        criteria.andIn("id", ids);
         return typeTemplateMapper.deleteByExample(example);
     }
 
@@ -129,7 +132,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
         // spec_ids=[{"id":32,"text":"机身内存"},{"id":36,"text":"网络"}]
         //将spec_id转成JSON，并循环
-        List<Map> dataMap = JSON.parseArray(template.getSpecIds(),Map.class);
+        List<Map> dataMap = JSON.parseArray(template.getSpecIds(), Map.class);
         //{"id":32,"text":"机身内存"}
         //Map key-value = JSON  key-value
         //{"id":36,"text":"网络"}
@@ -145,7 +148,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
             List<SpecificationOption> options = specificationOptionMapper.select(specificationOption);
 
             //组装JSON数据格式
-            map.put("options",options);
+            map.put("options", options);
         }
         return dataMap;
     }

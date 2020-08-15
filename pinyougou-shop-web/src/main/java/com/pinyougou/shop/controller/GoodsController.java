@@ -1,4 +1,5 @@
 package com.pinyougou.shop.controller;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.http.Result;
@@ -6,9 +7,11 @@ import com.pinyougou.model.Goods;
 import com.pinyougou.sellergoods.service.GoodsService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/goods")
 public class GoodsController {
@@ -23,18 +26,18 @@ public class GoodsController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    public Result delete(@RequestBody List<Long> ids){
+    public Result delete(@RequestBody List<Long> ids) {
         try {
             //根据ID删除数据
             int dcount = goodsService.deleteByIds(ids);
 
-            if(dcount>0){
-                return new Result(true,"删除成功");
+            if (dcount > 0) {
+                return new Result(true, "删除成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"删除失败");
+        return new Result(false, "删除失败");
     }
 
     /***
@@ -42,25 +45,25 @@ public class GoodsController {
      * @param goods
      * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result modify(@RequestBody Goods goods){
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result modify(@RequestBody Goods goods) {
         try {
             //判断当前用户操作的是否是自己的商品
             String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-            if(!sellerId.equals(goods.getSellerId())){
-                return  new Result(false,"非法操作！");
+            if (!sellerId.equals(goods.getSellerId())) {
+                return new Result(false, "非法操作！");
             }
 
             //根据ID修改Goods信息
             int mcount = goodsService.updateGoodsById(goods);
-            if(mcount>0){
-                return new Result(true,"修改成功");
+            if (mcount > 0) {
+                return new Result(true, "修改成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"修改失败");
+        return new Result(false, "修改失败");
     }
 
     /***
@@ -68,8 +71,8 @@ public class GoodsController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public Goods getById(@PathVariable(value = "id")long id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Goods getById(@PathVariable(value = "id") long id) {
         //根据ID查询Goods信息
         Goods goods = goodsService.getOneById(id);
         return goods;
@@ -85,8 +88,8 @@ public class GoodsController {
      *                  响应的消息
      *
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@RequestBody Goods goods){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody Goods goods) {
         try {
             //获取商家登录信息
             String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -97,16 +100,15 @@ public class GoodsController {
             //执行增加
             int acount = goodsService.add(goods);
 
-            if(acount>0){
+            if (acount > 0) {
                 //增加成功
-               return new Result(true,"增加成功");
+                return new Result(true, "增加成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"增加失败");
+        return new Result(false, "增加失败");
     }
-
 
 
     /***
@@ -114,8 +116,8 @@ public class GoodsController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public PageInfo<Goods> list(@RequestBody Goods goods,@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public PageInfo<Goods> list(@RequestBody Goods goods, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         //指定登录用户的ID信息
         String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -123,9 +125,8 @@ public class GoodsController {
         //给Goods赋值
         goods.setSellerId(sellerId);
 
-        return goodsService.getAll(goods,page, size);
+        return goodsService.getAll(goods, page, size);
     }
-
 
 
     /***
@@ -133,7 +134,7 @@ public class GoodsController {
      * 获取JSON数据
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Goods> list() {
         return goodsService.getAll();
     }
