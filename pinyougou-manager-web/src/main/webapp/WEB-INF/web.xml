@@ -56,5 +56,4 @@
         <url-pattern>*.shtml</url-pattern>
     </servlet-mapping>
     <!-- //End SpringMVC -->
-
 </web-app>
