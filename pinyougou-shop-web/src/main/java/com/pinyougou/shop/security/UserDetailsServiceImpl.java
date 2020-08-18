@@ -46,7 +46,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             //构建一个User
             return new User(username, seller.getPassword(), authorities);
         }
-
         return null;
     }
 }
