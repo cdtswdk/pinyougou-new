@@ -52,7 +52,7 @@
         <url-pattern>*.shtml</url-pattern>
     </servlet-mapping>
     <!-- //End SpringMVC -->
-    <!--<welcome-file-list>
+    <welcome-file-list>
         <welcome-file>home-index.html</welcome-file>
-    </welcome-file-list>-->
+    </welcome-file-list>
 </web-app>
