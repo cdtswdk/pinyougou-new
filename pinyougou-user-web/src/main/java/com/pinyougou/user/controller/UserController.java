@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.http.Result;
 import com.pinyougou.model.User;
 import com.pinyougou.user.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,11 +15,20 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 获取登录用户名
+     * @return
+     */
+    @RequestMapping(value = "/login/name")
+    public String getUsername(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    /**
      * 发送验证码
      * @param phone
      * @return
      */
-    @RequestMapping(value = "sendCode")
+    @RequestMapping(value = "/sendCode")
     public Result createCode(String phone){
         try {
             this.userService.createCode(phone);

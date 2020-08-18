@@ -11,7 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.util.DigestUtils;
-import sun.nio.cs.US_ASCII;
 
 import javax.jms.*;
 import java.util.Date;
@@ -96,6 +95,13 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public User getUserByUsername(String s) {
+        User user = new User();
+        user.setUsername(s);
+        return this.userMapper.selectOne(user);
     }
 
     private void sendMsg(String phone, String code) {

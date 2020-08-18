@@ -39,4 +39,11 @@ public interface UserService {
      * @return
      */
     Boolean checkByCode(String phone, String code);
+
+    /**
+     * 根据用户名获取用户信息
+     * @param s
+     * @return
+     */
+    User getUserByUsername(String s);
 }
