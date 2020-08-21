@@ -14,12 +14,12 @@ public class MessageListener {
     private MessageSender messageSender;
 
     @JmsListener(destination = "message-list")
-    public void readMessage(Map<String,String> dataMap) throws ClientException {
+    public void readMessage(Map<String, String> dataMap) throws ClientException {
         String mobile = dataMap.get("mobile");
         String signName = dataMap.get("signName");
         String templateCode = dataMap.get("templateCode");
         String param = dataMap.get("param");
         //消息发送
-        this.messageSender.sendSms(mobile,signName,templateCode,param);
+        this.messageSender.sendSms(mobile, signName, templateCode, param);
     }
 }

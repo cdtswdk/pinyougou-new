@@ -16,56 +16,57 @@ public class UserController {
 
     /**
      * 获取登录用户名
+     *
      * @return
      */
     @RequestMapping(value = "/login/name")
-    public String getUsername(){
+    public String getUsername() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     /**
      * 发送验证码
+     *
      * @param phone
      * @return
      */
     @RequestMapping(value = "/sendCode")
-    public Result createCode(String phone){
+    public Result createCode(String phone) {
         try {
             this.userService.createCode(phone);
-            return new Result(true,"发送验证码成功！");
-        }catch (Exception e){
+            return new Result(true, "发送验证码成功！");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"发送验证码失败！");
+        return new Result(false, "发送验证码失败！");
     }
 
 
     /**
      * 增加User数据
-     * @param user
-     * 响应数据：success
-     *                  true:成功  false：失败
-     *           message
-     *                  响应的消息
      *
+     * @param user 响应数据：success
+     *             true:成功  false：失败
+     *             message
+     *             响应的消息
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Result add(@RequestBody User user,String code) {
+    public Result add(@RequestBody User user, String code) {
         try {
             //校验用户名是否重复
             int ucount = this.userService.checkByUserName(user.getUsername());
-            if(ucount>0){
-                return new Result(false,"用户名已经存在！");
+            if (ucount > 0) {
+                return new Result(false, "用户名已经存在！");
             }
             //判断手机号是否存在
             int mcount = this.userService.checkByMobilePhone(user.getPhone());
-            if(mcount>0){
-                return new Result(false,"手机号已经存在！");
+            if (mcount > 0) {
+                return new Result(false, "手机号已经存在！");
             }
             //判断验证码是否一致
-            Boolean flag = this.userService.checkByCode(user.getPhone(),code);
-            if(!flag){
-                return new Result(false,"验证码输入错误！");
+            Boolean flag = this.userService.checkByCode(user.getPhone(), code);
+            if (!flag) {
+                return new Result(false, "验证码输入错误！");
             }
 
             //执行增加

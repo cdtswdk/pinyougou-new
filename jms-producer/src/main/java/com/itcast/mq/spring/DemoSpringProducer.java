@@ -20,9 +20,10 @@ public class DemoSpringProducer {
 
     /**
      * 发送文本消息
+     *
      * @param text
      */
-    public void sendTextMessage(String text){
+    public void sendTextMessage(String text) {
         this.jmsTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 TextMessage textMessage = session.createTextMessage(text);
@@ -33,13 +34,14 @@ public class DemoSpringProducer {
 
     /**
      * 发送map类型消息
+     *
      * @param dataMap
      */
-    public void sendMapMessage(Map<String,String> dataMap){
+    public void sendMapMessage(Map<String, String> dataMap) {
         this.jmsTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 MapMessage mapMessage = session.createMapMessage();
-                mapMessage.setObject("userInfo",dataMap);
+                mapMessage.setObject("userInfo", dataMap);
                 return mapMessage;
             }
         });
@@ -47,9 +49,10 @@ public class DemoSpringProducer {
 
     /**
      * 发送object类型消息
+     *
      * @param user
      */
-    public void sendObjectMessage(User user){
+    public void sendObjectMessage(User user) {
         this.jmsTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 ObjectMessage objectMessage = session.createObjectMessage();

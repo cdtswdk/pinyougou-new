@@ -15,6 +15,7 @@ public interface ItemPageService {
 
     /**
      * 根据商品id删除静态页
+     *
      * @param id
      */
     void deleteHtml(Long id);

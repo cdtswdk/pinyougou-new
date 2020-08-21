@@ -13,13 +13,13 @@ public class QueueController {
     private MessageSender messageSender;
 
     @RequestMapping(value = "/send/text")
-    public String sendTextMessage(String text){
+    public String sendTextMessage(String text) {
         this.messageSender.sendTextMessage(text);
         return "OK";
     }
 
     @RequestMapping(value = "send/map")
-    public String sendMapMessage(){
+    public String sendMapMessage() {
         this.messageSender.sendMapMessage();
         return "OK";
     }

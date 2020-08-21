@@ -4,7 +4,7 @@ app.controller('itemController', function ($scope) {
     $scope.specList = {};
 
     //加入购物车
-    $scope.addToCart=function(){
+    $scope.addToCart = function () {
         //SKU对应的ID
         let itemId = $scope.sku.id;
         alert(itemId)

@@ -8,9 +8,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- *
  * Cookie 工具类
- *
  */
 public final class CookieUtil {
 

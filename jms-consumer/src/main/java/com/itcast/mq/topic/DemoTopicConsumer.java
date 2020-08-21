@@ -5,7 +5,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 
 public class DemoTopicConsumer {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         //创建连接工厂对象
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.254.128:61616");
         //创建连接对象
@@ -22,10 +22,10 @@ public class DemoTopicConsumer {
         //监听消息，监听的方式是创建了一个线程
         consumer.setMessageListener(new MessageListener() {
             public void onMessage(Message message) {
-                if(message instanceof TextMessage){
+                if (message instanceof TextMessage) {
                     TextMessage textMessage = (TextMessage) message;
                     try {
-                        System.out.println("消息内容："+textMessage.getText());
+                        System.out.println("消息内容：" + textMessage.getText());
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }

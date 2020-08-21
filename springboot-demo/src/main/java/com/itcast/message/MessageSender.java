@@ -14,15 +14,15 @@ public class MessageSender {
     private JmsMessagingTemplate jmsMessagingTemplate;
 
 
-    public void sendTextMessage(String text){
-        this.jmsMessagingTemplate.convertAndSend("queue-text",text);
+    public void sendTextMessage(String text) {
+        this.jmsMessagingTemplate.convertAndSend("queue-text", text);
     }
 
-    public void sendMapMessage(){
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("username","zhangsan");
-        dataMap.put("password","123");
+    public void sendMapMessage() {
+        Map<String, String> dataMap = new HashMap<>();
+        dataMap.put("username", "zhangsan");
+        dataMap.put("password", "123");
 
-        this.jmsMessagingTemplate.convertAndSend("queue-map",dataMap);
+        this.jmsMessagingTemplate.convertAndSend("queue-map", dataMap);
     }
 }

@@ -84,7 +84,7 @@ public class CartServiceImpl implements CartService {
         for (Cart cart : cookieCart) {
             for (OrderItem orderItem : cart.getOrderItemList()) {
                 //将Cookie中的数据逐个添加到Reidis中
-                redisCart = add(redisCart,orderItem.getItemId(),orderItem.getNum());
+                redisCart = add(redisCart, orderItem.getItemId(), orderItem.getNum());
             }
         }
         return redisCart;

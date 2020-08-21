@@ -17,18 +17,19 @@ public class MessageController {
 
     /**
      * 消息发送模拟
+     *
      * @param code
      * @return
      */
     @RequestMapping(value = "/send")
-    public String sendMessage(String code){
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("mobile","13829024910");
-        dataMap.put("templateCode","SMS_189216040");
-        dataMap.put("signName","乐优商城");
-        dataMap.put("param","{\"code\":\""+(int)(Math.random()*10000)+"\"}");
+    public String sendMessage(String code) {
+        Map<String, String> dataMap = new HashMap<>();
+        dataMap.put("mobile", "13829024910");
+        dataMap.put("templateCode", "SMS_189216040");
+        dataMap.put("signName", "乐优商城");
+        dataMap.put("param", "{\"code\":\"" + (int) (Math.random() * 10000) + "\"}");
 
-        this.jmsMessagingTemplate.convertAndSend("message-itcast",dataMap);
+        this.jmsMessagingTemplate.convertAndSend("message-itcast", dataMap);
 
         return "OK";
     }

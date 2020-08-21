@@ -33,7 +33,7 @@ public class TopicMessageListener implements MessageListener {
                     for (Long id : ids) {
                         this.itemPageService.buildHtml(id);
                     }
-                }else if(messageInfo.getMethod() == MessageInfo.METHOD_DELETE){
+                } else if (messageInfo.getMethod() == MessageInfo.METHOD_DELETE) {
                     //删除静态页
                     List<Long> ids = (List<Long>) messageInfo.getContext();
                     for (Long id : ids) {

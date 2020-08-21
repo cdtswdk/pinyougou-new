@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 增加User信息
+     *
      * @param user
      * @return
      */
@@ -54,9 +55,9 @@ public class UserServiceImpl implements UserService {
         //密码加密
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 
-        int icount =  userMapper.insertSelective(user);
+        int icount = userMapper.insertSelective(user);
         //增加成功，则让验证码失效
-        if(icount>0){
+        if (icount > 0) {
             this.redisTemplate.boundHashOps("MobileInfo").delete(user.getPhone());
         }
         return icount;
@@ -65,12 +66,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createCode(String phone) {
         //生成4位随机数
-        String code = (int)(Math.random()*10000)+"";
+        String code = (int) (Math.random() * 10000) + "";
 
         //存入缓存
-        this.redisTemplate.boundHashOps("MobileInfo").put(phone,code);
+        this.redisTemplate.boundHashOps("MobileInfo").put(phone, code);
         //发送验证码到activeMQ
-        sendMsg(phone,code);
+        sendMsg(phone, code);
 
     }
 
@@ -91,7 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean checkByCode(String phone, String code) {
         String redisCode = (String) this.redisTemplate.boundHashOps("MobileInfo").get(phone);
-        if(redisCode == null || !redisCode.equals(code)){
+        if (redisCode == null || !redisCode.equals(code)) {
             return false;
         }
         return true;
@@ -110,12 +111,12 @@ public class UserServiceImpl implements UserService {
             public Message createMessage(Session session) throws JMSException {
                 MapMessage mapMessage = session.createMapMessage();
 
-                mapMessage.setString("templateCode",template_code);
-                mapMessage.setString("signName",sign_name);
-                mapMessage.setString("mobile",phone);
+                mapMessage.setString("templateCode", template_code);
+                mapMessage.setString("signName", sign_name);
+                mapMessage.setString("mobile", phone);
                 //存储验证码
-                Map<String,String> dataMap = new HashMap<>();
-                dataMap.put("code",code);
+                Map<String, String> dataMap = new HashMap<>();
+                dataMap.put("code", code);
                 mapMessage.setString("param", JSON.toJSONString(dataMap));
                 return mapMessage;
             }

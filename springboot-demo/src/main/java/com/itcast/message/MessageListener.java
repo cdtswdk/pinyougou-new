@@ -9,11 +9,12 @@ import java.util.Map;
 public class MessageListener {
 
     @JmsListener(destination = "queue-text")
-    public void textMessageListener(String text){
-        System.out.println("收到的text消息为："+text);
+    public void textMessageListener(String text) {
+        System.out.println("收到的text消息为：" + text);
     }
+
     @JmsListener(destination = "queue-map")
-    public void mapMessageListener(Map<String,String> dataMap){
-        System.out.println("收到的map消息为："+dataMap);
+    public void mapMessageListener(Map<String, String> dataMap) {
+        System.out.println("收到的map消息为：" + dataMap);
     }
 }

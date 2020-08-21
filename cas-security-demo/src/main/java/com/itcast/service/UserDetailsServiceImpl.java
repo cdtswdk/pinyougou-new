@@ -15,6 +15,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //角色集合
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return new User(username,"",grantedAuthorities);
+        return new User(username, "", grantedAuthorities);
     }
 }

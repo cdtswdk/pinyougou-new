@@ -160,7 +160,8 @@
                         <div class="fl title">
                             <div class="control-group">
                                 <div class="controls">
-                                    <input autocomplete="off" type="text" ng-model="num" value="1" minnum="1" class="itxt"/>
+                                    <input autocomplete="off" type="text" ng-model="num" value="1" minnum="1"
+                                           class="itxt"/>
                                     <a href="javascript:void(0)" ng-click="addNum(1)" class="increment plus">+</a>
                                     <a href="javascript:void(0)" ng-click="addNum(-1)" class="increment mins">-</a>
                                 </div>
@@ -169,7 +170,8 @@
                         <div class="fl">
                             <ul class="btn-choose unstyled">
                                 <li>
-                                    <a  ng-click="addToCart()" href="cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+                                    <a ng-click="addToCart()" href="cart.html" target="_blank"
+                                       class="sui-btn  btn-danger addshopcar">加入购物车</a>
                                 </li>
                             </ul>
                         </div>

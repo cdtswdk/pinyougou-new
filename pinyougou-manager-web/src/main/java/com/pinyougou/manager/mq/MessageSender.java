@@ -17,7 +17,7 @@ public class MessageSender {
     @Autowired
     private Destination destination;
 
-    public void sendMessage(MessageInfo messageInfo){
+    public void sendMessage(MessageInfo messageInfo) {
         this.jmsTemplate.send(destination, new MessageCreator() {
             @Override
             public Message createMessage(Session session) throws JMSException {

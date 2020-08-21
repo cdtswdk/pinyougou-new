@@ -42,16 +42,16 @@ public class CartController {
         //（2）向购物车添加商品
         carts = this.cartService.add(carts, itemId, num);
 
-        if(username.equals("anonymousUser")){
+        if (username.equals("anonymousUser")) {
             //（3）将购物车存入cookie
             String cartList = JSON.toJSONString(carts);
-            CookieUtil.setCookie(request,response,"cartList",cartList,3600*24,"UTF-8");
-        }else {
+            CookieUtil.setCookie(request, response, "cartList", cartList, 3600 * 24, "UTF-8");
+        } else {
             //存入Redis
             //如果是已登录，保存到redis
-            this.cartService.saveCartListToRedis(username,carts);
+            this.cartService.saveCartListToRedis(username, carts);
         }
-        return new Result(true,"加入购物车成功！");
+        return new Result(true, "加入购物车成功！");
     }
 
     /**
@@ -66,21 +66,21 @@ public class CartController {
         //从cookie中获取数据
         String cartList = CookieUtil.getCookieValue(request, "cartList", "UTF-8");
         //防止空指针
-        if(cartList==null || cartList.equals("")){
-            cartList="[]";
+        if (cartList == null || cartList.equals("")) {
+            cartList = "[]";
         }
         List<Cart> cookieCarts = JSON.parseArray(cartList, Cart.class);
-        if(username.equals("anonymousUser")){
+        if (username.equals("anonymousUser")) {
             return cookieCarts == null ? new ArrayList<>() : cookieCarts;
-        }else {
+        } else {
             List<Cart> redisCarts = this.cartService.findCartListFromRedis(username);
-            if(redisCarts!=null && redisCarts.size()>0){
+            if (redisCarts != null && redisCarts.size() > 0) {
                 //合并操作
-                redisCarts = this.cartService.mergeCartList(redisCarts,cookieCarts);
+                redisCarts = this.cartService.mergeCartList(redisCarts, cookieCarts);
                 //清除cookie数据
-                CookieUtil.deleteCookie(request,response,"cartList");
+                CookieUtil.deleteCookie(request, response, "cartList");
                 //更新redis
-                this.cartService.saveCartListToRedis(username,redisCarts);
+                this.cartService.saveCartListToRedis(username, redisCarts);
             }
             return redisCarts;
         }

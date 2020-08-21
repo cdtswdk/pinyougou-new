@@ -19,21 +19,21 @@ public class ProducerTest {
     private DemoSpringProducer demoSpringProducer;
 
     @Test
-    public void testTextMessage(){
-        this.demoSpringProducer.sendTextMessage("我抱牛逼啊"+Math.random());
+    public void testTextMessage() {
+        this.demoSpringProducer.sendTextMessage("我抱牛逼啊" + Math.random());
     }
 
     @Test
-    public void testMapMessage(){
-        Map<String,String> dataMap = new HashMap<String, String>();
-        dataMap.put("username","张三");
-        dataMap.put("password","123");
+    public void testMapMessage() {
+        Map<String, String> dataMap = new HashMap<String, String>();
+        dataMap.put("username", "张三");
+        dataMap.put("password", "123");
         this.demoSpringProducer.sendMapMessage(dataMap);
     }
 
     @Test
-    public void testObjectMessage(){
-        User user = new User("fafhuh和覅哦啊的活佛i啊","123",15);
+    public void testObjectMessage() {
+        User user = new User("fafhuh和覅哦啊的活佛i啊", "123", 15);
         this.demoSpringProducer.sendObjectMessage(user);
     }
 }

@@ -6,6 +6,7 @@ public interface UserService {
 
     /**
      * 增加User信息
+     *
      * @param user
      * @return
      */
@@ -13,6 +14,7 @@ public interface UserService {
 
     /**
      * 发送验证码
+     *
      * @param phone
      * @return
      */
@@ -20,6 +22,7 @@ public interface UserService {
 
     /**
      * 校验用户名
+     *
      * @param username
      * @return
      */
@@ -27,6 +30,7 @@ public interface UserService {
 
     /**
      * 校验手机号
+     *
      * @param phone
      * @return
      */
@@ -34,6 +38,7 @@ public interface UserService {
 
     /**
      * 校验验证码是否一致
+     *
      * @param phone
      * @param code
      * @return
@@ -42,6 +47,7 @@ public interface UserService {
 
     /**
      * 根据用户名获取用户信息
+     *
      * @param s
      * @return
      */

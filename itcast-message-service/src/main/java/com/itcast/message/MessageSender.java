@@ -27,7 +27,7 @@ public class MessageSender {
     //产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
 
-    public SendSmsResponse sendSms(String mobile,String signName,String templateCode,String param) throws ClientException {
+    public SendSmsResponse sendSms(String mobile, String signName, String templateCode, String param) throws ClientException {
 
         //应用id和密钥
         String accessKeyId = environment.getProperty("accessKeyId");
@@ -66,7 +66,7 @@ public class MessageSender {
     }
 
 
-    public QuerySendDetailsResponse querySendDetails(String bizId,String mobilePhone) throws ClientException {
+    public QuerySendDetailsResponse querySendDetails(String bizId, String mobilePhone) throws ClientException {
 
         //应用id和密钥
         String accessKeyId = environment.getProperty("accessKeyId");

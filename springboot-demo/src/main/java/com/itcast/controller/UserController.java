@@ -21,14 +21,14 @@ public class UserController {
     private Environment environment;
 
     @RequestMapping(value = "/hello")
-    public String hello(){
+    public String hello() {
 
         String url = environment.getProperty("url");
-        return "hel "+url;
+        return "hel " + url;
     }
 
     @RequestMapping(value = "/findAll")
-    public List<User> findAll(){
+    public List<User> findAll() {
         List<User> users = this.userService.findAll();
         for (User user : users) {
             System.out.println(user);

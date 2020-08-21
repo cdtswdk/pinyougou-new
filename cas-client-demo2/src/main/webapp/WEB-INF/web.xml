@@ -61,7 +61,8 @@
     <filter>
         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
         <filter-class>
-            org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+            org.jasig.cas.client.util.HttpServletRequestWrapperFilter
+        </filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>

@@ -55,9 +55,9 @@ public class ItemPageServiceImpl implements ItemPageService {
         dataMap.put("goodsDesc", goodsDesc);
         dataMap.put("items", items);
         //分类查询
-        dataMap.put("itemCat1",this.itemCatMapper.selectByPrimaryKey(goods.getCategory1Id()));
-        dataMap.put("itemCat2",this.itemCatMapper.selectByPrimaryKey(goods.getCategory2Id()));
-        dataMap.put("itemCat3",this.itemCatMapper.selectByPrimaryKey(goods.getCategory3Id()));
+        dataMap.put("itemCat1", this.itemCatMapper.selectByPrimaryKey(goods.getCategory1Id()));
+        dataMap.put("itemCat2", this.itemCatMapper.selectByPrimaryKey(goods.getCategory2Id()));
+        dataMap.put("itemCat3", this.itemCatMapper.selectByPrimaryKey(goods.getCategory3Id()));
 
         //通过Freemarker生成Html
         Configuration configuration = this.factoryBean.createConfiguration();
@@ -81,7 +81,7 @@ public class ItemPageServiceImpl implements ItemPageService {
     public void deleteHtml(Long id) {
         //创建一个要删除的文件对象
         File file = new File(ITEM_PATH + id + ITEM_SUFFIX);
-        if(file.exists()){
+        if (file.exists()) {
             //文件存在则删除
             file.delete();
         }
