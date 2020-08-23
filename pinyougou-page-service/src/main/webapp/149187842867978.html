@@ -12,48 +12,151 @@
     <link rel="stylesheet" type="text/css" href="css/pages-item.css"/>
     <link rel="stylesheet" type="text/css" href="css/pages-zoom.css"/>
     <link rel="stylesheet" type="text/css" href="css/widget-cartPanelView.css"/>
-    <#--扩展属性-->
-    <#assign customAttributeList = goodsDesc.customAttributeItems?eval />
-    <#--图片-->
-    <#assign imageList = goodsDesc.itemImages?eval />
-    <#--规格-->
-    <#assign specificationList = goodsDesc.specificationItems?eval />
-    <script type="text/javascript">
+        <script type="text/javascript">
         let skuList = [
-            <#list items as item>
             {
-                "id":${item.id?c},
-                "title": "${item.title}",
-                "price":${item.price?c},
-                "spec":${item.spec}
+                "id":1369304,
+                "title": "阿发  移动3G  16G",
+                "price":1,
+                "spec":{"网络":"移动3G","机身内存":"16G"}
             },
-            </#list>
+            {
+                "id":1369305,
+                "title": "阿发  移动4G  16G",
+                "price":31,
+                "spec":{"网络":"移动4G","机身内存":"16G"}
+            },
         ];
     </script>
 
-    <#--引入angularjs-->
     <script src="plugins/angularjs/angular.min.js"></script>
     <script src="js/base.js"></script>
     <script src="js/controller/ItemController.js"></script>
 </head>
 
 <body ng-app="pinyougou" ng-controller="itemController" ng-init="loadSku();num=1">
-<#--引入页面头部-->
-<#include "head.ftl">
-<div class="py-container">
+<!--页面顶部 开始-->
+<div id="nav-bottom">
+    <!--顶部-->
+    <div class="nav-top">
+        <div class="top">
+            <div class="py-container">
+                <div class="shortcut">
+                    <ul class="fl">
+                        <li class="f-item">品优购欢迎您！</li>
+                        <li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html"
+                                                                                                 target="_blank">免费注册</a></span>
+                        </li>
+                    </ul>
+                    <ul class="fr">
+                        <li class="f-item">我的订单</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item"><a href="home.html" target="_blank">我的品优购</a></li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">品优购会员</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">企业采购</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">关注品优购</li>
+                        <li class="f-item space"></li>
+                        <li class="f-item" id="service">
+                            <span>客户服务</span>
+                            <ul class="service">
+                                <li><a href="cooperation.html" target="_blank">合作招商</a></li>
+                                <li><a href="shoplogin.html" target="_blank">商家后台</a></li>
+                                <li><a href="cooperation.html" target="_blank">合作招商</a></li>
+                                <li><a href="#">商家后台</a></li>
+                            </ul>
+                        </li>
+                        <li class="f-item space"></li>
+                        <li class="f-item">网站导航</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--头部-->
+        <div class="header">
+            <div class="py-container">
+                <div class="yui3-g Logo">
+                    <div class="yui3-u Left logoArea">
+                        <a class="logo-bd" title="品优购" href="JD-index.html" target="_blank"></a>
+                    </div>
+                    <div class="yui3-u Center searchArea">
+                        <div class="search">
+                            <form action="" class="sui-form form-inline">
+                                <!--searchAutoComplete-->
+                                <div class="input-append">
+                                    <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge"/>
+                                    <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hotwords">
+                            <ul>
+                                <li class="f-item">品优购首发</li>
+                                <li class="f-item">亿元优惠</li>
+                                <li class="f-item">9.9元团购</li>
+                                <li class="f-item">每满99减30</li>
+                                <li class="f-item">亿元优惠</li>
+                                <li class="f-item">9.9元团购</li>
+                                <li class="f-item">办公用品</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yui3-u Right shopArea">
+                        <div class="fr shopcar">
+                            <div class="show-shopcar" id="shopcar">
+                                <span class="car"></span>
+                                <a class="sui-btn btn-default btn-xlarge" href="cart.html" target="_blank">
+                                    <span>我的购物车</span>
+                                    <i class="shopnum">0</i>
+                                </a>
+                                <div class="clearfix shopcarlist" id="shopcarlist" style="display:none">
+                                    <p>"啊哦，你的购物车还没有商品哦！"</p>
+                                    <p>"啊哦，你的购物车还没有商品哦！"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="yui3-g NavList">
+                    <div class="yui3-u Left all-sort">
+                        <h4>全部商品分类</h4>
+                    </div>
+                    <div class="yui3-u Center navArea">
+                        <ul class="nav">
+                            <li class="f-item">服装城</li>
+                            <li class="f-item">美妆馆</li>
+                            <li class="f-item">品优超市</li>
+                            <li class="f-item">全球购</li>
+                            <li class="f-item">闪购</li>
+                            <li class="f-item">团购</li>
+                            <li class="f-item">有趣</li>
+                            <li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u Right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--页面顶部 结束--><div class="py-container">
     <div id="item">
         <div class="crumb-wrap">
             <ul class="sui-breadcrumb">
                 <li>
-                    <a href="#">${itemCat1.name!""}</a>
+                    <a href="#">礼品箱包</a>
                 </li>
                 <li>
-                    <a href="#">${itemCat2.name!""}</a>
+                    <a href="#">精品男包</a>
                 </li>
                 <li>
-                    <a href="#">${itemCat3.name!""}</a>
+                    <a href="#">男士手包</a>
                 </li>
-                <#--<li class="active">iphone 6S系类</li>-->
             </ul>
         </div>
         <!--product-info-->
@@ -61,10 +164,9 @@
             <div class="fl preview-wrap">
                 <!--放大镜效果-->
                 <div class="zoom">
-                    <#if (imageList?? && imageList?size>0)>
                         <!--默认第一个预览-->
                         <div id="preview" class="spec-preview">
-                            <span class="jqzoom"><img jqimg="${imageList[0].url}" src="${imageList[0].url}"/></span>
+                            <span class="jqzoom"><img jqimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8ZkIeABs4KAAEjcs1GvfI857.jpg" src="http://192.168.254.128/group1/M00/00/00/wKj-gF8ZkIeABs4KAAEjcs1GvfI857.jpg"/></span>
                         </div>
                         <!--下方的缩略图-->
                         <div class="spec-scroll">
@@ -72,21 +174,18 @@
                             <!--左右按钮-->
                             <div class="items">
                                 <ul>
-                                    <#list imageList as img>
-                                        <li><img src="${img.url}" bimg="${img.url}" onmousemove="preview(this)"/></li>
-                                    </#list>
+                                        <li><img src="http://192.168.254.128/group1/M00/00/00/wKj-gF8ZkIeABs4KAAEjcs1GvfI857.jpg" bimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8ZkIeABs4KAAEjcs1GvfI857.jpg" onmousemove="preview(this)"/></li>
                                 </ul>
                             </div>
                             <a class="next">&gt;</a>
                         </div>
-                    </#if>
                 </div>
             </div>
             <div class="fr itemInfo-wrap">
                 <div class="sku-name">
                     <h4>{{sku.title}}</h4>
                 </div>
-                <div class="news"><span>${goods.caption}</span></div>
+                <div class="news"><span>感到很孤独</span></div>
                 <div class="summary">
                     <div class="summary-wrap">
                         <div class="fl title">
@@ -133,27 +232,44 @@
                 {{specList}}
                 <div class="clearfix choose">
                     <div id="specification" class="summary-wrap clearfix">
-                        <#list specificationList as spec>
                             <dl>
                                 <dt>
                                     <div class="fl title">
-                                        <i>${spec.attributeName}</i>
+                                        <i>机身内存</i>
                                     </div>
                                 </dt>
-                                <#--<dd><a href="javascript:;" class="selected">金色<span title="点击取消选择">&nbsp;</span>
-                                    </a></dd>-->
-                                <#list spec.attributeValue as attr>
                                     <dd>
-                                        <a class="{{isSelected('${spec.attributeName}','${attr}')?'selected':''}}"
+                                        <a class="{{isSelected('机身内存','16G')?'selected':''}}"
                                            href="javascript:;"
-                                           ng-click="selectSpecList('${spec.attributeName}','${attr}')">
-                                            ${attr}
+                                           ng-click="selectSpecList('机身内存','16G')">
+                                            16G
                                             <span title="点击取消选择">&nbsp;</span>
                                         </a>
                                     </dd>
-                                </#list>
                             </dl>
-                        </#list>
+                            <dl>
+                                <dt>
+                                    <div class="fl title">
+                                        <i>网络</i>
+                                    </div>
+                                </dt>
+                                    <dd>
+                                        <a class="{{isSelected('网络','移动3G')?'selected':''}}"
+                                           href="javascript:;"
+                                           ng-click="selectSpecList('网络','移动3G')">
+                                            移动3G
+                                            <span title="点击取消选择">&nbsp;</span>
+                                        </a>
+                                    </dd>
+                                    <dd>
+                                        <a class="{{isSelected('网络','移动4G')?'selected':''}}"
+                                           href="javascript:;"
+                                           ng-click="selectSpecList('网络','移动4G')">
+                                            移动4G
+                                            <span title="点击取消选择">&nbsp;</span>
+                                        </a>
+                                    </dd>
+                            </dl>
                     </div>
 
                     <div class="summary-wrap">
@@ -392,159 +508,66 @@
                     <div class="tab-content tab-wraped">
                         <div id="one" class="tab-pane active">
                             <ul class="goods-intro unstyled">
-                                <#list customAttributeList as customAttribute>
-                                    <li>${customAttribute.text}：${customAttribute.value}</li>
-                                </#list>
-                            </ul>
-                            <div class="intro-detail">
-                                ${goodsDesc.introduction}
-                            </div>
-                        </div>
-                        <div id="two" class="tab-pane">
-                            <p>${goodsDesc.packageList}</p>
-                        </div>
-                        <div id="three" class="tab-pane">
-                            <p>${goodsDesc.saleService}</p>
-                        </div>
-                        <div id="four" class="tab-pane">
-                            <p>商品评价</p>
-                        </div>
-                        <div id="five" class="tab-pane">
-                            <p>手机社区</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--like-->
-        <div class="clearfix"></div>
-        <div class="like">
-            <h4 class="kt">猜你喜欢</h4>
-            <div class="like-list">
-                <ul class="yui3-g">
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike01.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>3699.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有6人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike02.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>Apple苹果iPhone 6s/6s Plus 16G 64G 128G</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>4388.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有700人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike03.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>4088.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有700人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike04.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>4088.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有700人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike05.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>4088.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有700人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="yui3-u-1-6">
-                        <div class="list-wrap">
-                            <div class="p-img">
-                                <img src="img/_/itemlike06.png"/>
-                            </div>
-                            <div class="attr">
-                                <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
-                            </div>
-                            <div class="price">
-                                <strong>
-                                    <em>¥</em>
-                                    <i>4088.00</i>
-                                </strong>
-                            </div>
-                            <div class="commit">
-                                <i class="command">已有700人评价</i>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <li>内存大小：啊现在才</li>
+                                    <li>颜色：FreeMarker template error (DEBUG mode; use RETHROW in production!):
+The following has evaluated to null or missing:
+==> customAttribute.value  [in template "item.ftl" at line 396, column 67]
 
-<!-- 底部栏位 -->
-<#--引入页面底部-->
-<#include "foot.ftl">
-</body>
+----
+Tip: It's the step after the last dot that caused this error, not those before it.
+----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
 
-</html>
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: ${customAttribute.value}  [in template "item.ftl" at line 396, column 65]
+----
+
+Java stack trace (for programmers):
+----
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:131)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:355)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:82)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:41)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+	at freemarker.core.Environment.visitByHiddingParent(Environment.java:345)
+	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlockInner(IteratorBlock.java:268)
+	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlock(IteratorBlock.java:220)
+	at freemarker.core.IteratorBlock$IterationContext.accept(IteratorBlock.java:194)
+	at freemarker.core.Environment.visitIteratorBlock(Environment.java:572)
+	at freemarker.core.IteratorBlock.acceptWithResult(IteratorBlock.java:78)
+	at freemarker.core.IteratorBlock.accept(IteratorBlock.java:64)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.Environment.process(Environment.java:302)
+	at freemarker.template.Template.process(Template.java:325)
+	at com.pinyougou.page.service.impl.ItemPageServiceImpl.buildHtml(ItemPageServiceImpl.java:72)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213)
+	at com.sun.proxy.$Proxy33.buildHtml(Unknown Source)
+	at com.pinyougou.page.mq.TopicMessageListener.onMessage(TopicMessageListener.java:34)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:744)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:682)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:649)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:317)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:255)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1166)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1158)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1055)
+	at java.lang.Thread.run(Thread.java:748)

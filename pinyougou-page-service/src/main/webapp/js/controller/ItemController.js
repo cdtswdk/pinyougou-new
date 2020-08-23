@@ -1,5 +1,5 @@
 //商品详细页（控制层）
-app.controller('itemController', function ($scope) {
+app.controller('itemController', function ($scope,$http) {
     //定义规格选中对象
     $scope.specList = {};
 
@@ -7,7 +7,16 @@ app.controller('itemController', function ($scope) {
     $scope.addToCart = function () {
         //SKU对应的ID
         let itemId = $scope.sku.id;
-        alert(itemId)
+        let num = $scope.num;
+        //alert(itemId);
+        $http.get('http://localhost:18093/cart/add.shtml?itemId='+itemId+'&num='+num,{'withCredentials':true}).success(function (response) {
+            if(response.success){
+                //跳转到购物车页面
+                location.href='http://localhost:18093/cart.html';
+            }else {
+                alert(response.message);
+            }
+        })
     }
 
     //更改购物车数量
