@@ -60,4 +60,12 @@
 
     <!--引入spring-security配置-->
     <import resource="spring-security.xml"/>
+
+    <!--snowflakeID计算器-->
+    <bean class="com.pinyougou.util.IdWorker" id="idWorker">
+        <!-- 进程ID -->
+        <constructor-arg index="0" value="0"></constructor-arg>
+        <!-- 数据中心ID -->
+        <constructor-arg index="1" value="0"></constructor-arg>
+    </bean>
 </beans>

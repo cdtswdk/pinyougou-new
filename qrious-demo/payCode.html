@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>payImg</title>
+</head>
+<script src="qrious.min.js"></script>
+<body>
+<img id="payImg">
+<script>
+    let qr = new QRious({
+        element: document.getElementById('payImg'),
+        size: 300, level: 'M', value: 'weixin://wxpay/bizpayurl?pr=njYrm3S'
+    });
+</script>
+</body>
+</html>
