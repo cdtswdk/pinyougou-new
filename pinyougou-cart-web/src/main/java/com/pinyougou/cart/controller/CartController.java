@@ -32,7 +32,7 @@ public class CartController {
     private HttpServletResponse response;
 
     @RequestMapping(value = "/add")
-    @CrossOrigin(origins = "http://localhost:18088",allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:18088", allowCredentials = "true")
     public Result add(Long itemId, Integer num) {
 
         //解决跨域问题

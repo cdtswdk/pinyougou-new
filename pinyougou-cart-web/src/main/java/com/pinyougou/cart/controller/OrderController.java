@@ -19,7 +19,7 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/add")
-    public Result add(@RequestBody Order order){
+    public Result add(@RequestBody Order order) {
 
         //用户名称
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -35,12 +35,12 @@ public class OrderController {
         try {
             //增加
             int count = this.orderService.add(order);
-            if(count>0){
-                return new Result(true,"订单增加成功！");
+            if (count > 0) {
+                return new Result(true, "订单增加成功！");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false,"订单增加失败！");
+        return new Result(false, "订单增加失败！");
     }
 }

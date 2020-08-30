@@ -28,11 +28,11 @@ public class PayController {
     private OrderService orderService;
 
     @RequestMapping(value = "/createNative")
-    public Map createNative(){
+    public Map createNative() {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         PayLog payLog = this.orderService.searchPayLogFromRedis(username);
-        if(payLog!=null){
+        if (payLog != null) {
             //return this.weixinPayService.createNative(payLog.getOutTradeNo(), (payLog.getTotalFee()*100)+"");
             return this.weixinPayService.createNative(payLog.getOutTradeNo(), "1");
         }
@@ -45,26 +45,26 @@ public class PayController {
 
     @RequestMapping(value = "/queryPayStatus")
     public Result queryPayStatus(String out_trade_no) throws InterruptedException {
-        int count=0;
-        while (true){
-            Map<String,String> map = this.weixinPayService.queryPayStatus(out_trade_no);
+        int count = 0;
+        while (true) {
+            Map<String, String> map = this.weixinPayService.queryPayStatus(out_trade_no);
 
             //支付异常
-            if(map==null){
-                return  new Result(false,"支付发生错误！");
+            if (map == null) {
+                return new Result(false, "支付发生错误！");
             }
 
             //支付成功
-            if(map.get("trade_state").equals("SUCCESS")){
+            if (map.get("trade_state").equals("SUCCESS")) {
                 //修改支付状态和订单状态
-                this.orderService.updateOrderStatus(out_trade_no,map.get("transaction_id"));
-                return  new Result(true,"支付成功！");
+                this.orderService.updateOrderStatus(out_trade_no, map.get("transaction_id"));
+                return new Result(true, "支付成功！");
             }
             //每3秒查询一次
             Thread.sleep(3000);
             count++;
-            if(count>10){
-                return new Result(false,"time-out");
+            if (count > 10) {
+                return new Result(false, "time-out");
             }
         }
     }

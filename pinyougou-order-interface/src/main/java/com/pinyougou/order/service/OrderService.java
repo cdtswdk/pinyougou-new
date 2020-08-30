@@ -7,6 +7,7 @@ public interface OrderService {
 
     /**
      * 根据用户名查找订单日志
+     *
      * @param username
      * @return
      */
@@ -14,6 +15,7 @@ public interface OrderService {
 
     /**
      * 实现订单增加操作
+     *
      * @param order
      * @return
      */
@@ -21,8 +23,9 @@ public interface OrderService {
 
     /**
      * 修改订单状态和日志状态
+     *
      * @param out_trade_no
      * @param transaction_id
      */
-    void updateOrderStatus(String out_trade_no,String transaction_id);
+    void updateOrderStatus(String out_trade_no, String transaction_id);
 }

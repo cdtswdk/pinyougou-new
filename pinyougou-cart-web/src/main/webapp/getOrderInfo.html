@@ -74,7 +74,9 @@
                     <ul class="addr-detail">
                         <li class="addr-item">
                             <div ng-repeat="address in addressList">
-                                <div class="con name {{isSelectedAddress(address)?'selected':''}}"><a href="javascript:;" ng-click="selectAddress(address)">{{address.contact}}<span title="点击取消选择">&nbsp;</a>
+                                <div class="con name {{isSelectedAddress(address)?'selected':''}}"><a
+                                        href="javascript:;" ng-click="selectAddress(address)">{{address.contact}}<span
+                                        title="点击取消选择">&nbsp;</a>
                                 </div>
                                 <div class="con address">{{address.address}} <span>{{address.mobile}}</span>
                                     <span class="base" ng-if="address.isDefault=='1'">默认地址</span>

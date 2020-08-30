@@ -5,6 +5,7 @@ import java.util.Map;
 public interface WeixinPayService {
     /**
      * 创建二维码
+     *
      * @param out_trade_no
      * @param total_fee
      * @return
@@ -13,8 +14,17 @@ public interface WeixinPayService {
 
     /**
      * 查询订单状态
+     *
      * @param out_trade_no
      * @return
      */
     Map queryPayStatus(String out_trade_no);
+
+    /**
+     * 关闭订单
+     *
+     * @param out_trade_no
+     * @return
+     */
+    Map<String, String> closePay(String out_trade_no);
 }

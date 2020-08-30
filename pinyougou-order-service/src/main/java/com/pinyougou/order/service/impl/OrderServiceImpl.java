@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public PayLog searchPayLogFromRedis(String username){
+    public PayLog searchPayLogFromRedis(String username) {
         return (PayLog) this.redisTemplate.boundHashOps("payLog").get(username);
     }
 
@@ -48,11 +48,11 @@ public class OrderServiceImpl implements OrderService {
         //从缓存中取购物车数据
         List<Cart> carts = (List<Cart>) redisTemplate.boundHashOps("cartList").get(order.getUserId());
 
-        int acount=0;
+        int acount = 0;
         //订单总金额
-        double totalMoney=0;
+        double totalMoney = 0;
         //订单编号
-        List<String> orderIdList=new ArrayList<>();
+        List<String> orderIdList = new ArrayList<>();
         for (Cart cart : carts) {
             Order newOrder = new Order();
             IdWorker idWorker = new IdWorker();
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
                 orderItem.setOrderId(orderId);
                 orderItem.setId(idWorker.nextId());
                 orderItem.setSellerId(cart.getSellerId());
-                totalFee+=orderItem.getTotalFee().doubleValue();
+                totalFee += orderItem.getTotalFee().doubleValue();
 
                 //增加订单明细
                 this.orderItemMapper.insertSelective(orderItem);
@@ -96,26 +96,26 @@ public class OrderServiceImpl implements OrderService {
             //增加订单信息
             acount = this.orderMapper.insertSelective(newOrder);
 
-            totalMoney+=totalFee;
-            orderIdList.add(orderId+"");
+            totalMoney += totalFee;
+            orderIdList.add(orderId + "");
         }
         //判断是否在线支付
-        if(order.getPaymentType().equals("1")){
+        if (order.getPaymentType().equals("1")) {
             PayLog payLog = new PayLog();
             payLog.setCreateTime(order.getCreateTime());
-            payLog.setOutTradeNo(this.idWorker.nextId()+"");
+            payLog.setOutTradeNo(this.idWorker.nextId() + "");
             payLog.setPayType("1");
             payLog.setTotalFee((long) totalMoney);
             //0 待支付
             payLog.setTradeState("0");
             payLog.setUserId(order.getUserId());
-            payLog.setOrderList(orderIdList.toString().replace("[","").replace("]","").replace(" ",""));
+            payLog.setOrderList(orderIdList.toString().replace("[", "").replace("]", "").replace(" ", ""));
 
             //加入数据库
             this.payLogMapper.insertSelective(payLog);
 
             //加入redis
-            this.redisTemplate.boundHashOps("payLog").put(order.getUserId(),payLog);
+            this.redisTemplate.boundHashOps("payLog").put(order.getUserId(), payLog);
         }
         //删除购物车信息
         this.redisTemplate.boundHashOps("cartList").delete(order.getUserId());
@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
         String[] ids = payLog.getOrderList().split(",");
         for (String id : ids) {
             Order order = this.orderMapper.selectByPrimaryKey(Long.parseLong(id));
-            if(order!=null){
+            if (order != null) {
                 //已付款
                 order.setStatus("2");
                 //付款时间

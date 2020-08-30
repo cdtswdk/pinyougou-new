@@ -12,19 +12,19 @@
     <link rel="stylesheet" type="text/css" href="css/pages-item.css"/>
     <link rel="stylesheet" type="text/css" href="css/pages-zoom.css"/>
     <link rel="stylesheet" type="text/css" href="css/widget-cartPanelView.css"/>
-        <script type="text/javascript">
+    <script type="text/javascript">
         let skuList = [
             {
-                "id":1369363,
+                "id": 1369363,
                 "title": "欧莱雅洁面膏  移动4G  32G",
-                "price":11,
-                "spec":{"网络":"移动4G","机身内存":"32G"}
+                "price": 11,
+                "spec": {"网络": "移动4G", "机身内存": "32G"}
             },
             {
-                "id":1369364,
+                "id": 1369364,
                 "title": "欧莱雅洁面膏  移动3G  32G",
-                "price":22,
-                "spec":{"网络":"移动3G","机身内存":"32G"}
+                "price": 22,
+                "spec": {"网络": "移动3G", "机身内存": "32G"}
             },
         ];
     </script>
@@ -144,7 +144,8 @@
         </div>
     </div>
 </div>
-<!--页面顶部 结束--><div class="py-container">
+<!--页面顶部 结束-->
+<div class="py-container">
     <div id="item">
         <div class="crumb-wrap">
             <ul class="sui-breadcrumb">
@@ -164,22 +165,30 @@
             <div class="fl preview-wrap">
                 <!--放大镜效果-->
                 <div class="zoom">
-                        <!--默认第一个预览-->
-                        <div id="preview" class="spec-preview">
-                            <span class="jqzoom"><img jqimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg" src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg"/></span>
+                    <!--默认第一个预览-->
+                    <div id="preview" class="spec-preview">
+                        <span class="jqzoom"><img
+                                jqimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg"
+                                src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg"/></span>
+                    </div>
+                    <!--下方的缩略图-->
+                    <div class="spec-scroll">
+                        <a class="prev">&lt;</a>
+                        <!--左右按钮-->
+                        <div class="items">
+                            <ul>
+                                <li><img
+                                        src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg"
+                                        bimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg"
+                                        onmousemove="preview(this)"/></li>
+                                <li><img
+                                        src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDtmAWse7AAKXTnG93TE536.jpg"
+                                        bimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDtmAWse7AAKXTnG93TE536.jpg"
+                                        onmousemove="preview(this)"/></li>
+                            </ul>
                         </div>
-                        <!--下方的缩略图-->
-                        <div class="spec-scroll">
-                            <a class="prev">&lt;</a>
-                            <!--左右按钮-->
-                            <div class="items">
-                                <ul>
-                                        <li><img src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg" bimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDs-AN6FhAAEqgr0NQ14323.jpg" onmousemove="preview(this)"/></li>
-                                        <li><img src="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDtmAWse7AAKXTnG93TE536.jpg" bimg="http://192.168.254.128/group1/M00/00/00/wKj-gF8jDtmAWse7AAKXTnG93TE536.jpg" onmousemove="preview(this)"/></li>
-                                </ul>
-                            </div>
-                            <a class="next">&gt;</a>
-                        </div>
+                        <a class="next">&gt;</a>
+                    </div>
                 </div>
             </div>
             <div class="fr itemInfo-wrap">
@@ -233,44 +242,44 @@
                 {{specList}}
                 <div class="clearfix choose">
                     <div id="specification" class="summary-wrap clearfix">
-                            <dl>
-                                <dt>
-                                    <div class="fl title">
-                                        <i>网络</i>
-                                    </div>
-                                </dt>
-                                    <dd>
-                                        <a class="{{isSelected('网络','移动4G')?'selected':''}}"
-                                           href="javascript:;"
-                                           ng-click="selectSpecList('网络','移动4G')">
-                                            移动4G
-                                            <span title="点击取消选择">&nbsp;</span>
-                                        </a>
-                                    </dd>
-                                    <dd>
-                                        <a class="{{isSelected('网络','移动3G')?'selected':''}}"
-                                           href="javascript:;"
-                                           ng-click="selectSpecList('网络','移动3G')">
-                                            移动3G
-                                            <span title="点击取消选择">&nbsp;</span>
-                                        </a>
-                                    </dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                                    <div class="fl title">
-                                        <i>机身内存</i>
-                                    </div>
-                                </dt>
-                                    <dd>
-                                        <a class="{{isSelected('机身内存','32G')?'selected':''}}"
-                                           href="javascript:;"
-                                           ng-click="selectSpecList('机身内存','32G')">
-                                            32G
-                                            <span title="点击取消选择">&nbsp;</span>
-                                        </a>
-                                    </dd>
-                            </dl>
+                        <dl>
+                            <dt>
+                                <div class="fl title">
+                                    <i>网络</i>
+                                </div>
+                            </dt>
+                            <dd>
+                                <a class="{{isSelected('网络','移动4G')?'selected':''}}"
+                                   href="javascript:;"
+                                   ng-click="selectSpecList('网络','移动4G')">
+                                    移动4G
+                                    <span title="点击取消选择">&nbsp;</span>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a class="{{isSelected('网络','移动3G')?'selected':''}}"
+                                   href="javascript:;"
+                                   ng-click="selectSpecList('网络','移动3G')">
+                                    移动3G
+                                    <span title="点击取消选择">&nbsp;</span>
+                                </a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <div class="fl title">
+                                    <i>机身内存</i>
+                                </div>
+                            </dt>
+                            <dd>
+                                <a class="{{isSelected('机身内存','32G')?'selected':''}}"
+                                   href="javascript:;"
+                                   ng-click="selectSpecList('机身内存','32G')">
+                                    32G
+                                    <span title="点击取消选择">&nbsp;</span>
+                                </a>
+                            </dd>
+                        </dl>
                     </div>
 
                     <div class="summary-wrap">
@@ -509,8 +518,8 @@
                     <div class="tab-content tab-wraped">
                         <div id="one" class="tab-pane active">
                             <ul class="goods-intro unstyled">
-                                    <li>内存大小：21</li>
-                                    <li>颜色：21</li>
+                                <li>内存大小：21</li>
+                                <li>颜色：21</li>
                             </ul>
                             <div class="intro-detail">
                                 欧莱雅洁面膏欧莱雅洁面膏欧莱雅洁面膏欧莱雅洁面膏欧莱雅洁面膏欧莱雅洁面膏欧莱雅洁面膏
@@ -900,9 +909,9 @@
 
             <div class="toolbar-footer">
                 <div class="toolbar-tab tbar-tab-top"><a href="#"> <i class="tab-ico  "></i> <em
-                                class="footer-tab-text">顶部</em> </a></div>
+                        class="footer-tab-text">顶部</em> </a></div>
                 <div class="toolbar-tab tbar-tab-feedback"><a href="#" target="_blank"> <i class="tab-ico"></i> <em
-                                class="footer-tab-text ">反馈</em> </a></div>
+                        class="footer-tab-text ">反馈</em> </a></div>
             </div>
 
             <div class="toolbar-mini"></div>
