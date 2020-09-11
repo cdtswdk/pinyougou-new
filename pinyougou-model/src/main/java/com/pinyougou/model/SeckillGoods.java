@@ -388,4 +388,26 @@ public class SeckillGoods implements Serializable {
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
     }
+
+    @Override
+    public String toString() {
+        return "SeckillGoods{" +
+                "id=" + id +
+                ", goodsId=" + goodsId +
+                ", itemId=" + itemId +
+                ", title='" + title + '\'' +
+                ", smallPic='" + smallPic + '\'' +
+                ", price=" + price +
+                ", costPrice=" + costPrice +
+                ", sellerId='" + sellerId + '\'' +
+                ", createTime=" + createTime +
+                ", checkTime=" + checkTime +
+                ", status='" + status + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", num=" + num +
+                ", stockCount=" + stockCount +
+                ", introduction='" + introduction + '\'' +
+                '}';
+    }
 }

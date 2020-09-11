@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
-    <artifactId>pingyougou-seckill-task</artifactId>
+    <artifactId>pinyougou-seckill-task</artifactId>
     <dependencies>
         <!--依赖mapper-->
         <dependency>

@@ -39,7 +39,7 @@ public class Item implements Serializable {
      */
     @Column(name = "price")
     @Field(value = "item_price")
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "stock_count")
     private Integer stockCount;
@@ -126,7 +126,7 @@ public class Item implements Serializable {
     private String seller;
 
     @Dynamic
-    @Field(value = "item_spec_*")
+    @Field(value = "*_item_spec")
     private Map<String, String> specMap;
 
     public Map<String, String> getSpecMap() {
@@ -198,7 +198,7 @@ public class Item implements Serializable {
      *
      * @return price - 商品价格，单位为：元
      */
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -207,7 +207,7 @@ public class Item implements Serializable {
      *
      * @param price 商品价格，单位为：元
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

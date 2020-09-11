@@ -40,14 +40,15 @@ public class SeckillGoodsTask {
 
         List<SeckillGoods> seckillGoods = this.seckillGoodsMapper.selectByExample(example);
 
+        System.out.println(seckillGoods);
         //存入redis
         for (SeckillGoods seckillGood : seckillGoods) {
             this.redisTemplate.boundHashOps("SeckillGoods").put(seckillGood.getId(), seckillGood);
 
             //把商品的个数信息存入到Redis队列中
             pushId2Queue(seckillGood);
+            System.out.println(seckillGood);
         }
-
     }
 
     public void pushId2Queue(SeckillGoods goods) {

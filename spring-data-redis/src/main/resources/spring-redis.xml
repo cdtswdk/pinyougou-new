@@ -13,6 +13,45 @@
     <!--加载解析配置文件-->
     <context:property-placeholder location="classpath:redis-config.properties"/>
 
+    <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+        <property name="maxRedirects" value="3"/>
+        <!--集群的节点信息-->
+        <property name="clusterNodes">
+            <set>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7001"/>
+                </bean>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7002"/>
+                </bean>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7003"/>
+                </bean>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7004"/>
+                </bean>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7005"/>
+                </bean>
+                <!--Redis节点信息-->
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="192.168.254.129"/>
+                    <constructor-arg name="port" value="7006"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
     <!--Jedis连接池配置-->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
@@ -31,7 +70,9 @@
           p:host-name="${redis.host}"
           p:port="${redis.port}"
           p:password="${redis.pass}"
-          p:pool-config-ref="poolConfig"/>
+          p:pool-config-ref="poolConfig">
+        <constructor-arg name="clusterConfig" ref="redisClusterConfiguration"/>
+    </bean>
 
     <!--Jedis对缓存操作的模板对象-->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
