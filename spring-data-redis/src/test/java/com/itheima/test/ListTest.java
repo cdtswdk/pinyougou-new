@@ -32,7 +32,7 @@ public class ListTest {
         //只添加1条数据
         redisTemplate.boundListOps("Xiaohong").leftPush("花花");
         //批量添加
-        //redisTemplate.boundListOps("Xiaohong").leftPushAll("小红红", "小花花", "哈哈哈");
+        ///redisTemplate.boundListOps("Xiaohong").leftPushAll("小红红", "小花花", "哈哈哈");
     }
 
 
