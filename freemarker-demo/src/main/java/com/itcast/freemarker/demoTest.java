@@ -15,8 +15,8 @@ public class demoTest {
         Configuration configuration = new Configuration(Configuration.getVersion());
 
         //第二步：设置模板文件所在的路径。
-        //String path = System.getProperty("user.dir")+"/src/main/resources/";
-        String path = "C:\\Users\\Administrator\\Desktop\\pinyougou\\freemarker-demo\\src\\main\\resources";
+        String path = System.getProperty("user.dir")+"/freemarker-demo/src/main/resources/";
+//        String path = "C:\\Users\\Administrator\\Desktop\\pinyougou\\freemarker-demo\\src\\main\\resources";
         configuration.setDirectoryForTemplateLoading(new File(path));
 
         //第三步：设置模板文件使用的字符集。一般就是 utf-8.

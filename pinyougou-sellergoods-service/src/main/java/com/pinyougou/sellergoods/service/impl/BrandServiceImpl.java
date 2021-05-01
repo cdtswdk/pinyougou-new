@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.mapper.BrandMapper;
 import com.pinyougou.model.Brand;
+import com.pinyougou.model.BrandExample;
 import com.pinyougou.sellergoods.service.BrandService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
@@ -41,9 +43,18 @@ public class BrandServiceImpl implements BrandService {
         PageHelper.startPage(pageNum, pageSize);
 
         //执行查询
-        List<Brand> all = brandMapper.select(brand);
-        PageInfo<Brand> pageInfo = new PageInfo<Brand>(all);
-        return pageInfo;
+        BrandExample example = new BrandExample();
+        BrandExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotEmpty(brand.getName())) {
+            criteria.andNameLike("%" + brand.getName() + "%");
+        }
+        if (StringUtils.isNotEmpty(brand.getFirstChar())) {
+            criteria.andFirstCharLike("%" + brand.getFirstChar() + "%");
+        }
+        List<Brand> brands = this.brandMapper.selectByExample(example);
+//        List<Brand> all = brandMapper.select(brand);
+//        PageInfo<Brand> pageInfo = new PageInfo<Brand>(all);
+        return new PageInfo<>(brands);
     }
 
 

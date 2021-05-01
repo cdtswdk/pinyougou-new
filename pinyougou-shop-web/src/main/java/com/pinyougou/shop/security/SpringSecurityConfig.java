@@ -55,7 +55,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         //限制访问
-        http.authorizeRequests().antMatchers("/**").access("hasAnyRole('ADMIN')");
+        http.authorizeRequests()
+                .antMatchers("/**").access("hasAnyRole('ADMIN')");
 
         //禁用CSRF
         http.csrf().disable();

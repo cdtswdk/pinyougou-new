@@ -38,6 +38,7 @@
         <module>../pinyougou-seckill-interface</module>
         <module>../pinyougou-seckill-service</module>
         <module>../pinyougou-seckill-web</module>
+        <module>../generatorSqlmapCustom</module>
     </modules>
 
     <!--父工程pom-->

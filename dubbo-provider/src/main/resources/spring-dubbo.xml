@@ -13,7 +13,7 @@
     <dubbo:application name="dubbo-provider"/>
 
     <!--1、指定注册地址-->
-    <dubbo:registry address="zookeeper://192.168.211.128:2181"/>
+    <dubbo:registry address="zookeeper://192.168.68.131:2181"/>
 
     <!--2、暴露外部访问接口的端口和协议-->
     <dubbo:protocol name="dubbo" port="20880"/>

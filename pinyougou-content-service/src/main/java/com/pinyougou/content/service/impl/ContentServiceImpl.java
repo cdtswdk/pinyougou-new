@@ -90,7 +90,7 @@ public class ContentServiceImpl implements ContentService {
         //执行修改
         int mcount = contentMapper.updateByPrimaryKeySelective(content);
         if (mcount > 0) {
-            this.redisTemplate.boundHashOps("Content").delete(content.getCategoryId());
+            this.redisTemplate.boundHashOps("Content").delete(oldContent.getCategoryId());
         }
         if (oldContent.getCategoryId().longValue() != content.getCategoryId().longValue()) {
             this.redisTemplate.boundHashOps("Content").delete(content.getCategoryId());
