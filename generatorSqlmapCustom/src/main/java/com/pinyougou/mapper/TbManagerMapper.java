@@ -1,7 +1,7 @@
-package cn.pinyougou.mybatis.dao.mapper;
+package com.pinyougou.mapper;
 
-import cn.pinyougou.mybatis.po.TbManager;
-import cn.pinyougou.mybatis.po.TbManagerExample;
+import com.pinyougou.model.TbManager;
+import com.pinyougou.model.TbManagerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

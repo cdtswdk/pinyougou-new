@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.content.service.ContentService;
-import com.pinyougou.mapper.ContentCategoryMapper;
 import com.pinyougou.mapper.ContentMapper;
 import com.pinyougou.model.Content;
 

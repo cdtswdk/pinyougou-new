@@ -1,4 +1,4 @@
-package cn.pinyougou.mybatis.po;
+package com.pinyougou.model;
 
 public class TbManager {
     private Integer id;

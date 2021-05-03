@@ -1,4 +1,4 @@
-package cn.pinyougou.mybatis.po;
+package com.pinyougou.model;
 
 import java.util.ArrayList;
 import java.util.List;

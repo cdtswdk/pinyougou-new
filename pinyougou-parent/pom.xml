@@ -39,6 +39,8 @@
         <module>../pinyougou-seckill-service</module>
         <module>../pinyougou-seckill-web</module>
         <module>../generatorSqlmapCustom</module>
+        <module>../pinyougou-manager-interface</module>
+        <module>../pinyougou-manager-service</module>
     </modules>
 
     <!--父工程pom-->

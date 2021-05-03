@@ -32,6 +32,7 @@ app.controller("brandController", function ($scope, $http, $controller, brandSer
         result.success(function (response) {
             //判断执行状态
             if (response.success) {
+                alert(response.message);
                 //重新加载新的数据
                 $scope.reloadList();
             } else {
@@ -54,6 +55,7 @@ app.controller("brandController", function ($scope, $http, $controller, brandSer
         brandService.delete($scope.selectids).success(function (response) {
             //判断删除状态
             if (response.success) {
+                alert(response.message);
                 $scope.reloadList();
             } else {
                 alert(response.message);

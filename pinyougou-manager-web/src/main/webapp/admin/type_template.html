@@ -73,8 +73,8 @@
         </div>
         <div class="box-tools pull-right">
             <div class="has-feedback">
-                分类模板名称：<input>
-                <button class="btn btn-default">查询</button>
+                分类模板名称：<input ng-model="searchEntity.name" ng-change="getPage(1,10)">
+                <button class="btn btn-default" ng-click="getPage(1,10)">查询</button>
             </div>
         </div>
         <!--工具栏/-->

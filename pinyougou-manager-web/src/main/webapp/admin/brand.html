@@ -68,8 +68,8 @@
         </div>
         <div class="box-tools pull-right">
             <div class="has-feedback">
-                品牌名称：<input ng-model="searchEntity.name">
-                品牌首字母：<input ng-model="searchEntity.firstChar">
+                品牌名称：<input ng-model="searchEntity.name" ng-change="getPage(1,10)">
+                品牌首字母：<input ng-model="searchEntity.firstChar" ng-change="getPage(1,10)">
                 <button ng-click="getPage(1,10)" class="btn btn-default">查询</button>
             </div>
         </div>

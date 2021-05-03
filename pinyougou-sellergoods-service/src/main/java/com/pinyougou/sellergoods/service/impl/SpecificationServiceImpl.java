@@ -6,8 +6,10 @@ import com.github.pagehelper.PageInfo;
 import com.pinyougou.mapper.SpecificationMapper;
 import com.pinyougou.mapper.SpecificationOptionMapper;
 import com.pinyougou.model.Specification;
+import com.pinyougou.model.SpecificationExample;
 import com.pinyougou.model.SpecificationOption;
 import com.pinyougou.sellergoods.service.SpecificationService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
@@ -44,9 +46,14 @@ public class SpecificationServiceImpl implements SpecificationService {
         PageHelper.startPage(pageNum, pageSize);
 
         //执行查询
-        List<Specification> all = specificationMapper.select(specification);
-        PageInfo<Specification> pageInfo = new PageInfo<Specification>(all);
-        return pageInfo;
+        SpecificationExample example = new SpecificationExample();
+        SpecificationExample.Criteria criteria = example.createCriteria();
+
+        if (StringUtils.isNotEmpty(specification.getSpecName())) {
+            criteria.andSpecNameLike("%" + specification.getSpecName() + "%");
+        }
+        List<Specification> all = this.specificationMapper.selectByExample(example);
+        return new PageInfo<>(all);
     }
 
     @Autowired

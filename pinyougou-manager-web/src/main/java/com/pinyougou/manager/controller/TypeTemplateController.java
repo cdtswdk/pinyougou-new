@@ -18,8 +18,7 @@ public class TypeTemplateController {
     @Reference
     private TypeTemplateService typeTemplateService;
 
-
-    /***
+    /**
      * 根据ID批量删除
      * @param ids
      * @return
@@ -39,7 +38,7 @@ public class TypeTemplateController {
         return new Result(false, "删除失败");
     }
 
-    /***
+    /**
      * 修改信息
      * @param typeTemplate
      * @return
@@ -58,7 +57,7 @@ public class TypeTemplateController {
         return new Result(false, "修改失败");
     }
 
-    /***
+    /**
      * 根据ID查询TypeTemplate信息
      * @param id
      * @return
@@ -66,12 +65,11 @@ public class TypeTemplateController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TypeTemplate getById(@PathVariable(value = "id") long id) {
         //根据ID查询TypeTemplate信息
-        TypeTemplate typeTemplate = typeTemplateService.getOneById(id);
-        return typeTemplate;
+        return typeTemplateService.getOneById(id);
     }
 
 
-    /***
+    /**
      * 增加TypeTemplate数据
      * @param typeTemplate
      * 响应数据：success
@@ -97,7 +95,7 @@ public class TypeTemplateController {
     }
 
 
-    /***
+    /**
      * 分页查询数据
      * 获取JSON数据
      * @return
@@ -109,7 +107,7 @@ public class TypeTemplateController {
     }
 
 
-    /***
+    /**
      * 查询所有
      * 获取JSON数据
      * @return

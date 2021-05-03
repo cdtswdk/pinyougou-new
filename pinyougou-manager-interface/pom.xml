@@ -4,45 +4,34 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.pinyougou</groupId>
-  <artifactId>generatorSqlmapCustom</artifactId>
+  <parent>
+    <artifactId>pinyougou-parent</artifactId>
+    <groupId>com.pinyougou</groupId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../pinyougou-parent/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>pinyougou-manager-interface</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
   <dependencies>
-
-    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.16</version>
+      <groupId>com.pinyougou</groupId>
+      <artifactId>pinyougou-model</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <!--分页工具包-->
     <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.2.3</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
-    <dependency>
-      <groupId>org.mybatis.generator</groupId>
-      <artifactId>mybatis-generator-core</artifactId>
-      <version>1.3.2</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.28</version>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
     </dependency>
 
     <dependency>
@@ -54,7 +43,7 @@
   </dependencies>
 
   <build>
-    <finalName>generatorSqlmapCustom</finalName>
+    <finalName>pinyougou-manager-interface</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

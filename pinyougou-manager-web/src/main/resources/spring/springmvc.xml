@@ -66,5 +66,8 @@
         <property name="maxUploadSize" value="5242880"></property>
     </bean>
 
+    <!--加密对象-->
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
     <import resource="spring-mq.xml"/>
 </beans>

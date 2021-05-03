@@ -9,7 +9,9 @@ import com.pinyougou.mapper.TypeTemplateMapper;
 import com.pinyougou.model.Specification;
 import com.pinyougou.model.SpecificationOption;
 import com.pinyougou.model.TypeTemplate;
+import com.pinyougou.model.TypeTemplateExample;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -50,12 +52,16 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         PageHelper.startPage(pageNum, pageSize);
 
         //执行查询
-        List<TypeTemplate> all = typeTemplateMapper.select(typeTemplate);
+        TypeTemplateExample example = new TypeTemplateExample();
+        TypeTemplateExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotEmpty(typeTemplate.getName())){
+            criteria.andNameLike("%"+typeTemplate.getName()+"%");
+        }
+        List<TypeTemplate> all = this.typeTemplateMapper.selectByExample(example);
 
         //刷新缓存
         refreshRedis();
-        PageInfo<TypeTemplate> pageInfo = new PageInfo<TypeTemplate>(all);
-        return pageInfo;
+        return new PageInfo<TypeTemplate>(all);
     }
 
     /**

@@ -3,7 +3,6 @@ package com.pinyougou.shop.security;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.model.Seller;
 import com.pinyougou.sellergoods.service.SellerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
