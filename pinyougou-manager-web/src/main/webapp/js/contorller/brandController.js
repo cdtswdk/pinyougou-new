@@ -62,4 +62,13 @@ app.controller("brandController", function ($scope, $http, $controller, brandSer
             }
         });
     }
+
+    //控制复选框全选和反选
+    $scope.selectAll = function ($event) {
+        alert("abc");
+        let selects = document.querySelectorAll(".select");
+        selects.forEach(function (select) {
+            select.checked = $event.target.checked;
+        })
+    }
 });

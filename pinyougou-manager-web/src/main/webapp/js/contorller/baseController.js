@@ -25,6 +25,7 @@ app.controller("baseController", function ($scope) {
     $scope.selectids = [];
     //判断当前点击是否要删除对应品牌
     $scope.updateSelection = function ($event, id) {
+
         //判断当前操作是否是选中复选框
         if ($event.target.checked) {
             //如果选中复选框，则将该id增加到数组中去
