@@ -91,7 +91,8 @@
             <tbody>
 
             <tr ng-repeat="item in list">
-                <td><input class="select" ng-click="updateSelection($event,item.id)" type="checkbox"></td>
+                <td><input class="select" ng-click="updateSelection($event,item.id)" value="{{item.id}}"
+                           type="checkbox"></td>
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.firstChar}}</td>
@@ -114,8 +115,6 @@
 
     </div>
     <!-- 数据表格 /-->
-
-
 </div>
 <!-- /.box-body -->
 

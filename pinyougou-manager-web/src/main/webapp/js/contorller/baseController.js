@@ -21,45 +21,85 @@ app.controller("baseController", function ($scope) {
         }
     };
 
-    //定义一个变量，用于存储要删除的品牌ID
+    //定义一个变量，用于存储要删除的ID
     $scope.selectids = [];
-    //判断当前点击是否要删除对应品牌
+    //判断当前点击是否要删除对应选项
     $scope.updateSelection = function ($event, id) {
-
         //判断当前操作是否是选中复选框
         if ($event.target.checked) {
             //如果选中复选框，则将该id增加到数组中去
             $scope.selectids.push(id);
         } else {
             //取消删除，则从数组中移除该id
-            var idx = $scope.selectids.indexOf(id);   //获取id对应的下标
+            let idx = $scope.selectids.indexOf(id);   //获取id对应的下标
             $scope.selectids.splice(idx, 1);//删除对应下标的数据，1表示删除的数量
         }
+        console.log($scope.selectids);
+        $scope.selectOne();
+    }
+    //控制复选框全选和反选
+    $scope.selectAll = function ($event) {
+        let selects = document.querySelectorAll(".select");
+        //每次调用前都把id数组清空一遍
+        $scope.selectids.splice(0);
+        //全选
+        if ($event.target.checked) {
+            selects.forEach(function (select) {
+                select.checked = $event.target.checked;
+                //将所有id加入数组中
+                $scope.selectids.push(select.value);
+
+            });
+            console.log($scope.selectids);
+        } else {
+            selects.forEach(function (select) {
+                select.checked = $event.target.checked;
+                //将所有id从数组中移除
+                let idx = $scope.selectids.indexOf(select.value);
+                $scope.selectids.splice(idx, 1);
+            });
+            console.log($scope.selectids);
+        }
+    }
+    //控制单个复选框
+    $scope.selectOne = function () {
+        let flag = true;
+        let selectAll = document.querySelector("#selall");
+        let selects = document.querySelectorAll(".select");
+        selects.forEach(function (select) {
+            if (!select.checked) {
+                flag = false;
+            }
+        });
+        selectAll.checked = flag;
     }
 
     //重新加载
     $scope.reloadList = function () {
         $scope.getPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+        //重新加载后都把复选框重置一遍
+        let selectAll = document.querySelector("#selall");
+        selectAll.checked = false;
+        $scope.selectids.splice(0);
     }
 
 
     //将JSON字符数据提取拼接一个字符串
     $scope.json2str = function (jsonstr, key) {
         //将字符转JSON
-        var json = JSON.parse(jsonstr);
+        let json = JSON.parse(jsonstr);
 
         //拼接的结果
-        var result = "";
+        let result = "";
 
         //循环提取
-        for (var i = 0; i < json.length; i++) {
+        for (let i = 0; i < json.length; i++) {
             if (i > 0) {
                 result += ",";
             }
             //result+=json[i]['text'];
             result += json[i][key];
         }
-
         return result;
     }
 });

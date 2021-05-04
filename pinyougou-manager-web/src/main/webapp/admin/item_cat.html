@@ -70,7 +70,7 @@
             <thead>
             <tr>
                 <th class="" style="padding-right:0px">
-                    <input type="checkbox" class="icheckbox_square-blue">
+                    <input ng-click="selectAll($event)" type="checkbox" class="icheckbox_square-blue">
                 </th>
                 <th class="sorting_asc">分类ID</th>
                 <th class="sorting">分类名称</th>
@@ -81,7 +81,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in list">
-                <td><input type="checkbox"></td>
+                <td><input class="select" ng-click="updateSelection($event,item.id)" value="{{item.id}}" type="checkbox"></td>
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>
