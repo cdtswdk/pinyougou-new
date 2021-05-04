@@ -5,8 +5,8 @@
 app.service("itemCatService", function ($http) {
 
     //根据父ID查询所有子分类
-    this.findByParentId = function (id) {
-        return $http.get('/itemCat/parent/' + id + '.shtml');
+    this.findByParentId = function (id, page, size) {
+        return $http.get('/itemCat/parent/' + id + '.shtml?page=' + page + "&size=" + size);
     }
 
     //查询列表，不做分页

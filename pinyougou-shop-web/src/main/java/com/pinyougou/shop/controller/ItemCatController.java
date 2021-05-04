@@ -22,8 +22,10 @@ public class ItemCatController {
      * http://localhost:18082/itemCat/parent/2.shtml    查询父ID=2的所有分类
      */
     @RequestMapping(value = "/parent/{id}")
-    public List<ItemCat> findByParentId(@PathVariable(value = "id") long id) {
-        return itemCatService.findByParentId(id);
+    public List<ItemCat> findByParentId(@PathVariable(value = "id") long id,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                        @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return itemCatService.findByParentId(id, page, size);
     }
 
 

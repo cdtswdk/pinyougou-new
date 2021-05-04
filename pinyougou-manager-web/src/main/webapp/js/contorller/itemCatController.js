@@ -16,13 +16,16 @@ app.controller("itemCatController", function ($scope, $http, $controller, itemCa
     //定义一个参数，记录当前属于第几级分类
     $scope.grand = 1;
 
+    //记住上级id
+    $scope.parentId = 0;
+
     //定义一个方法，每次调用，就让grand+1
     $scope.loadChild = function (itemCat) {
         $scope.grand += 1;
         //当前分类属于第2级分类的时候，就把itemCat给第2个面包屑赋值
-        if ($scope.grand == 2) {
+        if ($scope.grand === 2) {
             $scope.entity_2 = itemCat;
-        } else if ($scope.grand == 3) {
+        } else if ($scope.grand === 3) {
             //当前分类属于第3级分类的时候，就把itemCat给第3个面包屑赋值
             $scope.entity_3 = itemCat;
         }
@@ -30,7 +33,9 @@ app.controller("itemCatController", function ($scope, $http, $controller, itemCa
 
     //根据父ID查询所有子类
     $scope.findByParentId = function (id) {
-        itemCatService.findByParentId(id).success(function (response) {
+        console.log(id, $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+        $scope.parentId = id;
+        itemCatService.findByParentId(id, $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage).success(function (response) {
             $scope.list = response;
         });
     }
@@ -48,12 +53,13 @@ app.controller("itemCatController", function ($scope, $http, $controller, itemCa
 
     //添加或者修改方法
     $scope.save = function () {
-        var result = null;
+        let result = null;
         if ($scope.entity.id != null) {
             //执行修改数据
             result = itemCatService.update($scope.entity);
         } else {
             //增加操作
+            $scope.entity.parentId = $scope.parentId;
             result = itemCatService.add($scope.entity);
         }
         //判断操作流程
@@ -61,7 +67,7 @@ app.controller("itemCatController", function ($scope, $http, $controller, itemCa
             //判断执行状态
             if (response.success) {
                 //重新加载新的数据
-                $scope.reloadList();
+                $scope.findByParentId($scope.parentId);
             } else {
                 //打印错误消息
                 alert(response.message);

@@ -5,10 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.mapper.ItemCatMapper;
 import com.pinyougou.model.ItemCat;
+import com.pinyougou.model.ItemCatExample;
 import com.pinyougou.sellergoods.service.ItemCatService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -46,9 +47,13 @@ public class ItemCatServiceImpl implements ItemCatService {
         PageHelper.startPage(pageNum, pageSize);
 
         //执行查询
-        List<ItemCat> all = itemCatMapper.select(itemCat);
-        PageInfo<ItemCat> pageInfo = new PageInfo<ItemCat>(all);
-        return pageInfo;
+        ItemCatExample example = new ItemCatExample();
+        ItemCatExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotEmpty(itemCat.getName())) {
+            criteria.andNameLike("%" + itemCat.getName() + "%");
+        }
+        List<ItemCat> all = this.itemCatMapper.selectByExample(example);
+        return new PageInfo<ItemCat>(all);
     }
 
 
@@ -105,10 +110,12 @@ public class ItemCatServiceImpl implements ItemCatService {
      * 根据父ID查询所有子类
      * select * from tb_item_cat where parent_id=0;
      * @param id
+     * @param page
+     * @param size
      * @return
      */
     @Override
-    public List<ItemCat> findByParentId(long id) {
+    public List<ItemCat> findByParentId(long id, int page, int size) {
         ItemCat itemCat = new ItemCat();
         itemCat.setParentId(id);
 
@@ -117,6 +124,8 @@ public class ItemCatServiceImpl implements ItemCatService {
         for (ItemCat cat : itemCats) {
             this.redisTemplate.boundHashOps("ItemCat").put(cat.getName(), cat.getTypeId());
         }
+
+        PageHelper.startPage(page, size);
         return itemCatMapper.select(itemCat);
     }
 }

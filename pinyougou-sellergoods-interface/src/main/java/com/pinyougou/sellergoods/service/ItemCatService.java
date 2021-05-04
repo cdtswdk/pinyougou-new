@@ -53,7 +53,9 @@ public interface ItemCatService {
     /***
      * 根据父ID查询所有子分类
      * @param id
+     * @param page
+     * @param size
      * @return
      */
-    List<ItemCat> findByParentId(long id);
+    List<ItemCat> findByParentId(long id, int page, int size);
 }
