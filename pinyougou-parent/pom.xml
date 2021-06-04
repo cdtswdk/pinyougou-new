@@ -89,7 +89,7 @@
         <commons-pool2.version>2.0</commons-pool2.version>
         <commons.codec.version>1.11</commons.codec.version>
         <wxpay.version>0.0.3</wxpay.version>
-        <httpclient.version>4.5.3</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <dependencyManagement>
