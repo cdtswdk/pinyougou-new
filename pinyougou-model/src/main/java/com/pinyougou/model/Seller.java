@@ -153,6 +153,9 @@ public class Seller implements Serializable {
     @Column(name = "bank_name")
     private String bankName;
 
+    @Column(name = "last_login_time")
+    private Date lastLoginTime;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -585,5 +588,21 @@ public class Seller implements Serializable {
      */
     public void setBankName(String bankName) {
         this.bankName = bankName == null ? null : bankName.trim();
+    }
+
+    /**
+     * 获取最后登录时间
+     * @return
+     */
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    /**
+     * 设置最后登录时间
+     * @param lastLoginTime
+     */
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

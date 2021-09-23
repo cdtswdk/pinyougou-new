@@ -1,7 +1,10 @@
 package com.pinyougou.shop.security;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.pinyougou.http.Result;
+import com.pinyougou.model.Seller;
+import com.pinyougou.sellergoods.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /***
  *
@@ -33,6 +37,8 @@ import java.io.PrintWriter;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Reference
+    private SellerService sellerService;
 
     /****
      * 1、放行配置
@@ -61,7 +67,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //禁用CSRF
         http.csrf().disable();
 
-
         //发生异常
         http.exceptionHandling().accessDeniedPage("/error.html");
 
@@ -77,8 +82,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                        // 更新时间
+                        String sellerId = authentication.getName();
+                        Seller seller = sellerService.getOneById(sellerId);
+                        seller.setLastLoginTime(new Date());
+                        sellerService.updateSellerById(seller);
+
                         //成功响应消息
                         Result result = new Result(true, "/admin/index.html");
+
                         responseLogin(response, result);
                     }
                 }).failureHandler(new AuthenticationFailureHandler() {
@@ -90,18 +102,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             }
         });
 
-        //.defaultSuccessUrl("/admin/index.html",true)
-        //.failureUrl("/shoplogin.html");
-
         //配置登出
         http.logout().logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/shoplogin.html");
-
     }
 
     /**
      * 响应用户登录
+     *
      * @param response
      * @param result
      * @throws IOException
@@ -135,7 +144,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //写死
         //auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-
         //自定义授权认证类
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder);  //指定加密对象

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    /*@Autowired*/
 
     /****
      * 1)给单钱接口创建一个代理对象

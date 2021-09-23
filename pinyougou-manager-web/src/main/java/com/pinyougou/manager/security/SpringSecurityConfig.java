@@ -45,6 +45,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**")
                 .antMatchers("/plugins/**")
                 .antMatchers("/*.html");
+//                .antMatchers("/login.html")
+//                .antMatchers("/error.html");
     }
 
 
@@ -68,13 +70,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().maximumSessions(1).expiredUrl("/login.html");
 
         //登录
-        http.formLogin()
+        /*http.formLogin()
                 .loginPage("/login.html")   //登录页面
                 .loginProcessingUrl("/login")   //登录处理地址
                 .defaultSuccessUrl("/admin/index.html", true)    //登录成功后总是跳转到这个页面
-                .failureUrl("/login.html");     //登录失败跳转地址
+                .failureUrl("/login.html");     //登录失败跳转地址*/
 
-        /*//登录
+        //登录
         http.formLogin()
                 .loginPage("/login.html")   //登录页面
                 .loginProcessingUrl("/login")   //登录处理地址
@@ -92,7 +94,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         Result result = new Result(false, "/login.html");
                         responseLogin(httpServletResponse, result);
                     }
-                });*/
+                });
 
         //登出
         http.logout()
@@ -138,11 +140,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
+        /*auth.inMemoryAuthentication()
                 .withUser("admin")   //创建用户，用户名为 admin
                 .password("123")             //用户名的密码是123456
-                .roles("ADMIN");                //用户的角色是ADMIN
+                .roles("ADMIN");  */             //用户的角色是ADMIN
+
         //自定义授权认证类
-        /*auth.userDetailsService(userDetailsService);*/
+        auth.userDetailsService(userDetailsService);
     }
 }

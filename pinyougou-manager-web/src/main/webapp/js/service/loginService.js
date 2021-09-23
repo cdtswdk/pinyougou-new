@@ -3,8 +3,13 @@
 * */
 app.service('loginService', function ($http) {
 
+    // 登录
+    this.login = function (username, password) {
+        return $http.post('/login?username=' + username + '&password=' + password);
+    }
+
     //获取用户登录名
-    this.login = function () {
+    this.loginName = function () {
         return $http.get('/login/name.shtml');
     }
 

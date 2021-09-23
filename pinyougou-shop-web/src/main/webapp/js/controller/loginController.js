@@ -21,4 +21,17 @@ app.controller('loginController', function ($scope, loginService) {
             }
         });
     }
+
+    // 查询登录用户名
+    $scope.getLoginName = function () {
+        loginService.loginName().success(function (response) {
+            $scope.username = response;
+        })
+    }
+    // 查询用户最近登录时间
+    $scope.getLastLoginTime = function () {
+        loginService.lastLoginTime().success(function (response) {
+            $scope.lastLoginDate = response;
+        })
+    }
 });

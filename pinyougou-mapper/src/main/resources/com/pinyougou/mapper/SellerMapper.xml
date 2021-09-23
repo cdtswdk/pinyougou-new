@@ -29,5 +29,6 @@
         <result column="legal_person_card_id" property="legalPersonCardId" jdbcType="VARCHAR"/>
         <result column="bank_user" property="bankUser" jdbcType="VARCHAR"/>
         <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     </resultMap>
 </mapper>

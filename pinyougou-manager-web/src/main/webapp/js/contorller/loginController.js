@@ -3,10 +3,16 @@
 * */
 app.controller('loginController', function ($scope, loginService) {
 
-
-    //调用查询用户名的方法
+    // 实现登录
     $scope.login = function () {
-        loginService.login().success(function (response) {
+        loginService.login($scope.username,$scope.password).success(function (response) {
+
+        })
+    }
+
+    // 调用查询用户名的方法
+    $scope.getLoginName = function () {
+        loginService.loginName().success(function (response) {
             $scope.username = response;
         });
     }

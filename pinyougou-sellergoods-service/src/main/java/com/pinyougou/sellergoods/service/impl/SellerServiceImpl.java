@@ -8,7 +8,6 @@ import com.pinyougou.model.Seller;
 import com.pinyougou.sellergoods.service.SellerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
@@ -31,7 +30,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    /***
+    /**
      * 分页返回Seller列表
      * @param pageNum
      * @param pageSize
@@ -73,7 +72,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    /***
+    /**
      * 增加Seller信息
      * @param seller
      * @return
@@ -86,7 +85,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    /***
+    /**
      * 根据ID查询Seller信息
      * @param id
      * @return
@@ -97,7 +96,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    /***
+    /**
      * 根据ID修改Seller信息
      * @param seller
      * @return
@@ -108,7 +107,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
 
-    /***
+    /**
      * 根据ID批量删除Seller信息
      * @param ids
      * @return
@@ -122,5 +121,16 @@ public class SellerServiceImpl implements SellerService {
         //所需的SQL语句类似 delete from tb_seller where id in(1,2,5,6)
         criteria.andIn("id", ids);
         return sellerMapper.deleteByExample(example);
+    }
+
+    /**
+     * 根据id返回最近登录时间
+     * @param id
+     * @return
+     */
+    @Override
+    public Date getLastLoginTime(String id) {
+        Seller seller = this.sellerMapper.selectByPrimaryKey(id);
+        return seller.getLastLoginTime();
     }
 }

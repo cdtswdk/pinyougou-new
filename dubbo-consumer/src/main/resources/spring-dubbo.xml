@@ -13,7 +13,7 @@
     <dubbo:application name="dubbo-consumer"/>
 
     <!--1、指定注册地址-->
-    <dubbo:registry address="zookeeper://192.168.68.131:2181"/>
+    <dubbo:registry address="zookeeper://192.168.68.132:2181"/>
 
     <!--3、Dubbo包扫描-->
     <dubbo:annotation package="com.itheima.controller"/>

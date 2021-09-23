@@ -3,6 +3,7 @@ package com.pinyougou.sellergoods.service;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.Seller;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SellerService {
@@ -49,4 +50,11 @@ public interface SellerService {
      * @return
      */
     int deleteByIds(List<Long> ids);
+
+    /**
+     * 根据id获取最近登录时间
+     * @param id
+     * @return
+     */
+    Date getLastLoginTime(String id);
 }
