@@ -19,6 +19,11 @@ app.service("sellerService", function ($http) {
         return $http.post("/seller/update.shtml", entity);
     }
 
+    // 获取用户登录名
+    this.loginName = function () {
+        return $http.get('/login/name.shtml');
+    }
+
     //根据ID查询
     this.findOne = function (id) {
         return $http.get("/seller/" + id + ".shtml");
@@ -27,6 +32,11 @@ app.service("sellerService", function ($http) {
     //批量删除
     this.delete = function (ids) {
         return $http.post("/seller/delete.shtml", ids);
+    }
+
+    // 更新密码
+    this.updatePassword = function (prePwd, newPwd, cfmPwd) {
+        return $http.post('/seller/updatePwd.shtml?prePwd=' + prePwd + '&newPwd=' + newPwd + '&cfmPwd=' + cfmPwd);
     }
 
 });

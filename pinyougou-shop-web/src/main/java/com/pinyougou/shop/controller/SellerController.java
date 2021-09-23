@@ -6,6 +6,7 @@ import com.pinyougou.http.Result;
 import com.pinyougou.model.Seller;
 import com.pinyougou.sellergoods.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,12 +52,12 @@ public class SellerController {
             //根据ID修改Seller信息
             int mcount = sellerService.updateSellerById(seller);
             if (mcount > 0) {
-                return new Result(true, "修改成功");
+                return new Result(true, "修改成功。");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false, "修改失败");
+        return new Result(false, "修改失败。");
     }
 
     /***
@@ -67,8 +68,7 @@ public class SellerController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Seller getById(@PathVariable(value = "id") String id) {
         //根据ID查询Seller信息
-        Seller seller = sellerService.getOneById(id);
-        return seller;
+        return this.sellerService.getOneById(id);
     }
 
     @Autowired
@@ -129,5 +129,30 @@ public class SellerController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Seller> list() {
         return sellerService.getAll();
+    }
+
+    @RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
+    public Result updatePassword(@RequestParam(value = "prePwd") String prePwd,
+                                 @RequestParam(value = "newPwd") String newPwd,
+                                 @RequestParam(value = "cfmPwd") String cfmPwd) {
+        try {
+            String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+            Seller seller = this.sellerService.getOneById(sellerId);
+            if (!encoder.matches(prePwd, seller.getPassword())) {
+                return new Result(false, "原密码输入错误。");
+            }
+            if (!newPwd.equals(cfmPwd)) {
+                return new Result(false, "两次密码输入不一致。");
+            }
+            //密码应该加密
+            seller.setPassword(encoder.encode(newPwd));
+            int count = this.sellerService.updateSellerById(seller);
+            if (count > 0) {
+                return new Result(true, "修改密码成功。");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Result(false, "修改密码失败。");
     }
 }

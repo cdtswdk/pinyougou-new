@@ -21,7 +21,7 @@ app.controller("sellerController", function ($scope, $http, $controller, sellerS
     //添加或者修改方法
     $scope.save = function () {
         //增加操作
-        var result = sellerService.add($scope.entity);
+        let result = sellerService.add($scope.entity);
         //判断操作流程
         result.success(function (response) {
             //判断执行状态
@@ -35,9 +35,20 @@ app.controller("sellerController", function ($scope, $http, $controller, sellerS
         });
     }
 
+    // 查询登录用户名
+    $scope.getLoginName = function () {
+        sellerService.loginName().success(function (response) {
+            $scope.username = response;
+            sellerService.findOne($scope.username).success(function (response) {
+                //将后台的数据绑定到前台
+                $scope.entity = response;
+            });
+        })
+    }
+
     //根据ID查询信息
-    $scope.getById = function (id) {
-        sellerService.findOne(id).success(function (response) {
+    $scope.getById = function () {
+        sellerService.findOne($scope.username).success(function (response) {
             //将后台的数据绑定到前台
             $scope.entity = response;
         });
@@ -48,10 +59,35 @@ app.controller("sellerController", function ($scope, $http, $controller, sellerS
         sellerService.delete($scope.selectids).success(function (response) {
             //判断删除状态
             if (response.success) {
+                alert(response.message);
                 $scope.reloadList();
             } else {
                 alert(response.message);
             }
         });
+    }
+    // 修改资料
+    $scope.update = function () {
+        sellerService.update($scope.entity).success(function (response) {
+            //判断修改状态
+            if (response.success) {
+                alert(response.message);
+                location.reload();
+            } else {
+                alert(response.message);
+            }
+        })
+    }
+
+    // 更新密码
+    $scope.updatePwd = function (prePwd, newPwd, cfmPwd) {
+        sellerService.updatePassword(prePwd, newPwd, cfmPwd).success(function (response) {
+            if (response.success) {
+                alert(response.message);
+            } else {
+                alert(response.message);
+            }
+            location.reload();
+        })
     }
 });
