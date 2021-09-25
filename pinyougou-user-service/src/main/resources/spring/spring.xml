@@ -45,7 +45,7 @@
     <!-- 配置事务管理器 -->
     <bean id="txManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="druidDataSource"/>
     </bean>
 
     <!-- 开启AOP注解 -->
@@ -68,6 +68,7 @@
 
     <!--引入dubbo配置-->
     <import resource="spring-dubbo.xml"/>
+
     <!--引入mq-->
     <import resource="spring-mq.xml"/>
 </beans>

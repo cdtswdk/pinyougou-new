@@ -66,6 +66,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //异常处理
         http.exceptionHandling().accessDeniedPage("/error.html");
 
+        //启用iframe
+        //默认情况，SpringSecurity禁止使用iframe，需要将iframe一些禁止选项关闭
+        http.headers().frameOptions().disable();
+
         //一个用户只能在一个地方登录
         http.sessionManagement().maximumSessions(1).expiredUrl("/login.html");
 
@@ -101,9 +105,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)        //登出后销毁session
                 .logoutUrl("/logout")               //登出处理地址
                 .logoutSuccessUrl("/login.html");   //登出成功后跳转地址
-
-        //默认情况，SpringSecurity禁止使用iframe，需要将iframe一些禁止选项关闭
-        http.headers().frameOptions().disable();
     }
 
     /**

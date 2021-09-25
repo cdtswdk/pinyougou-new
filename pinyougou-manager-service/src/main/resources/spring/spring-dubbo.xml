@@ -10,10 +10,14 @@
 
     <!--注册应用-->
     <dubbo:application name="pinyougou-manager-service"/>
+
     <!--指定注册中心的地址-->
     <dubbo:registry address="zookeeper://192.168.68.132:2181"/>
+
     <!--对外暴露端口-->
     <dubbo:protocol name="dubbo" port="20889"/>
+
     <!--包扫描-->
     <dubbo:annotation package="com.pinyougou.manager.service.impl"/>
+
 </beans>

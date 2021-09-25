@@ -24,11 +24,10 @@
        name：其他应用调用该服务所使用的协议
        host：该服务的访问地址
      -->
-    <!--<dubbo:protocol port="20882" name="dubbo" host="192.168.73.1" />-->
     <dubbo:protocol port="20887" name="dubbo"/>
 
     <!--注册中心-->
-    <dubbo:registry address="zookeeper://192.168.254.128:2181"/>
+    <dubbo:registry address="zookeeper://192.168.254.132:2181"/>
 
     <!--包扫描，暴露接口信息-->
     <dubbo:annotation package="com.pinyougou.pay.service.impl"/>

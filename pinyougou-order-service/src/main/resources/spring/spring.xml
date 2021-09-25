@@ -38,7 +38,7 @@
     <!-- 配置事务管理器 -->
     <bean id="txManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="druidDataSource"/>
     </bean>
 
     <!-- 开启AOP注解 -->
