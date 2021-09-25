@@ -39,7 +39,7 @@
     <script src="/js/controller/loginController.js"></script>
 </head>
 
-<body ng-app="pinyougou" ng-controller="loginController" ng-init="getLoginName()"
+<body ng-app="pinyougou" ng-controller="loginController" ng-init="getLoginName();getLastLoginTime()"
       class="hold-transition skin-green sidebar-mini">
 
 <div class="wrapper">
@@ -281,7 +281,7 @@
 
                                 <p>
                                     {{username}}
-                                    <small>最后登录 11:20AM</small>
+                                    <small>最后登录 {{lastLoginDate}}</small>
                                 </p>
                             </li>
 

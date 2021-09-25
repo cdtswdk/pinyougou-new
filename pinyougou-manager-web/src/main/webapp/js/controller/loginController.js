@@ -21,4 +21,11 @@ app.controller('loginController', function ($scope, loginService) {
             $scope.username = response;
         });
     }
+
+    // 最后登录时间
+    $scope.getLastLoginTime = function () {
+        loginService.lastLoginTime().success(function (response) {
+            $scope.lastLoginDate = response;
+        });
+    }
 });

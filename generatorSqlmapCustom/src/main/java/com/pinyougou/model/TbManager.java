@@ -1,11 +1,15 @@
 package com.pinyougou.model;
 
+import java.util.Date;
+
 public class TbManager {
     private Integer id;
 
-    private Integer managerId;
+    private String managerId;
 
     private String managerPwd;
+
+    private Date lastLoginTime;
 
     public Integer getId() {
         return id;
@@ -15,12 +19,12 @@ public class TbManager {
         this.id = id;
     }
 
-    public Integer getManagerId() {
+    public String getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
+    public void setManagerId(String managerId) {
+        this.managerId = managerId == null ? null : managerId.trim();
     }
 
     public String getManagerPwd() {
@@ -29,5 +33,13 @@ public class TbManager {
 
     public void setManagerPwd(String managerPwd) {
         this.managerPwd = managerPwd == null ? null : managerPwd.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

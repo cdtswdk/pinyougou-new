@@ -28,8 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Integer manageId = Integer.valueOf(username);
-        TbManager manager = this.managerService.findByManagerId(manageId);
+
+        TbManager manager = null;
+        try {
+            manager = this.managerService.findByManagerId(username);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (manager != null) {
             //授权信息-一般是查询出来

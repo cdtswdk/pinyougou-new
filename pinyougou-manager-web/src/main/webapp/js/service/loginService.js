@@ -13,4 +13,9 @@ app.service('loginService', function ($http) {
         return $http.get('/login/name.shtml');
     }
 
+    // 获取最新登录时间
+    this.lastLoginTime = function () {
+        return $http.get('/login/lastLoginTime.shtml');
+    }
+
 })

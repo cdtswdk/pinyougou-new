@@ -3,6 +3,7 @@ package com.pinyougou.manager.service;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.model.TbManager;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ManagerService {
@@ -34,7 +35,7 @@ public interface ManagerService {
      * @param id
      * @return
      */
-    TbManager getOneById(Long id);
+    TbManager getOneById(Integer id);
 
     /***
      * 根据ID修改Manager信息
@@ -52,8 +53,17 @@ public interface ManagerService {
 
     /**
      * 根据manageId查找manager
+     *
      * @param manageId
      * @return
      */
-    TbManager findByManagerId(Integer manageId);
+    TbManager findByManagerId(String manageId);
+
+    /**
+     * 根据id获取最近登录时间
+     *
+     * @param managerId
+     * @return
+     */
+    Date getLastLoginTime(String managerId);
 }

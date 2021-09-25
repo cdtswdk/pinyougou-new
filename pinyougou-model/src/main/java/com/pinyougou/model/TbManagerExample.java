@@ -1,6 +1,7 @@
 package com.pinyougou.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TbManagerExample {
@@ -174,52 +175,62 @@ public class TbManagerExample {
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdEqualTo(Integer value) {
+        public Criteria andManagerIdEqualTo(String value) {
             addCriterion("manager_id =", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdNotEqualTo(Integer value) {
+        public Criteria andManagerIdNotEqualTo(String value) {
             addCriterion("manager_id <>", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdGreaterThan(Integer value) {
+        public Criteria andManagerIdGreaterThan(String value) {
             addCriterion("manager_id >", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andManagerIdGreaterThanOrEqualTo(String value) {
             addCriterion("manager_id >=", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdLessThan(Integer value) {
+        public Criteria andManagerIdLessThan(String value) {
             addCriterion("manager_id <", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdLessThanOrEqualTo(Integer value) {
+        public Criteria andManagerIdLessThanOrEqualTo(String value) {
             addCriterion("manager_id <=", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdIn(List<Integer> values) {
+        public Criteria andManagerIdLike(String value) {
+            addCriterion("manager_id like", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdNotLike(String value) {
+            addCriterion("manager_id not like", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdIn(List<String> values) {
             addCriterion("manager_id in", values, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdNotIn(List<Integer> values) {
+        public Criteria andManagerIdNotIn(List<String> values) {
             addCriterion("manager_id not in", values, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdBetween(Integer value1, Integer value2) {
+        public Criteria andManagerIdBetween(String value1, String value2) {
             addCriterion("manager_id between", value1, value2, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManagerIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andManagerIdNotBetween(String value1, String value2) {
             addCriterion("manager_id not between", value1, value2, "managerId");
             return (Criteria) this;
         }
@@ -291,6 +302,66 @@ public class TbManagerExample {
 
         public Criteria andManagerPwdNotBetween(String value1, String value2) {
             addCriterion("manager_pwd not between", value1, value2, "managerPwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeIsNull() {
+            addCriterion("last_login_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeIsNotNull() {
+            addCriterion("last_login_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeEqualTo(Date value) {
+            addCriterion("last_login_time =", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeNotEqualTo(Date value) {
+            addCriterion("last_login_time <>", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeGreaterThan(Date value) {
+            addCriterion("last_login_time >", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("last_login_time >=", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeLessThan(Date value) {
+            addCriterion("last_login_time <", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeLessThanOrEqualTo(Date value) {
+            addCriterion("last_login_time <=", value, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeIn(List<Date> values) {
+            addCriterion("last_login_time in", values, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeNotIn(List<Date> values) {
+            addCriterion("last_login_time not in", values, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeBetween(Date value1, Date value2) {
+            addCriterion("last_login_time between", value1, value2, "lastLoginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastLoginTimeNotBetween(Date value1, Date value2) {
+            addCriterion("last_login_time not between", value1, value2, "lastLoginTime");
             return (Criteria) this;
         }
     }

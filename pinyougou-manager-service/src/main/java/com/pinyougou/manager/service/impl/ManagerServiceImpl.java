@@ -10,6 +10,7 @@ import com.pinyougou.model.TbManagerExample;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public TbManager getOneById(Long id) {
+    public TbManager getOneById(Integer id) {
         return this.managerMapper.selectByPrimaryKey(id);
     }
 
@@ -61,7 +62,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public TbManager findByManagerId(Integer manageId) {
+    public TbManager findByManagerId(String manageId) {
 
         try {
             TbManagerExample example = new TbManagerExample();
@@ -76,6 +77,20 @@ public class ManagerServiceImpl implements ManagerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Date getLastLoginTime(String managerId) {
+
+        TbManagerExample example = new TbManagerExample();
+        TbManagerExample.Criteria criteria = example.createCriteria();
+        criteria.andManagerIdEqualTo(managerId);
+
+        List<TbManager> tbManagerList = this.managerMapper.selectByExample(example);
+        if (CollectionUtils.isNotEmpty(tbManagerList)) {
+            return tbManagerList.get(0).getLastLoginTime();
         }
         return null;
     }
