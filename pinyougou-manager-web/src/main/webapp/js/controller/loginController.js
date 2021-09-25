@@ -5,9 +5,14 @@ app.controller('loginController', function ($scope, loginService) {
 
     // 实现登录
     $scope.login = function () {
-        loginService.login($scope.username,$scope.password).success(function (response) {
-
-        })
+        $scope.msg = "正在登录....";
+        loginService.login($scope.username, $scope.password).success(function (response) {
+            if (response.success) {
+                location.href = response.message;
+            } else {
+                $scope.msg = response.message;
+            }
+        });
     }
 
     // 调用查询用户名的方法

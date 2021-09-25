@@ -2,11 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://code.alibabatech.com/schema/dubbo
-        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+      	http://www.springframework.org/schema/context/spring-context.xsd
+">
 
     <!--注册应用-->
     <dubbo:application name="pinyougou-manager-service"/>
@@ -16,6 +20,8 @@
 
     <!--对外暴露端口-->
     <dubbo:protocol name="dubbo" port="20889"/>
+
+    <context:component-scan base-package="com.pinyougou.manager.service.impl"/>
 
     <!--包扫描-->
     <dubbo:annotation package="com.pinyougou.manager.service.impl"/>

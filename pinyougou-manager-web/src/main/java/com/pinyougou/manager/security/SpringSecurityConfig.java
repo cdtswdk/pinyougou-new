@@ -44,9 +44,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/img/**")
                 .antMatchers("/js/**")
                 .antMatchers("/plugins/**")
-                .antMatchers("/*.html");
-//                .antMatchers("/login.html")
-//                .antMatchers("/error.html");
+                .antMatchers("/login.html")
+                .antMatchers("/error.html");
     }
 
 
@@ -95,7 +94,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
                         //失败响应消息
-                        Result result = new Result(false, "/login.html");
+                        Result result = new Result(false, "账号密码不正确。");
                         responseLogin(httpServletResponse, result);
                     }
                 });

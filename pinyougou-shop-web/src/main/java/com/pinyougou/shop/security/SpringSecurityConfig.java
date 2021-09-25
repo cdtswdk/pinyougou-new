@@ -3,7 +3,6 @@ package com.pinyougou.shop.security;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.pinyougou.http.Result;
-import com.pinyougou.model.Seller;
 import com.pinyougou.sellergoods.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,20 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 
 /***
  *
@@ -39,6 +31,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Reference
     private SellerService sellerService;
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private LoginFailureHandler loginFailureHandler;
 
     /****
      * 1、放行配置
@@ -77,7 +75,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().maximumSessions(1).expiredUrl("/shoplogin.html");
 
         //配置登录
-        http.formLogin().loginPage("/shoplogin.html")
+        /*http.formLogin().loginPage("/shoplogin.html")
                 .loginProcessingUrl("/login")
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
@@ -100,36 +98,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 Result result = new Result(false, "账号或密码不正确！");
                 responseLogin(response, result);
             }
-        });
+        });*/
+        http.formLogin().loginPage("/shoplogin.html")
+                .loginProcessingUrl("/login")
+                .successHandler(this.loginSuccessHandler)
+                .failureHandler(this.loginFailureHandler);
 
         //配置登出
         http.logout().logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/shoplogin.html");
     }
-
-    /**
-     * 响应用户登录
-     *
-     * @param response
-     * @param result
-     * @throws IOException
-     */
-    public void responseLogin(HttpServletResponse response, Result result) throws IOException {
-        //设置编码格式
-        response.setContentType("application/json;charset=utf-8");
-
-        //将Result转成JSON字符
-        String jsonString = JSON.toJSONString(result);
-
-        //输出数据
-        PrintWriter writer = response.getWriter();
-        writer.write(jsonString);
-
-        writer.flush();
-        writer.close();
-    }
-
 
     @Autowired
     private UserDetailsService userDetailsService;

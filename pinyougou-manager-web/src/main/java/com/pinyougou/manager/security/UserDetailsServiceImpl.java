@@ -3,7 +3,6 @@ package com.pinyougou.manager.security;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.manager.service.ManagerService;
 import com.pinyougou.model.TbManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

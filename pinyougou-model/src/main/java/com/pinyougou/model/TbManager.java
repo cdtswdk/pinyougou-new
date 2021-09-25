@@ -1,10 +1,20 @@
 package com.pinyougou.model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "tb_manager")
 public class TbManager {
+
+    @Id
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "manager_id")
     private Integer managerId;
 
+    @Column(name = "manager_pwd")
     private String managerPwd;
 
     public Integer getId() {
