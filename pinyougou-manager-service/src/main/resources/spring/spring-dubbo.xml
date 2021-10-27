@@ -19,7 +19,7 @@
     <dubbo:registry address="zookeeper://192.168.68.132:2181"/>
 
     <!--对外暴露端口-->
-    <dubbo:protocol name="dubbo" port="20889"/>
+    <dubbo:protocol name="dubbo" port="20890"/>
 
     <context:component-scan base-package="com.pinyougou.manager.service.impl"/>
 

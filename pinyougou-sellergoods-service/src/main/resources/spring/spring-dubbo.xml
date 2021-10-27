@@ -23,6 +23,7 @@
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!--先进行包扫描    -->
+
     <context:component-scan base-package="com.pinyougou.sellergoods.service.impl"/>
 
     <!--3、Dubbo包扫描-->

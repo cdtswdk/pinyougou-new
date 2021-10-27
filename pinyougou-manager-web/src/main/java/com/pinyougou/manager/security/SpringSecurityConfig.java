@@ -45,7 +45,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**")
                 .antMatchers("/plugins/**")
                 .antMatchers("/login.html")
-                .antMatchers("/error.html");
+                .antMatchers("/register.html")
+                .antMatchers("/error.html")
+                .antMatchers("/manager/add.shtml");
     }
 
 
