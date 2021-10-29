@@ -44,10 +44,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/img/**")
                 .antMatchers("/js/**")
                 .antMatchers("/plugins/**")
-                .antMatchers("/login.html")
-                .antMatchers("/register.html")
-                .antMatchers("/error.html")
-                .antMatchers("/manager/add.shtml");
+//                .antMatchers("/login.html")
+//                .antMatchers("/register.html")
+//                .antMatchers("/error.html")
+                .antMatchers("/*.html")
+                .antMatchers("/management/add.shtml");
     }
 
 
@@ -135,6 +136,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN");  */             //用户的角色是ADMIN
 
         //自定义授权认证类
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 }

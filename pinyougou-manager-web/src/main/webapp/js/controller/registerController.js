@@ -9,13 +9,15 @@ app.controller('registerController', function ($scope, registerService) {
         let result = registerService.add($scope.entity);
         //判断操作流程
         result.success(function (response) {
+            $scope.msg = "正在注册....";
             //判断执行状态
             if (response.success) {
+                alert("注册成功");
                 //注册成功后跳转到登录页
                 location.href = "/login.html";
             } else {
                 //打印错误消息
-                alert(response.message);
+                $scope.msg = response.message;
             }
         });
     }

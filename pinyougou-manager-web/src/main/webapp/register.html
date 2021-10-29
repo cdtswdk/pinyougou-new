@@ -15,12 +15,12 @@
     <script src="/js/base.js"></script>
 
     <!--service、controller-->
-    <script src="/js/service/registerService.js"></script>
+    <script src="/js/service/manageService.js"></script>
     <script src="/js/controller/baseController.js"></script>
-    <script src="/js/controller/registerController.js"></script>
+    <script src="/js/controller/manageController.js"></script>
 </head>
 
-<body ng-app="pinyougou" ng-controller="registerController">
+<body ng-app="pinyougou" ng-controller="manageController">
 <div class="register py-container ">
     <!--head-->
     <div class="logoArea">
@@ -54,6 +54,9 @@
                     <div class="controls">
                         <input name="m1" type="checkbox" value="2" checked=""><span>同意协议并注册  <a href="sampling.html">《品优购商家入驻协议》</a></span>
                     </div>
+                </div>
+                <div style="color: red; text-align: center; padding-bottom: 10px;">
+                    {{msg}}
                 </div>
                 <div class="control-group">
                     <label class="control-label"></label>

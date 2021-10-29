@@ -5,7 +5,7 @@ app.service('registerService', function ($http) {
 
     //增加Manager
     this.add = function (entity) {
-        return $http.post("/manager/add.shtml", entity);
+        return $http.post("/register/add.shtml", entity);
     }
 
 })
