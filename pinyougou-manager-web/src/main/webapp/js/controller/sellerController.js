@@ -7,6 +7,8 @@ app.controller("sellerController", function ($scope, $http, $controller, sellerS
     //继承父控制器
     $controller("baseController", {$scope: $scope});
 
+    //定义状态集合     0         1           2          3
+    $scope.status = ["待审核", "已审核", "审核未通过", "关闭"];
 
     //修改商户状态
     $scope.updateStatus = function (sellerId, status) {
@@ -29,7 +31,7 @@ app.controller("sellerController", function ($scope, $http, $controller, sellerS
             //分页数据
             $scope.paginationConf.totalItems = response.total;
         });
-        alert($scope.list);
+        // alert($scope.list);
     }
 
     //添加或者修改方法
