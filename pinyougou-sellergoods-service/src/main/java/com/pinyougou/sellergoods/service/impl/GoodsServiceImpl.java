@@ -9,7 +9,6 @@ import com.pinyougou.model.*;
 import com.pinyougou.sellergoods.service.GoodsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
@@ -317,6 +316,20 @@ public class GoodsServiceImpl implements GoodsService {
         criteria.andEqualTo("status", status);
 
         return this.itemMapper.selectByExample(example);
+    }
+
+    @Override
+    public int changeStatus(String goodsId, String status) {
+        //update goods set auditStatus=? where id =1
+        Example example = new Example(Goods.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("id", goodsId);
+
+        //修改数据
+        Goods goods = new Goods();
+        goods.setAuditStatus(status);
+
+        return goodsMapper.updateByExampleSelective(goods, example);
     }
 
     /***

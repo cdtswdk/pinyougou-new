@@ -12,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jms.*;
-import java.util.HashMap;
+import javax.jms.Destination;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/goods")
@@ -33,8 +32,42 @@ public class GoodsController {
     @Autowired
     private MessageSender messageSender;
 
-    /***
+    /****
+     * http://localhost:8080/goods/changeStatus/xiaohong/1.shtml  审核通过
+     * http://localhost:8080/goods/changeStatus/xiaohong/2.shtml  审核不通过
+     * http://localhost:8080/goods/changeStatus/xiaohong/3.shtml  关闭
+     * @return
+     */
+    @RequestMapping(value = "/changeStatus/{goodsId}/{sta}")
+    public Result changeStatus(@PathVariable(value = "goodsId") String goodsId,
+                               @PathVariable(value = "sta") String status) {
+        try {
+            //修改
+            int mcount = goodsService.changeStatus(goodsId, status);
+            if (mcount > 0) {
+                //判断商品是否审核通过
+                if ("1".equals(status)) {
+                    //查找商品
+                    List<Long> ids = new ArrayList<>();
+                    ids.add(Long.valueOf(goodsId));
+                    List<Item> items = this.goodsService.findItemListByGoodsIdAndStatus(ids, status);
+                    //向ActiveMQ发送消息-订阅消息
+                    MessageInfo messageInfo = new MessageInfo(MessageInfo.METHOD_UPDATE, items);
+                    this.messageSender.sendMessage(messageInfo);
+                }
+                //修改成功
+                return new Result(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Result(false, "修改状态失败！");
+    }
+
+
+    /**
      * 审核操作
+     *
      * @param ids
      * @param status
      * @return
@@ -65,7 +98,7 @@ public class GoodsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new Result(false, "审核失败");
+        return new Result(false, "修改状态失败！");
     }
 
     /***

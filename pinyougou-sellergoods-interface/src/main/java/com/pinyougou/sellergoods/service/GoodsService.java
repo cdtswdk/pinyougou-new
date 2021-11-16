@@ -61,4 +61,6 @@ public interface GoodsService {
      * @return
      */
     List<Item> findItemListByGoodsIdAndStatus(List<Long> ids, String status);
+
+    int changeStatus(String goodsId, String status);
 }

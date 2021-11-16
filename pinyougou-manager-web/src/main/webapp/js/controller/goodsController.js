@@ -13,6 +13,18 @@ app.controller("goodsController", function ($scope, $http, $controller, goodsSer
     //定义个变量存储所有分类
     $scope.itemCatShowList = {};
 
+    //修改商品状态
+    $scope.changeStatus = function (goodsId, status) {
+        goodsService.changeStatus(goodsId, status).success(function (response) {
+            if (response.success) {
+                //修改成功
+                $scope.reloadList();
+            } else {
+                alert(response.message);
+            }
+        });
+    }
+
     //修改状态
     $scope.updateStatus = function (status) {
         goodsService.updateStatus($scope.selectids, status).success(function (response) {

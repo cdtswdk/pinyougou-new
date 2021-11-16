@@ -4,6 +4,11 @@
  * */
 app.service("goodsService", function ($http) {
 
+    //修改商户状态
+    this.changeStatus = function (goodsId, status) {
+        return $http.post('/goods/changeStatus/' + goodsId + '/' + status + '.shtml');
+    }
+
     //修改状态
     this.updateStatus = function (ids, status) {
         return $http.post('/goods/update/status.shtml?status=' + status, ids);

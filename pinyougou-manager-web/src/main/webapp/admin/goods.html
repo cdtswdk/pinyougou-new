@@ -60,7 +60,7 @@
                     <button type="button" ng-click="updateStatus('3')" class="btn btn-default" title="关闭"><i
                             class="fa fa-ban"></i> 关闭
                     </button>
-                    <button type="button" class="btn btn-default" title="刷新"><i class="fa fa-refresh"></i> 刷新</button>
+                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <thead>
             <tr>
                 <th class="" style="padding-right:0px">
-                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                    <input id="selall" ng-click="selectAll($event)" type="checkbox" class="icheckbox_square-blue">
                 </th>
                 <th class="sorting_asc">商品ID</th>
                 <th class="sorting">商品名称</th>
@@ -91,7 +91,9 @@
             </thead>
             <tbody>
             <tr ng-repeat="item in list">
-                <td><input ng-click="updateSelection($event,item.id);" type="checkbox"></td>
+                <td><input class="select" ng-click="updateSelection($event,item.id);" value="{{item.id}}"
+                           type="checkbox">
+                </td>
                 <td>{{item.id}}</td>
                 <td>{{item.goodsName}}</td>
                 <td>{{item.price}}</td>
@@ -104,7 +106,10 @@
 		                                  	</span>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn bg-olive btn-xs">详情</button>
+                    <button type="button" ng-click="getById(item.id)" class="btn bg-olive btn-xs"
+                            data-toggle="modal"
+                            data-target="#goodsModal">详情
+                    </button>
                 </td>
             </tr>
 
@@ -116,6 +121,95 @@
         <tm-pagination conf="paginationConf"></tm-pagination>
     </div>
     <!-- 数据表格 /-->
+
+    <!-- 商品详情 -->
+    <div class="modal fade" id="goodsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">商品详情</h3>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">基本信息</a></li>
+                        <li><a href="#category" data-toggle="tab">分类信息</a></li>
+                        <li><a href="#others" data-toggle="tab">其他信息</a></li>
+                    </ul>
+
+                    <!-- 选项卡开始 -->
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane active in" id="home">
+                            <br>
+                            <table class="table table-bordered table-striped" width="800px">
+                                <tr>
+                                    <td>商品ID</td>
+                                    <td>{{entity.id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>商品名称</td>
+                                    <td>{{entity.goodsName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>商品价格</td>
+                                    <td>{{entity.price}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="category">
+                            <br>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>一级分类</td>
+                                    <td>{{itemCatShowList[entity.category1Id]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>二级分类</td>
+                                    <td>{{itemCatShowList[entity.category2Id]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>三级分类</td>
+                                    <td>{{itemCatShowList[entity.category3Id]}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="others">
+                            <br>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>状态</td>
+                                    <td>{{status[entity.auditStatus]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>副标题</td>
+                                    <td>{{entity.caption}}</td>
+                                </tr>
+                                <tr>
+                                    <td>模板ID</td>
+                                    <td>{{entity.typeTemplateId}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 选项卡结束 -->
+
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="changeStatus(entity.id,'1')" class="btn btn-success" data-dismiss="modal"
+                            aria-hidden="true">审核通过
+                    </button>
+                    <button ng-click="changeStatus(entity.id,'2')" class="btn btn-danger" data-dismiss="modal"
+                            aria-hidden="true">审核未通过
+                    </button>
+                    <button ng-click="changeStatus(entity.id,'3')" class="btn btn-danger" data-dismiss="modal"
+                            aria-hidden="true">关闭商品
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
