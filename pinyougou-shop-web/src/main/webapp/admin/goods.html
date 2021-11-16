@@ -62,14 +62,14 @@
         </div>
         <div class="box-tools pull-right">
             <div class="has-feedback">
-                状态：<select ng-model="searchEntity.auditStatus">
+                状态：<select ng-model="searchEntity.auditStatus" ng-change="reloadList()">
                 <option value="">全部</option>
                 <option value="0">未申请</option>
                 <option value="1">审核通过</option>
                 <option value="2">审核不通过</option>
                 <option value="3">已驳回</option>
             </select>
-                商品名称：<input ng-model="searchEntity.goodsName">
+                商品名称：<input ng-model="searchEntity.goodsName" ng-change="reloadList()">
                 <button class="btn btn-default" ng-click="reloadList()">查询</button>
             </div>
         </div>

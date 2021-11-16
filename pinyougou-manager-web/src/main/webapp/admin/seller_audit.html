@@ -45,9 +45,9 @@
             <div class="box-tools pull-right">
                 <div class="has-feedback">
 
-                    公司名称：<input ng-model="searchEntity.name">
-                    店铺名称： <input ng-model="searchEntity.nickName">
-                    <button class="btn btn-default" ng-click="getPage(1,10)">查询</button>
+                    公司名称：<input ng-model="searchEntity.name" ng-change="reloadList()">
+                    店铺名称： <input ng-model="searchEntity.nickName" ng-change="reloadList()">
+                    <button class="btn btn-default" ng-click="reloadList()">查询</button>
                 </div>
             </div>
             <!--工具栏/-->
@@ -165,15 +165,15 @@
                             <table class="table table-bordered table-striped">
                                 <tr>
                                     <td>营业执照号</td>
-                                    <td>330106000109206</td>
+                                    <td>{{entity.licenseNumber}}</td>
                                 </tr>
                                 <tr>
                                     <td>税务登记证号</td>
-                                    <td>0292039393011</td>
+                                    <td>{{entity.taxNumber}}</td>
                                 </tr>
                                 <tr>
                                     <td>组织机构代码证号</td>
-                                    <td>22320320302421</td>
+                                    <td>{{entity.orgNumber}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -182,11 +182,11 @@
                             <table class="table table-bordered table-striped">
                                 <tr>
                                     <td>法定代表人</td>
-                                    <td>王小聪</td>
+                                    <td>{{entity.legalPerson}}</td>
                                 </tr>
                                 <tr>
                                     <td>法定代表人身份证号</td>
-                                    <td>211030198503223122</td>
+                                    <td>{{entity.legalPersonCardId}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -195,7 +195,7 @@
                             <table class="table table-bordered table-striped">
                                 <tr>
                                     <td>开户行名称</td>
-                                    <td>中国建设银行北京市分行</td>
+                                    <td>{{entity.bankName}}</td>
                                 </tr>
                                 <tr>
                                     <td>开户行支行</td>
@@ -203,7 +203,7 @@
                                 </tr>
                                 <tr>
                                     <td>银行账号</td>
-                                    <td>999000111222</td>
+                                    <td>{{entity.bankUser}}</td>
                                 </tr>
                             </table>
                         </div>

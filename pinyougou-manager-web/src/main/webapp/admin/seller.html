@@ -44,10 +44,10 @@
 
             <div class="box-tools pull-right">
                 <div class="has-feedback">
-                    公司名称：<input ng-model="searchEntity.name">
-                    店铺名称： <input ng-model="searchEntity.nickName">
+                    公司名称：<input ng-model="searchEntity.name" ng-change="reloadList()">
+                    店铺名称： <input ng-model="searchEntity.nickName" ng-change="reloadList()">
                     状态：
-                    <select ng-model="searchEntity.status">
+                    <select ng-model="searchEntity.status" ng-change="reloadList()">
                         <option value="">全部</option>
                         <option value="0">待审核</option>
                         <option value="1">已审核</option>
@@ -225,9 +225,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button ng-click="updateStatus(entity.sellerId,1)" class="btn btn-success" data-dismiss="modal" aria-hidden="true">审核通过</button>
-                    <button ng-click="updateStatus(entity.sellerId,2)" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">审核未通过</button>
-                    <button ng-click="updateStatus(entity.sellerId,3)" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">关闭商家</button>
+                    <button ng-click="updateStatus(entity.sellerId,'1')" class="btn btn-success" data-dismiss="modal" aria-hidden="true">审核通过</button>
+                    <button ng-click="updateStatus(entity.sellerId,'2')" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">审核未通过</button>
+                    <button ng-click="updateStatus(entity.sellerId,'3')" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">关闭商家</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
             </div>

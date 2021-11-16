@@ -252,6 +252,7 @@ app.controller("goodsController", function ($scope, $http, $controller, $locatio
         itemCatService.findByParentId(id).success(function (response) {
             $scope.itemCat1List = response;
         });
+        console.log($scope.itemCat1List);
 
         //清空2/3级分类
         $scope.itemCat2List = null;
@@ -423,6 +424,7 @@ app.controller("goodsController", function ($scope, $http, $controller, $locatio
             //将后台的数据绑定到前台
             $scope.entity = response;
 
+            console.log($scope.entity);
             //记录模板ID
             modifyTypeTemplateId = $scope.entity.typeTemplateId;
 
@@ -483,6 +485,4 @@ app.controller("goodsController", function ($scope, $http, $controller, $locatio
         }
         return false;
     }
-
-
 });

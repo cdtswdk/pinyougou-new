@@ -125,7 +125,9 @@ public class ItemCatServiceImpl implements ItemCatService {
             this.redisTemplate.boundHashOps("ItemCat").put(cat.getName(), cat.getTypeId());
         }
 
-        PageHelper.startPage(page, size);
+        if (page != -1 && size != -1) {
+            PageHelper.startPage(page, size);
+        }
         return itemCatMapper.select(itemCat);
     }
 }

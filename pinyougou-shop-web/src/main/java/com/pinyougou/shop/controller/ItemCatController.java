@@ -23,9 +23,14 @@ public class ItemCatController {
      */
     @RequestMapping(value = "/parent/{id}")
     public List<ItemCat> findByParentId(@PathVariable(value = "id") long id,
-                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                        @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
-        return itemCatService.findByParentId(id, page, size);
+                                        @RequestParam(value = "page", required = false, defaultValue = "-1") int page,
+                                        @RequestParam(value = "size", required = false, defaultValue = "-1") int size) {
+        try {
+            return itemCatService.findByParentId(id, page, size);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -76,8 +81,14 @@ public class ItemCatController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ItemCat getById(@PathVariable(value = "id") long id) {
         //根据ID查询ItemCat信息
-        ItemCat itemCat = itemCatService.getOneById(id);
-        return itemCat;
+        ItemCat itemCat = null;
+        try {
+            itemCat = itemCatService.getOneById(id);
+            return itemCat;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
